@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Donut from './Donut';
 import '../css/Donuts.css';
 
+// @TODO move me to view component
+import DonutSettingsController from './DonutSettingsController';
+
 class Donuts extends Component {
   render() {
     const donuts = [{
@@ -21,6 +24,7 @@ class Donuts extends Component {
             </li>
           )
         })}
+        <DonutSettingsController />
       </ul>
     );
   }
