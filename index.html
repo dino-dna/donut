@@ -39,9 +39,9 @@
         s.setAttribute('src', src);
         document.body.appendChild(s);
       }
-      var oldScriptSrc = window.document.body.getElementsByTagName('script')[0].src
-      ndxToInject = oldScriptSrc.indexOf('main')
-      addScript(oldScriptSrc.splice(ndxToInject, 0, 'donut/');
+      var oldScriptSrc = window.document.body.getElementsByTagName('script')[0].src;
+      ndxToInject = oldScriptSrc.indexOf('main');
+      addScript(oldScriptSrc.splice(ndxToInject, 0, 'donut/'));
     </script>
   </body>
 </html>
