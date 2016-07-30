@@ -1,0 +1,13 @@
+.Viewer {
+  display: flex;
+}
+
+@media (min-width: 32em) {
+  .Viewer .Donut {
+    max-width: 32em;
+    width: 50%;
+  }
+  .Viewer .DonutSettings {
+    flex-grow: 2;
+  }
+}
