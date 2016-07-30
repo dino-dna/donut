@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../css/DonutSettings.css';
 
 class DonutSettings extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class DonutSettings extends Component {
 
   render() {
     const donut = this.props.donut || this.donut;
-    const { 
+    const {
       onChangeFrostingCoverage,
       onChangeFrostingThickness,
       onChangeSprinkleCoverage,
@@ -24,7 +25,7 @@ class DonutSettings extends Component {
 
     console.log(donut.DONUT_OUTER_RADIUS)
     return (
-      <form>
+      <form className="DonutSettings">
         <h2>Make your donut:</h2>
         <div className="DonutSettings-control">
           <label>Frosting Coverage:</label>
@@ -33,6 +34,7 @@ class DonutSettings extends Component {
             type="range"
             min="0"
             max="1"
+            step="0.005"
             value={donut.DONUT_FROSTING_COVERAGE}
           />
         </div>
@@ -43,6 +45,7 @@ class DonutSettings extends Component {
             type="range"
             min="0"
             max="1"
+            step="0.005"
             value={donut.DONUT_FROSTING_THICKNESS}
           />
         </div>
@@ -53,6 +56,7 @@ class DonutSettings extends Component {
             type="range"
             min="0"
             max="1"
+            step="0.005"
             value={donut.DONUT_SPRINKLE_COVERAGE}
           />
         </div>
@@ -63,6 +67,7 @@ class DonutSettings extends Component {
             type="range"
             min="0"
             max="1"
+            step="0.005"
             value={donut.DONUT_INNER_RADIUS}
           />
         </div>
@@ -73,6 +78,7 @@ class DonutSettings extends Component {
             type="range"
             min="0"
             max="1"
+            step="0.005"
             value={donut.DONUT_OUTER_RADIUS}
           />
         </div>

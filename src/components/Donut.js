@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import '../css/Donut.css'
 
 export default class Donut extends Component {
+  renderSprinkle() {
+    
+  }
+
   render() {
     // All props between 0..1
     const {
@@ -36,3 +40,11 @@ export default class Donut extends Component {
     );
   }
 }
+
+Donut.SPRINKLE_COLORS = [
+  '#EFE578',
+  '#B7E5CF',
+  '#FFFFFF',
+  '#F8CACD',
+  '#1ACFE2',
+];
