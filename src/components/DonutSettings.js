@@ -12,11 +12,11 @@ class DonutSettings extends Component {
 
     const wat = function() {}
 
-    onChangeFrostingCoverage = wat;
-    onChangeFrostingThickness = wat;
-    onChangeSprinkleCoverage = wat;
-    onChangeInnerRadius = wat;
-    onChangeOuterRadius = wat;
+    const onChangeFrostingCoverage = wat;
+    const onChangeFrostingThickness = wat;
+    const onChangeSprinkleCoverage = wat;
+    const onChangeInnerRadius = wat;
+    const onChangeOuterRadius = wat;
 
     return (
       <form>
