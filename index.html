@@ -17,31 +17,5 @@
       To begin the development, run `npm start` in this folder.
       To create a production bundle, use `npm run build`.
     -->
-    <!-- dirty hack to be github.io compatibible -->
-    <script>
-      // add /donut/ to link href.
-      String.prototype.splice = function(idx, rem, str) {
-        return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
-      };
-
-      // fix <link>
-      var oldLinkHref = window.document.head.getElementsByTagName('link')[1].href;
-      var ndxToInject = oldLinkHref.indexOf('main')
-      window.document.head.getElementsByTagName('link')[1].href = oldLinkHref.splice(
-        ndxToInject,
-        0,
-        'donut/'
-      );
-
-      // fix <script>
-      function addScript(src) {
-        var s = document.createElement('script');
-        s.setAttribute('src', src);
-        document.body.appendChild(s);
-      }
-      var oldScriptSrc = window.document.body.getElementsByTagName('script')[1].src;
-      ndxToInject = oldScriptSrc.indexOf('main');
-      addScript(oldScriptSrc.splice(ndxToInject, 0, 'donut/'));
-    </script>
   </body>
 </html>

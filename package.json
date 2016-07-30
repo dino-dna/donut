@@ -1,6 +1,7 @@
 {
   "name": "donut",
   "version": "0.0.1",
+  "homepage": "https://dino-dna.github.io/donut/",
   "private": true,
   "devDependencies": {
     "gh-pages": "^0.11.0",
