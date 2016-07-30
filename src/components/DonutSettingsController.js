@@ -61,11 +61,5 @@ DonutSettingsController.propTypes = {
 
 };
 
-function mapStateToProps(state) {
-  const { donut } = state;
-  return {
-    donut
-  };
-}
 
-export default connect(mapStateToProps)(DonutSettingsController);
+export default connect()(DonutSettingsController);

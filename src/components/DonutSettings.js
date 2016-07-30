@@ -23,7 +23,6 @@ class DonutSettings extends Component {
       onChangeOuterRadius,
     } = this.props;
 
-    console.log(donut.DONUT_OUTER_RADIUS)
     return (
       <form className="DonutSettings">
         <h2>Make your donut:</h2>
