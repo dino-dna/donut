@@ -1,76 +1,79 @@
 import React, { Component } from 'react';
 
 class DonutSettings extends Component {
+  constructor(props) {
+    super(props);
+    this.donut = this.props.donut || {
+      DONUT_FROSTING_COVERAGE: .55,
+      DONUT_FROSTING_THICKNESS: 1,
+      // DONUT_SPRINKLE_COVERAGE: .75,
+      DONUT_INNER_RADIUS: .15,
+      DONUT_OUTER_RADIUS: .75,
+    };
+  }
+
   render() {
-    const { donut } = this.props;
+    const donut = this.props.donut || this.donut;
+    const { 
+      onChangeFrostingCoverage,
+      onChangeFrostingThickness,
+      onChangeSprinkleCoverage,
+      onChangeInnerRadius,
+      onChangeOuterRadius,
+    } = this.props;
 
-    const DONUT_FROSTING_COVERAGE = 0;
-    const DONUT_FROSTING_THICKNESS = 0;
-    const DONUT_SPRINKLE_COVERAGE = 0;
-    const DONUT_INNER_RADIUS = 0;
-    const DONUT_OUTER_RADIUS = 0;
-
-    const wat = function() {}
-
-    const onChangeFrostingCoverage = wat;
-    const onChangeFrostingThickness = wat;
-    const onChangeSprinkleCoverage = wat;
-    const onChangeInnerRadius = wat;
-    const onChangeOuterRadius = wat;
-
+    console.log(donut.DONUT_OUTER_RADIUS)
     return (
       <form>
         <h2>Make your donut:</h2>
-        <pre>{donut ? JSON.stringify(donut, null, 2) : 'no donut :('}</pre>
-
         <div className="DonutSettings-control">
           <label>Frosting Coverage:</label>
           <input
-            onChange={onChangeFrostingCoverage}
+            onChange={(evt) => onChangeFrostingCoverage(evt.target.value)}
             type="range"
             min="0"
             max="1"
-            value={DONUT_FROSTING_COVERAGE}
+            value={donut.DONUT_FROSTING_COVERAGE}
           />
         </div>
         <div className="DonutSettings-control">
           <label>Frosting Thickness:</label>
           <input
-            onChange={onChangeFrostingThickness}
+            onChange={(evt) => onChangeFrostingThickness(evt.target.value)}
             type="range"
             min="0"
             max="1"
-            value={DONUT_FROSTING_THICKNESS}
+            value={donut.DONUT_FROSTING_THICKNESS}
           />
         </div>
         <div className="DonutSettings-control">
           <label>Sprinkle Coverage:</label>
           <input
-            onChange={onChangeSprinkleCoverage}
+            onChange={(evt) => onChangeSprinkleCoverage(evt.target.value)}
             type="range"
             min="0"
             max="1"
-            value={DONUT_SPRINKLE_COVERAGE}
+            value={donut.DONUT_SPRINKLE_COVERAGE}
           />
         </div>
         <div className="DonutSettings-control">
           <label>Inner Radius:</label>
           <input
-            onChange={onChangeInnerRadius}
+            onChange={(evt) => onChangeInnerRadius(evt.target.value)}
             type="range"
             min="0"
             max="1"
-            value={DONUT_INNER_RADIUS}
+            value={donut.DONUT_INNER_RADIUS}
           />
         </div>
         <div className="DonutSettings-control">
           <label>Outer Radius:</label>
           <input
-            onChange={onChangeOuterRadius}
+            onChange={(evt) => onChangeOuterRadius(evt.target.value)}
             type="range"
             min="0"
             max="1"
-            value={DONUT_OUTER_RADIUS}
+            value={donut.DONUT_OUTER_RADIUS}
           />
         </div>
 

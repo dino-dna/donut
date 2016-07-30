@@ -7,7 +7,7 @@ export default class Donut extends Component {
     const {
       DONUT_FROSTING_COVERAGE = .55,
       DONUT_FROSTING_THICKNESS = 1,
-      DONUT_SPRINKLE_COVERAGE = .75,
+      // DONUT_SPRINKLE_COVERAGE = .75,
       DONUT_INNER_RADIUS = .15,
       DONUT_OUTER_RADIUS = .75,
     } = this.props;
