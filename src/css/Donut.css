@@ -3,3 +3,7 @@
   color: #779;
   padding: 1rem;
 }
+.Donut svg {
+  height: 100%;
+  width: 100%;
+}
