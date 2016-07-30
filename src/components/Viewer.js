@@ -9,11 +9,11 @@ class Viewer extends Component {
     const { donut } = this.props;
     return (
       <div className="Viewer">
-        <Donut donut={donut} />
+        <Donut {...donut} />
         <DonutSettingsController donut={donut} />
       </div>
     );
   }
 }
 
-export default connect()(Viewer);
+export default connect(state => state)(Viewer);

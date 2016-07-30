@@ -7,7 +7,13 @@ export const DONUT_OUTER_RADIUS = 'DONUT_OUTER_RADIUS';
 const SET_DONUT_ATTRIBUTE = 'SET_DONUT_ATTRIBUTE';
 export const setDonutAttribute = ({ attribute, value }) => ({ attribute, value, type: SET_DONUT_ATTRIBUTE });
 
-export default function reducer(state = null, action) {
+export default function reducer(state = {
+  DONUT_FROSTING_COVERAGE: .55,
+  DONUT_FROSTING_THICKNESS: 1,
+  DONUT_SPRINKLE_COVERAGE: .75,
+  DONUT_INNER_RADIUS: .15,
+  DONUT_OUTER_RADIUS: .75,  
+}, action) {
   switch (action.type) {
     case SET_DONUT_ATTRIBUTE:
       const newValue = parseFloat(action.value, 10);
