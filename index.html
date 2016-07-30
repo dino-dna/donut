@@ -35,11 +35,11 @@
 
       // fix <script>
       function addScript(src) {
-        var s = document.createElement( 'script' );
+        var s = document.createElement('script');
         s.setAttribute('src', src);
         document.body.appendChild(s);
       }
-      var oldScriptSrc = window.document.body.getElementsByTagName('script')[0].src;
+      var oldScriptSrc = window.document.body.getElementsByTagName('script')[1].src;
       ndxToInject = oldScriptSrc.indexOf('main');
       addScript(oldScriptSrc.splice(ndxToInject, 0, 'donut/'));
     </script>
