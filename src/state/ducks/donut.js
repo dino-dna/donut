@@ -7,7 +7,7 @@ export const DONUT_OUTER_RADIUS = 'DONUT_OUTER_RADIUS'
 const SET_DONUT_ATTRIBUTE = 'SET_DONUT_ATTRIBUTE';
 export const setDonutAttritube = ({ attribute, value }) => ({ attribute, value, type: SET_DONUT_ATTRIBUTE });
 
-export default function reducer(state = {}, action) {
+export default function reducer(state = null, action) {
   switch (action.type) {
     case SET_DONUT_ATTRIBUTE:
       switch (action.attribute) {
