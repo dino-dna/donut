@@ -1,0 +1,20 @@
+.About {
+  text-align: left;
+  padding: 0 5vw;
+}
+
+.profile {
+  text-align: center;
+}
+
+.profile img {
+  width: 20vw;
+}
+
+.profile a {
+  color: white;
+}
+
+.profile a:visited {
+  color: lightgrey;
+}
