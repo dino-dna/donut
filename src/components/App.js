@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Donuts from './Donuts';
 import Header from './Header';
 import '../css/App.css';
 
@@ -8,7 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Donuts />
+        { this.props.children }
       </div>
     );
   }
