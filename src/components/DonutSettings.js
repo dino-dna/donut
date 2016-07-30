@@ -14,7 +14,7 @@ class DonutSettings extends Component {
 
   render() {
     const donut = this.props.donut || this.donut;
-    const { 
+    const {
       onChangeFrostingCoverage,
       onChangeFrostingThickness,
       onChangeSprinkleCoverage,
@@ -22,7 +22,6 @@ class DonutSettings extends Component {
       onChangeOuterRadius,
     } = this.props;
 
-    console.log(donut.DONUT_OUTER_RADIUS)
     return (
       <form>
         <h2>Make your donut:</h2>
