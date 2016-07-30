@@ -1,0 +1,30 @@
+.Header {
+  background: #f487a9;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+.Header h1,
+.Header a {
+  font-size: 125%;
+  padding: .75rem 1rem;
+}
+.Header h1 {
+  float: left;
+  margin: 0;
+  line-height: inherit;
+}
+.Header a {
+  color: inherit;
+  display: inline-block;
+  text-decoration: none;
+  padding: .5em;
+}
+.Header ul {
+  list-style: none;
+  float: right;
+  margin: 0;
+}
+.Header li {
+  display: inline;
+}
