@@ -1,16 +1,11 @@
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import Donut from './Donut';
 import '../css/Donuts.css';
 
 class Donuts extends Component {
   render() {
-    const donuts = [{
-      innerRadius: .5,
-      outerRadius: 1,
-      sprinkleCoverage: .667,
-      frostingCoverage: .2,
-      frostingThickness: .8,
-    }, {}, {}, {}];
+    const { donuts } = this.props;
 
     return (
       <ul className="Donuts">
@@ -26,4 +21,4 @@ class Donuts extends Component {
   }
 }
 
-export default Donuts;
+export default connect(({ donuts }) => ({ donuts }))(Donuts);

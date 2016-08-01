@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DonutSettings from './DonutSettings';
-import * as dnut from '../state/ducks/donut'
+import * as dnut from '../state/ducks/donut';
+import addDonut from '../state/ducks/donuts';
 
 class DonutSettingsController extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class DonutSettingsController extends Component {
     this.onChangeSprinkleCoverage = this.onChangeSprinkleCoverage.bind(this)
     this.onChangeInnerRadius = this.onChangeInnerRadius.bind(this)
     this.onChangeOuterRadius = this.onChangeOuterRadius.bind(this)
+    this.onSave = this.onSave.bind(this);
   }
   onChangeFrostingCoverage (value) {
     const { dispatch } = this.props;
@@ -42,6 +44,9 @@ class DonutSettingsController extends Component {
       attribute: dnut.DONUT_OUTER_RADIUS, value
       }));
   }
+  onSave(donut) {
+    addDonut(donut);
+  }
   render() {
     const { donut } = this.props;
     return <DonutSettings
@@ -51,6 +56,7 @@ class DonutSettingsController extends Component {
       onChangeSprinkleCoverage={this.onChangeSprinkleCoverage}
       onChangeInnerRadius={this.onChangeInnerRadius}
       onChangeOuterRadius={this.onChangeOuterRadius}
+      onSave={this.onSave}
     />
   }
 }

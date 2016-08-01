@@ -121,3 +121,23 @@
 .DonutSettings input[type=range]:focus::-ms-fill-upper {
   background: #367ebd;
 }
+
+
+/** Button */
+.DonutSettings button {
+  background: #fff;
+  border: none;
+  color: #f288a9;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 125%;
+  font-weight: 700;
+  line-height: 1.25;
+  padding: .75rem 1rem;
+}
+.DonutSettings button:focus,
+.DonutSettings button:hover,
+.DonutSettings button:active {
+  background: #f288a9;
+  color: #fff;
+}
