@@ -25,7 +25,6 @@ class DonutSettings extends Component {
       onChangeSprinkleCoverage,
       onChangeInnerRadius,
       onChangeOuterRadius,
-      onSave,
     } = this.props;
 
     return (
