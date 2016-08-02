@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import Donut from './Donut';
 import '../css/Donuts.css';
 
@@ -12,7 +13,9 @@ class Donuts extends Component {
         {donuts.map((donut, i) => {
           return (
             <li key={i}>
-              <Donut {...donut} />
+              <Link to={`/donuts/${i}`}>
+                <Donut {...donut} />
+              </Link>
             </li>
           )
         })}

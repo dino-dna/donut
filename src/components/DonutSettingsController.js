@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import DonutSettings from './DonutSettings';
 import * as dnut from '../state/ducks/donut';
-import { addDonut } from '../state/ducks/donuts';
+import { addDonut, updateDonut } from '../state/ducks/donuts';
 
 class DonutSettingsController extends Component {
   constructor(props) {
@@ -45,7 +45,13 @@ class DonutSettingsController extends Component {
       }));
   }
   onSave(donut) {
-    this.props.dispatch(addDonut(donut));
+    const { dispatch, id } = this.props;
+
+    if (id) {
+      dispatch(updateDonut(id, donut));
+    } else {
+      dispatch(addDonut(donut));
+    }
   }
   render() {
     const { donut } = this.props;
@@ -64,8 +70,12 @@ class DonutSettingsController extends Component {
 DonutSettingsController.displayName = 'DonutSettingsController';
 
 DonutSettingsController.propTypes = {
-
+  donut: PropTypes.object.isRequired,
+  id: PropTypes.string,
 };
 
+function mapStateToProps(state, ownProps) {
+  return ownProps;
+}
 
-export default connect()(DonutSettingsController);
+export default connect(mapStateToProps)(DonutSettingsController);

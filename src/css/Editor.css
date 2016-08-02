@@ -1,13 +1,13 @@
-.Viewer {
+.Editor {
   display: flex;
 }
 
 @media (min-width: 32em) {
-  .Viewer .Donut {
+  .Editor .Donut {
     max-width: 32em;
     width: 50%;
   }
-  .Viewer .DonutSettings {
+  .Editor .DonutSettings {
     flex-grow: 2;
   }
 }

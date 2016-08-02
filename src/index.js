@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import Donuts from './components/Donuts';
-import Viewer from './components/Viewer';
+import Editor from './components/Editor';
 import About from './components/About';
 import { Provider } from 'react-redux';
 import { configure as configureStore } from './state/store';
@@ -19,7 +19,8 @@ ReactDOM.render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Donuts} />
-        <Route path="view" component={Viewer}/>
+        <Route path="donuts/:id" component={Editor} />
+        <Route path="donuts/new" component={Editor} />
         <Route path="about" component={About}/>
       </Route>
     </Router>

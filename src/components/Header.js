@@ -9,10 +9,11 @@ class Header extends Component {
   render() {
     return (
       <header className="Header" role="banner">
-        <h1>Donut</h1>
+        <h1>
+          <Link to="/" rel="home">Donut</Link>
+        </h1>
         <ul>
-          <li><Link to={`/`}>Donuts</Link></li>
-          <li><Link to={`/view`}>Viewer</Link></li>
+          <li><Link to={`/donuts/new`}>New Donut</Link></li>
           <li><Link to={`/about`}>About</Link></li>
         </ul>
       </header>
