@@ -346,6 +346,12 @@ git checkout -
 
 You may copy and paste them, or put them into a custom shell script. You may also customize them for another hosting provider.
 
+### Commit Messages
+
+Add the following emoji to the *beginning* of a commit message:
+
+* `:wrench:` for configuration changes
+
 ### Something Missing?
 
 If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/template/README.md)
