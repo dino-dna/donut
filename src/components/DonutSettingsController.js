@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DonutSettings from './DonutSettings';
 import * as dnut from '../state/ducks/donut';
-import addDonut from '../state/ducks/donuts';
+import { addDonut } from '../state/ducks/donuts';
 
 class DonutSettingsController extends Component {
   constructor(props) {
@@ -45,7 +45,7 @@ class DonutSettingsController extends Component {
       }));
   }
   onSave(donut) {
-    addDonut(donut);
+    this.props.dispatch(addDonut(donut));
   }
   render() {
     const { donut } = this.props;

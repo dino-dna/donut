@@ -1,9 +1,18 @@
-export const ADD_DONUT = 'ADD_DONUT';
+import { push } from 'react-router-redux'
 
 export function addDonut(donut) {
+  return (dispatch) => {
+    dispatch(doAddDonut(donut));
+    dispatch(push('/'));
+  };
+}
+
+export const DO_ADD_DONUT = 'DO_ADD_DONUT';
+
+function doAddDonut(donut) {
   return {
     donut,
-    type: ADD_DONUT,
+    type: DO_ADD_DONUT,
   }
 }
 
@@ -18,7 +27,7 @@ export function removeDonut(index) {
 
 export default function reducer(state = [], action) {
   switch (action.type) {
-    case ADD_DONUT:
+    case DO_ADD_DONUT:
       return [...state, action.donut];
     case REMOVE_DONUT:
       return state.filter((donut, i) => i !== action.index);
