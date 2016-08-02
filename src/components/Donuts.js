@@ -12,7 +12,7 @@ class Donuts extends Component {
         {donuts.map((donut, i) => {
           return (
             <li key={i}>
-              <Donut donut={donut} />
+              <Donut {...donut} />
             </li>
           )
         })}
