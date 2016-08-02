@@ -101,39 +101,45 @@ module.exports = {
     return [autoprefixer];
   },
   plugins: [
+    // new HtmlWebpackPlugin({
+    //   inject: true,
+    //   template: paths.appHtml,
+    //   favicon: paths.appFavicon,
+    //   minify: {
+    //     removeComments: true,
+    //     collapseWhitespace: true,
+    //     removeRedundantAttributes: true,
+    //     useShortDoctype: true,
+    //     removeEmptyAttributes: true,
+    //     removeStyleLinkTypeAttributes: true,
+    //     keepClosingSlash: true,
+    //     minifyJS: true,
+    //     minifyCSS: true,
+    //     minifyURLs: true
+    //   }
+    // }),
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
       favicon: paths.appFavicon,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true
-      }
     }),
-    new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        screw_ie8: true,
-        warnings: false
-      },
-      mangle: {
-        screw_ie8: true
-      },
-      output: {
-        comments: false,
-        screw_ie8: true
-      }
-    }),
-    new ExtractTextPlugin('static/css/[name].[contenthash:8].css')
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"development"' }), // production
+    // new webpack.optimize.OccurrenceOrderPlugin(),
+    // new webpack.optimize.DedupePlugin(),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     screw_ie8: true,
+    //     warnings: false
+    //   },
+    //   mangle: {
+    //     screw_ie8: true
+    //   },
+    //   output: {
+    //     comments: false,
+    //     screw_ie8: true
+    //   }
+    // }),
+    // new ExtractTextPlugin('static/css/[name].[contenthash:8].css')
+    new CaseSensitivePathsPlugin()
   ]
 };
