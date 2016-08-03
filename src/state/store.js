@@ -3,12 +3,12 @@ import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise';
 import thunkMiddleware from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
 import getRootReducer from './root-reducer';
 
 const finalCreateStore = applyMiddleware(
-  routerMiddleware(browserHistory),
+  routerMiddleware(hashHistory),
   thunkMiddleware,
   promiseMiddleware,
   createLogger({ collapsed: true })

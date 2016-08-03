@@ -6,13 +6,13 @@ import Viewer from './components/Viewer';
 import About from './components/About';
 import { Provider } from 'react-redux';
 import { configure as configureStore } from './state/store';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 import './index.css';
 
 const store = configureStore();
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(hashHistory, store);
 
 ReactDOM.render(
   <Provider store={store}>
