@@ -4,6 +4,25 @@
   padding: 1rem;
 }
 .Donut svg {
-  height: 100%;
-  width: 100%;
+  margin: 0 auto 1em;
+  width: 90%;
 }
+.Donut dl {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+.Donut dt,
+.Donut dd {
+  border-top: thin solid #c4c4e6;
+  flex-shrink: 0;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  width: 50%;
+}
+.Donut dd {
+  margin: 0;
+}
+

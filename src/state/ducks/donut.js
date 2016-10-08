@@ -25,8 +25,16 @@ export default function reducer(state = {
         case DONUT_FROSTING_THICKNESS:
           return Object.assign({}, state, { [action.attribute]: newValue });
         case DONUT_INNER_RADIUS:
+          if (newValue >= state.DONUT_OUTER_RADIUS) {
+            return state;
+          }
+
           return Object.assign({}, state, { [action.attribute]: newValue });
         case DONUT_OUTER_RADIUS:
+          if (newValue <= state.DONUT_INNER_RADIUS) {
+            return state;
+          }
+
           return Object.assign({}, state, { [action.attribute]: newValue });
         default:
           throw new Error(`invalid attribute provided ${action.attribute}`);

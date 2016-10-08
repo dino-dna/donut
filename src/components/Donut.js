@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import zip from 'lodash/zip';
 import '../css/Donut.css'
+import { getIndicator, getIndicatorParams } from '../donut-classifier'
 
 const TWO_PI = Math.PI * 2
 const SPRINKLE_WIDTH = 6
@@ -113,6 +114,44 @@ export default class Donut extends Component {
     });
   }
 
+  static getEmoji(val) {
+    if (val > .9) {
+      return '😎';
+    } else if (val > .8) {
+      return '😐';
+    }
+
+    return '😱';
+  }
+
+  renderRating() {
+    const indicator = getIndicator(this.props);
+    const {
+      frostingCoverage,
+      frostingThickness,
+      radius,
+      sprinkleCoverage
+    } = getIndicatorParams(this.props);
+
+    return (
+      <dl>
+        <dt>Overall:</dt>
+        <dd>{Donut.getEmoji(indicator)}</dd>
+
+        <dt>Frosting coverage:</dt>
+        <dd>{Donut.getEmoji(frostingCoverage)}</dd>
+
+        <dt>Frosting thickness:</dt>
+        <dd>{Donut.getEmoji(frostingThickness)}</dd>
+
+        <dt>Radius:</dt>
+        <dd>{Donut.getEmoji(radius)}</dd>
+        <dt>Sprinkles:</dt>
+        <dd>{Donut.getEmoji(sprinkleCoverage)}</dd>
+      </dl>
+    );
+  }
+
   render() {
     const {
       DONUT_FROSTING_COVERAGE,
@@ -144,6 +183,7 @@ export default class Donut extends Component {
             {this.renderSprinkles(frostingInnerRadius, frostingOuterRadius)}
           </g>
         </svg>
+        {this.renderRating()}
       </div>
     );
   }
