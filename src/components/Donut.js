@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import '../css/Donut.css'
-import donutClassifier from '../donut-classifier'
+import { getIndicator, getIndicatorParams } from '../donut-classifier'
 
 export default class Donut extends Component {
   constructor(props) {
@@ -27,12 +27,9 @@ export default class Donut extends Component {
       ]);
     }
 
-    // scale(.5) rotate(${rotation} deg)
-
     return (
       <g transform="translate(50, 50) scale(0.5)">
         {sprinkles.map(([x, y, rotation], index) =>{
-          // rotate(${rotation})
           const scale = 0.125;
           const length = 60 * scale;
           const height = 20 * scale;
@@ -49,21 +46,41 @@ export default class Donut extends Component {
     );
   }
 
-  renderRating() {
-    const classification = donutClassifier(this.props);
-
-    let indicator;
-    
-    if (classification > .9) {
-      indicator = '😎';
-    } else if (classification > .8) {
-      indicator = '😐';
-    } else {
-      indicator = '😱';
+  static getEmoji(val) {
+    if (val > .9) {
+      return '😎';
+    } else if (val > .8) {
+      return '😐';
     }
 
+    return '😱';
+  }
+
+  renderRating() {
+    const indicator = getIndicator(this.props);
+    const {
+      frostingCoverage,
+      frostingThickness,
+      radius,
+      sprinkleCoverage
+    } = getIndicatorParams(this.props);
+
     return (
-      <div>Donut status: {indicator}</div>
+      <dl>
+        <dt>Overall:</dt>
+        <dd>{Donut.getEmoji(indicator)}</dd>
+
+        <dt>Frosting coverage:</dt>
+        <dd>{Donut.getEmoji(frostingCoverage)}</dd>
+
+        <dt>Frosting thickness:</dt>
+        <dd>{Donut.getEmoji(frostingThickness)}</dd>
+
+        <dt>Radius:</dt>
+        <dd>{Donut.getEmoji(radius)}</dd>
+        <dt>Sprinkles:</dt>
+        <dd>{Donut.getEmoji(sprinkleCoverage)}</dd>
+      </dl>
     );
   }
 
@@ -74,6 +91,8 @@ export default class Donut extends Component {
       DONUT_INNER_RADIUS,
       DONUT_OUTER_RADIUS,
     } = this.props;
+
+    console.log(this.props);
 
     const innerRadius = DONUT_INNER_RADIUS * 50;
     const outerRadius = DONUT_OUTER_RADIUS * 50;
