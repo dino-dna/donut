@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import '../css/Donut.css'
+import donutClassifier from '../donut-classifier'
 
 export default class Donut extends Component {
   constructor(props) {
@@ -48,6 +49,24 @@ export default class Donut extends Component {
     );
   }
 
+  renderRating() {
+    const classification = donutClassifier(this.props);
+
+    let indicator;
+    
+    if (classification > .9) {
+      indicator = '😎';
+    } else if (classification > .8) {
+      indicator = '😐';
+    } else {
+      indicator = '😱';
+    }
+
+    return (
+      <div>Donut status: {indicator}</div>
+    );
+  }
+
   render() {
     const {
       DONUT_FROSTING_COVERAGE,
@@ -75,6 +94,7 @@ export default class Donut extends Component {
             strokeWidth={frostStrokeWidth} />
           {this.renderSprinkles(frostRadius)}
         </svg>
+        {this.renderRating()}
       </div>
     );
   }
