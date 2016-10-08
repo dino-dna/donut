@@ -92,8 +92,6 @@ export default class Donut extends Component {
       DONUT_OUTER_RADIUS,
     } = this.props;
 
-    console.log(this.props);
-
     const innerRadius = DONUT_INNER_RADIUS * 50;
     const outerRadius = DONUT_OUTER_RADIUS * 50;
     const frostRadius = (outerRadius + innerRadius) / 2;
