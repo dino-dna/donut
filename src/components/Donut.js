@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import zip from 'lodash/zip';
-import '../css/Donut.css'
-import { getIndicator, getIndicatorParams } from '../donut-classifier'
+import Rating from './Rating';
+import '../css/Donut.css';
 
-const TWO_PI = Math.PI * 2
-const SPRINKLE_WIDTH = 6
-const HALF_SPRINKLE_WIDTH = SPRINKLE_WIDTH / 2
-const SPRINKLE_HEIGHT = 6
-const HALF_SPRINKLE_HEIGHT = SPRINKLE_HEIGHT / 2
+const isDev = process.env.NODE_ENV === 'development'
+
+const TWO_PI = Math.PI * 2;
+const SPRINKLE_WIDTH = 6;
+const HALF_SPRINKLE_WIDTH = SPRINKLE_WIDTH / 2;
+const SPRINKLE_HEIGHT = 6;
+const HALF_SPRINKLE_HEIGHT = SPRINKLE_HEIGHT / 2;
+const sprinkleD = `M10,0 C4.4771525,0 0,4.4771525 0,10 C0,15.5228475 4.4771525,20 10,20 L50,20 C55.5228475,20 60,15.5228475 60,10 C60,4.4771525 55.5228475,0 50,0 L10,0 Z`
+// const sprinkleD = `M10,0 C${0.223857625*SPRINKLE_HEIGHT},0 0,${0.223857625*SPRINKLE_HEIGHT} 0,${0.5*SPRINKLE_HEIGHT} C0,${0.7761423749999999*SPRINKLE_HEIGHT} ${4.4771525/SPRINKLE_HEIGHT},${SPRINKLE_HEIGHT} ${0.5*SPRINKLE_HEIGHT},${SPRINKLE_HEIGHT} L${SPRINKLE_WIDTH*5/6},${SPRINKLE_HEIGHT} C${0.9253807916666666*SPRINKLE_WIDTH},${SPRINKLE_HEIGHT} ${SPRINKLE_WIDTH},${0.7761423749999999*SPRINKLE_HEIGHT} ${SPRINKLE_WIDTH},${0.5*SPRINKLE_HEIGHT} C${SPRINKLE_WIDTH},${0.223857625*SPRINKLE_HEIGHT} ${0.9253807916666666*SPRINKLE_WIDTH},0 ${SPRINKLE_WIDTH*5/6},0 L${0.5*SPRINKLE_HEIGHT},0 Z`
 
 export default class Donut extends Component {
   constructor(props) {
@@ -28,6 +31,12 @@ export default class Donut extends Component {
    * @memberOf Donut
    */
   getBandRadii(innerRadius, bandCount, bandGapWidth) {
+    //      void     sprinkle   void     sprinkle
+    // + --------- | ---------  =======  ---------  ======= --------- |
+    //                             ^                   ^
+    // +     IR          BG    iHSW oHSW
+    // ring1 = IR + BG + 1*iHSW
+    // ring2 = ring1 + 1*oHSW + BG + 1*iHSW
     const bandRadii = []
     for (let i=0; i < bandCount; ++i) {
       const innerHalfSprinkleWidths = (i + 1) * HALF_SPRINKLE_WIDTH;
@@ -42,17 +51,17 @@ export default class Donut extends Component {
 
   getSprinkledBands(bandRequest) {
     return bandRequest.map((band) => {
-      let radius = band[0]
-      let dTheta = TWO_PI / band[1]
-      let startRadian = Math.random() * TWO_PI
-      let endRadian = startRadian + TWO_PI
-      let theta = startRadian
-      let set = []
+      let radius = band[0];
+      let dTheta = TWO_PI / band[1];
+      let startRadian = isDev ? 0 : Math.random() * TWO_PI;
+      let endRadian = startRadian + TWO_PI;
+      let theta = startRadian;
+      let set = [];
       while (theta <= endRadian) {
         set.push([
-          radius * Math.sin(theta), // x
-          radius * Math.cos(theta), // y
-          this.radiansToDegrees(theta) + 90, // rotation
+          (radius) * Math.sin(theta), // x
+          (radius) * Math.cos(theta), // y
+          this.radiansToDegrees(theta), // rotation
         ]);
         theta += dTheta;
       }
@@ -61,23 +70,22 @@ export default class Donut extends Component {
   }
 
   getSprinklesPerBand(innerRadius, outerRadius, radii, coverage) {
-    const edgeRadii = radii.map(r => r - HALF_SPRINKLE_WIDTH)
-    const edgeCircums = edgeRadii.map(r => r * TWO_PI)
-    const totalCircum = edgeCircums.reduce((t, c) => t + c, 0)
-    const totalSprinkles = Math.round((totalCircum / SPRINKLE_HEIGHT) * coverage)
-    const edgeCirumPercentCoverage = edgeCircums.map(c => c / totalCircum)
-    return edgeCirumPercentCoverage.map(pct => Math.floor(pct * totalSprinkles))
+    const edgeRadii = radii.map(r => r - HALF_SPRINKLE_WIDTH);
+    const edgeCircums = edgeRadii.map(r => r * TWO_PI);
+    const totalCircum = edgeCircums.reduce((t, c) => t + c, 0);
+    const totalSprinkles = Math.round((totalCircum / SPRINKLE_HEIGHT) * coverage);
+    const edgeCirumPercentCoverage = edgeCircums.map(c => c / totalCircum);
+    return edgeCirumPercentCoverage.map(pct => Math.floor(pct * totalSprinkles));
   }
 
   radiansToDegrees(rad) {
-    return 360 * rad / TWO_PI
+    return 360 * rad / TWO_PI;
   }
 
   renderSprinkles(innerRadius, outerRadius) {
     const {
-      DONUT_FROSTING_COVERAGE,
       DONUT_FROSTING_THICKNESS,
-      DONUT_SPRINKLE_COVERAGE,
+      DONUT_SPRINKLE_COVERAGE
     } = this.props;
     if (!DONUT_SPRINKLE_COVERAGE) return;
     if (DONUT_FROSTING_THICKNESS < 0.2) return;
@@ -98,58 +106,19 @@ export default class Donut extends Component {
 
     // generate sprinkle DOM
     return sprinkles.map(([x, y, rotation], index) => {
-      const pathHeight = 20/2; // see `d`
-      const pathWidth = 50; // see `d`
+
       return (
-        <circle transform={`translate(${x}, ${y})`} r="3" fill={Donut.SPRINKLE_COLORS[index % 5]}/>
+        <g>
+          <path
+            key={index}
+            d={sprinkleD}
+            fill={Donut.SPRINKLE_COLORS[index % 5]}
+            transform={`translate(${x-3},${y-1}) scale(0.1) rotate(${-rotation}, 30, 10)`}
+          ></path>
+          {/* <circle transform={`translate(${x}, ${y})`} r="1" fill={Donut.SPRINKLE_COLORS[index % 5]}/>*/}
+        </g>
       );
-      // return (
-      //   <path
-      //     key={index}
-      //     d="M10,0 C4.4771525,0 0,4.4771525 0,10 C0,15.5228475 4.4771525,20 10,20 L50,20 C55.5228475,20 60,15.5228475 60,10 C60,4.4771525 55.5228475,0 50,0 L10,0 Z"
-      //     fill={Donut.SPRINKLE_COLORS[index % 5]}
-      //     transform={`translate(${x},${y}) rotate(${rotation})`}
-      //   ></path>
-      // );
     });
-  }
-
-  static getEmoji(val) {
-    if (val > .9) {
-      return '😎';
-    } else if (val > .8) {
-      return '😐';
-    }
-
-    return '😱';
-  }
-
-  renderRating() {
-    const indicator = getIndicator(this.props);
-    const {
-      frostingCoverage,
-      frostingThickness,
-      radius,
-      sprinkleCoverage
-    } = getIndicatorParams(this.props);
-
-    return (
-      <dl>
-        <dt>Overall:</dt>
-        <dd>{Donut.getEmoji(indicator)}</dd>
-
-        <dt>Frosting coverage:</dt>
-        <dd>{Donut.getEmoji(frostingCoverage)}</dd>
-
-        <dt>Frosting thickness:</dt>
-        <dd>{Donut.getEmoji(frostingThickness)}</dd>
-
-        <dt>Radius:</dt>
-        <dd>{Donut.getEmoji(radius)}</dd>
-        <dt>Sprinkles:</dt>
-        <dd>{Donut.getEmoji(sprinkleCoverage)}</dd>
-      </dl>
-    );
   }
 
   render() {
@@ -183,7 +152,7 @@ export default class Donut extends Component {
             {this.renderSprinkles(frostingInnerRadius, frostingOuterRadius)}
           </g>
         </svg>
-        {this.renderRating()}
+        <Rating { ...this.props} />
       </div>
     );
   }
