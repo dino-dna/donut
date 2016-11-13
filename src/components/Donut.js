@@ -6,12 +6,37 @@ import '../css/Donut.css';
 const isDev = process.env.NODE_ENV === 'development'
 
 const TWO_PI = Math.PI * 2;
-const SPRINKLE_WIDTH = 6;
+function getSprinklePath (scale) {
+  const height = 1 * scale
+  const width = 3 * scale
+  const AA = height * 4.4771525 / 20
+  const BB = height * 15.5228475 / 20
+  const CC = width * 55.5228475 / 60
+  const DD = height / 2
+  const EE = height
+  const FF = (5/6) * width
+  const GG = width
+  return {
+    path: `
+      M${DD},0
+      C${AA},0 0,${AA} 0,${DD}
+      C0,${BB} ${AA},${EE} ${DD},${EE}
+      L${FF},${EE}
+      C${CC},${EE} ${GG},${BB} ${GG},${DD}
+      C${GG},${AA} ${CC},0 ${FF},0
+      L${DD},0 Z
+    `,
+    height,
+    width
+  }
+}
+const sprinkle = getSprinklePath(2)
+const ciruclarSprinkle = 0
+const SPRINKLE_HEIGHT = ciruclarSprinkle ? sprinkle.width : sprinkle.height;
+const SPRINKLE_WIDTH = sprinkle.width;
 const HALF_SPRINKLE_WIDTH = SPRINKLE_WIDTH / 2;
-const SPRINKLE_HEIGHT = 6;
 const HALF_SPRINKLE_HEIGHT = SPRINKLE_HEIGHT / 2;
-const sprinkleD = `M10,0 C4.4771525,0 0,4.4771525 0,10 C0,15.5228475 4.4771525,20 10,20 L50,20 C55.5228475,20 60,15.5228475 60,10 C60,4.4771525 55.5228475,0 50,0 L10,0 Z`
-// const sprinkleD = `M10,0 C${0.223857625*SPRINKLE_HEIGHT},0 0,${0.223857625*SPRINKLE_HEIGHT} 0,${0.5*SPRINKLE_HEIGHT} C0,${0.7761423749999999*SPRINKLE_HEIGHT} ${4.4771525/SPRINKLE_HEIGHT},${SPRINKLE_HEIGHT} ${0.5*SPRINKLE_HEIGHT},${SPRINKLE_HEIGHT} L${SPRINKLE_WIDTH*5/6},${SPRINKLE_HEIGHT} C${0.9253807916666666*SPRINKLE_WIDTH},${SPRINKLE_HEIGHT} ${SPRINKLE_WIDTH},${0.7761423749999999*SPRINKLE_HEIGHT} ${SPRINKLE_WIDTH},${0.5*SPRINKLE_HEIGHT} C${SPRINKLE_WIDTH},${0.223857625*SPRINKLE_HEIGHT} ${0.9253807916666666*SPRINKLE_WIDTH},0 ${SPRINKLE_WIDTH*5/6},0 L${0.5*SPRINKLE_HEIGHT},0 Z`
+const sprinklePath = sprinkle.path;
 
 export default class Donut extends Component {
   constructor(props) {
@@ -58,21 +83,27 @@ export default class Donut extends Component {
       let theta = startRadian;
       let set = [];
       while (theta <= endRadian) {
-        set.push([
-          (radius) * Math.sin(theta), // x
-          (radius) * Math.cos(theta), // y
-          this.radiansToDegrees(theta), // rotation
-        ]);
+        let sinTheta = Math.sin(theta)
+        let cosTheta = Math.cos(theta)
+        set.push({
+          r: radius,
+          x: radius * sinTheta,
+          y: radius * cosTheta,
+          sinTheta,
+          cosTheta,
+          thetaRad: theta,
+          thetaDeg: this.radiansToDegrees(theta),
+        });
         theta += dTheta;
       }
       return set;
     });
   }
 
-  getSprinklesPerBand(innerRadius, outerRadius, radii, coverage) {
-    const edgeRadii = radii.map(r => r - HALF_SPRINKLE_WIDTH);
+  getSprinklesPerBand(bandRadii, coverage) {
+    const edgeRadii = ciruclarSprinkle ? bandRadii : bandRadii.map(r => r - HALF_SPRINKLE_WIDTH);
     const edgeCircums = edgeRadii.map(r => r * TWO_PI);
-    const totalCircum = edgeCircums.reduce((t, c) => t + c, 0);
+    const totalCircum = edgeCircums.reduce((total, curr) => total + curr, 0);
     const totalSprinkles = Math.round((totalCircum / SPRINKLE_HEIGHT) * coverage);
     const edgeCirumPercentCoverage = edgeCircums.map(c => c / totalCircum);
     return edgeCirumPercentCoverage.map(pct => Math.floor(pct * totalSprinkles));
@@ -89,35 +120,37 @@ export default class Donut extends Component {
     } = this.props;
     if (!DONUT_SPRINKLE_COVERAGE) return;
     if (DONUT_FROSTING_THICKNESS < 0.2) return;
-    const theoreticBandCount = (outerRadius - innerRadius) / SPRINKLE_WIDTH;
+    const usableRadialLength = outerRadius - innerRadius
+    const theoreticBandCount = usableRadialLength / SPRINKLE_WIDTH;
     if (theoreticBandCount < 1) return;
     const bandCount = Math.floor(theoreticBandCount);
-    const unsprinkledWidth = (outerRadius - innerRadius) - bandCount * SPRINKLE_WIDTH;
-    const bandGapWidth = unsprinkledWidth / (1 + bandCount)
+    const unsprinkledRadialLength = usableRadialLength - bandCount * SPRINKLE_WIDTH;
+    const bandGapWidth = unsprinkledRadialLength / (1 + bandCount)
     const bandRadii = this.getBandRadii(innerRadius, bandCount, bandGapWidth)
-    const countPerBand = this.getSprinklesPerBand(innerRadius, outerRadius, bandRadii, DONUT_SPRINKLE_COVERAGE)
+    const countPerBand = this.getSprinklesPerBand(bandRadii, DONUT_SPRINKLE_COVERAGE)
     const bandRequest = zip(bandRadii, countPerBand) // [[0.3, 10], [0.6, 20], ...]
 
     // locate sprinkles
     let bandSprinkles = this.getSprinkledBands(bandRequest)
 
     // flatten band-wise sprinkle definitions
-    let sprinkles = bandSprinkles.reduce((set, subset) => set.concat(subset), []);
+    const allSprinkles = bandSprinkles.reduce((set, subset) => set.concat(subset), []);
 
     // generate sprinkle DOM
-    return sprinkles.map(([x, y, rotation], index) => {
-
-      return (
-        <g>
-          <path
-            key={index}
-            d={sprinkleD}
-            fill={Donut.SPRINKLE_COLORS[index % 5]}
-            transform={`translate(${x-3},${y-1}) scale(0.1) rotate(${-rotation}, 30, 10)`}
-          ></path>
-          {/* <circle transform={`translate(${x}, ${y})`} r="1" fill={Donut.SPRINKLE_COLORS[index % 5]}/>*/}
-        </g>
-      );
+    return allSprinkles.map(({x, y, thetaDeg, sinTheta, cosTheta}, index) => {
+      const sprinkle = ciruclarSprinkle
+        ? <circle transform={`translate(${x}, ${y})`} r={SPRINKLE_WIDTH/2} fill={Donut.SPRINKLE_COLORS[index % 5]}/>
+        : (
+          <g>
+            <path
+              d={sprinklePath}
+              fill={Donut.SPRINKLE_COLORS[index % 5]}
+              transform={`translate(${x - cosTheta * HALF_SPRINKLE_WIDTH - sinTheta * HALF_SPRINKLE_HEIGHT},${y - cosTheta * HALF_SPRINKLE_HEIGHT + sinTheta * HALF_SPRINKLE_WIDTH}) rotate(${-thetaDeg})`}
+            ></path>
+            <circle transform={`translate(${x}, ${y})`} r={SPRINKLE_WIDTH/8} fill={'black'}/>
+          </g>
+        )
+      return (<g key={index}>{sprinkle}</g>)
     });
   }
 
