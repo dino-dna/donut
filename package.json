@@ -6,7 +6,7 @@
   "devDependencies": {
     "gh-pages": "^0.11.0",
     "react-scripts": "^0.7.0",
-    "redux-logger": "^2.7.0"
+    "redux-logger": "^2.7.2"
   },
   "dependencies": {
     "gaussian": "^1.1.0",
