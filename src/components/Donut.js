@@ -1,42 +1,18 @@
 import React, { Component } from 'react';
+import Sprinkle, { attrs as sprinkleAttrs } from './Sprinkle'
 import zip from 'lodash/zip';
 import Rating from './Rating';
 import '../css/Donut.css';
 
 const isDev = process.env.NODE_ENV === 'development'
 
+const SPRINKLE_SCALE = 2;
+const SPRINKLE_RANDOM = true
+const SPRINKLE_META = sprinkleAttrs(SPRINKLE_SCALE);
 const TWO_PI = Math.PI * 2;
-function getSprinklePath (scale) {
-  const height = 1 * scale
-  const width = 3 * scale
-  const AA = height * 4.4771525 / 20
-  const BB = height * 15.5228475 / 20
-  const CC = width * 55.5228475 / 60
-  const DD = height / 2
-  const EE = height
-  const FF = (5/6) * width
-  const GG = width
-  return {
-    path: `
-      M${DD},0
-      C${AA},0 0,${AA} 0,${DD}
-      C0,${BB} ${AA},${EE} ${DD},${EE}
-      L${FF},${EE}
-      C${CC},${EE} ${GG},${BB} ${GG},${DD}
-      C${GG},${AA} ${CC},0 ${FF},0
-      L${DD},0 Z
-    `,
-    height,
-    width
-  }
-}
-const sprinkle = getSprinklePath(2)
-const ciruclarSprinkle = 0
-const SPRINKLE_HEIGHT = ciruclarSprinkle ? sprinkle.width : sprinkle.height;
-const SPRINKLE_WIDTH = sprinkle.width;
+const SPRINKLE_HEIGHT = SPRINKLE_META.height;
+const SPRINKLE_WIDTH = SPRINKLE_META.width;
 const HALF_SPRINKLE_WIDTH = SPRINKLE_WIDTH / 2;
-const HALF_SPRINKLE_HEIGHT = SPRINKLE_HEIGHT / 2;
-const sprinklePath = sprinkle.path;
 
 export default class Donut extends Component {
   constructor(props) {
@@ -74,34 +50,36 @@ export default class Donut extends Component {
     return bandRadii
   }
 
-  getSprinkledBands(bandRequest) {
+  getSprinkledBands(bandRequest, radialWiggle) {
     return bandRequest.map((band) => {
       let radius = band[0];
       let dTheta = TWO_PI / band[1];
+      let i = band[1]
       let startRadian = isDev ? 0 : Math.random() * TWO_PI;
       let endRadian = startRadian + TWO_PI;
       let theta = startRadian;
       let set = [];
-      while (theta <= endRadian) {
+
+      while (i > 0) {
         let sinTheta = Math.sin(theta)
         let cosTheta = Math.cos(theta)
+        let randRadius = radius + (Math.random() - 0.5) * radialWiggle
         set.push({
-          r: radius,
-          x: radius * sinTheta,
-          y: radius * cosTheta,
+          x: randRadius * sinTheta,
+          y: randRadius * cosTheta,
           sinTheta,
           cosTheta,
-          thetaRad: theta,
-          thetaDeg: this.radiansToDegrees(theta),
+          thetaDeg: isDev ? this.radiansToDegrees(theta) : 360 * Math.random(),
         });
         theta += dTheta;
+        --i;
       }
       return set;
     });
   }
 
   getSprinklesPerBand(bandRadii, coverage) {
-    const edgeRadii = ciruclarSprinkle ? bandRadii : bandRadii.map(r => r - HALF_SPRINKLE_WIDTH);
+    const edgeRadii = bandRadii.map(r => r - HALF_SPRINKLE_WIDTH);
     const edgeCircums = edgeRadii.map(r => r * TWO_PI);
     const totalCircum = edgeCircums.reduce((total, curr) => total + curr, 0);
     const totalSprinkles = Math.round((totalCircum / SPRINKLE_HEIGHT) * coverage);
@@ -131,25 +109,19 @@ export default class Donut extends Component {
     const bandRequest = zip(bandRadii, countPerBand) // [[0.3, 10], [0.6, 20], ...]
 
     // locate sprinkles
-    let bandSprinkles = this.getSprinkledBands(bandRequest)
+    let bandSprinkles = this.getSprinkledBands(bandRequest, (unsprinkledRadialLength + bandGapWidth + SPRINKLE_WIDTH) / bandCount)
 
     // flatten band-wise sprinkle definitions
     const allSprinkles = bandSprinkles.reduce((set, subset) => set.concat(subset), []);
 
     // generate sprinkle DOM
     return allSprinkles.map(({x, y, thetaDeg, sinTheta, cosTheta}, index) => {
-      const sprinkle = ciruclarSprinkle
-        ? <circle transform={`translate(${x}, ${y})`} r={SPRINKLE_WIDTH/2} fill={Donut.SPRINKLE_COLORS[index % 5]}/>
-        : (
-          <g>
-            <path
-              d={sprinklePath}
-              fill={Donut.SPRINKLE_COLORS[index % 5]}
-              transform={`translate(${x - cosTheta * HALF_SPRINKLE_WIDTH - sinTheta * HALF_SPRINKLE_HEIGHT},${y - cosTheta * HALF_SPRINKLE_HEIGHT + sinTheta * HALF_SPRINKLE_WIDTH}) rotate(${-thetaDeg})`}
-            ></path>
-            <circle transform={`translate(${x}, ${y})`} r={SPRINKLE_WIDTH/8} fill={'black'}/>
-          </g>
-        )
+      const sprinkle = (
+        <g transform={`translate(${x}, ${y})`}>
+          <Sprinkle color={Donut.SPRINKLE_COLORS[index % 5]} scale={SPRINKLE_SCALE} deg={-thetaDeg+90}/>
+          {/*<circle r={SPRINKLE_WIDTH/8} fill={'black'}/> */}
+        </g>
+      )
       return (<g key={index}>{sprinkle}</g>)
     });
   }
