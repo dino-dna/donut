@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import Donut from './Donut';
+import DonutList from './DonutList'
 import '../css/Donuts.css';
 
 class Donuts extends Component {
@@ -18,17 +18,13 @@ class Donuts extends Component {
         </div>
       )
     }
-
     return (
-      <ul className="Donuts">
-        {donuts.map((donut, i) => {
-          return (
-            <li key={i}>
-              <Donut {...donut} />
-            </li>
-          )
-        })}
-      </ul>
+      <div>
+        <h3 id='donut_list_header'>Your donuts, your highness...</h3>
+        <div>
+          <DonutList donuts={donuts} />
+        </div>
+      </div>
     );
   }
 }

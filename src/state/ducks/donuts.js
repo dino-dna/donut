@@ -25,12 +25,22 @@ export function removeDonut(index) {
   }
 }
 
-export default function reducer(state = [], action) {
+function getDonuts() {
+  return JSON.parse(localStorage.getItem('DONUTS')) || []
+}
+
+function setDonuts(donuts) {
+  localStorage.setItem('DONUTS', JSON.stringify(donuts))
+  return donuts
+}
+
+export default function reducer(state = null, action) {
+  state = state || getDonuts()
   switch (action.type) {
     case DO_ADD_DONUT:
-      return [...state, action.donut];
+      return setDonuts([...state, action.donut]);
     case REMOVE_DONUT:
-      return state.filter((donut, i) => i !== action.index);
+      return setDonuts(state.filter((donut, i) => i !== action.index));
     default:
       return state;
   }

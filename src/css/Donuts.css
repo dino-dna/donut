@@ -1,11 +1,4 @@
-.Donuts {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: .5em;
-}
-.Donuts li {
-  width: 50%;
-  padding: .5rem;
+#donut_list_header {
+  padding-left: 1rem;
+  text-align: left;
 }
