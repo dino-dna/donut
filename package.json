@@ -8,7 +8,7 @@
     "@kadira/storybook-addon-knobs": "^1.5.0",
     "gh-pages": "^0.11.0",
     "react-remarkable": "^1.1.1",
-    "storybook-host": "^1.0.7",
+    "storybook-host": "^1.0.14",
     "react-scripts": "^0.7.0",
     "redux-logger": "^2.7.4"
   },
