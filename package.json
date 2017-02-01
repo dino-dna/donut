@@ -10,7 +10,7 @@
     "react-remarkable": "^1.1.1",
     "storybook-host": "^1.0.7",
     "react-scripts": "^0.7.0",
-    "redux-logger": "^2.7.4"
+    "redux-logger": "^2.8.0"
   },
   "dependencies": {
     "gaussian": "^1.1.0",
