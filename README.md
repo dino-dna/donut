@@ -11,7 +11,6 @@ donut is a utility to create totally rad doughnuts!
 
 to facilitate a fun and interactive demo for [coinstac](https://github.com/mrn-code/coinstac).
 
-
 ## faq
 
 yes, we know we spelled doughnut wrong!  donut is spelled in the donutjs tradition! :smile:
