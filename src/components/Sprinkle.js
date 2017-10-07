@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import memoize from 'lodash/memoize'
 
 export const attrs = memoize((scale) => {

@@ -7,7 +7,6 @@ import '../css/Donut.css';
 const isDev = process.env.NODE_ENV === 'development'
 
 const SPRINKLE_SCALE = 2;
-const SPRINKLE_RANDOM = true
 const SPRINKLE_META = sprinkleAttrs(SPRINKLE_SCALE);
 const TWO_PI = Math.PI * 2;
 const SPRINKLE_HEIGHT = SPRINKLE_META.height;
@@ -56,7 +55,6 @@ export default class Donut extends Component {
       let dTheta = TWO_PI / band[1];
       let i = band[1]
       let startRadian = isDev ? 0 : Math.random() * TWO_PI;
-      let endRadian = startRadian + TWO_PI;
       let theta = startRadian;
       let set = [];
 
