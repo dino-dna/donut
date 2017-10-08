@@ -1,5 +1,5 @@
 import React from 'react'
-import { storiesOf } from '@kadira/storybook'
+import { storiesOf } from '@storybook/react'
 import Sprinkle from './Sprinkle'
 
 export default storiesOf('Sprinkle', module)
@@ -7,13 +7,6 @@ export default storiesOf('Sprinkle', module)
   return (
     <svg viewport="0 0 60 60" width="60" height="60">
       <Sprinkle />
-    </svg>
-  )
-})
-.add('rotated', () => {
-  return (
-    <svg viewport="0 0 60 60">
-      <Sprinkle deg={90} />
     </svg>
   )
 })

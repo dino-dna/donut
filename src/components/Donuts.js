@@ -14,7 +14,13 @@ class Donuts extends Component {
             Thanks for stoppin' in.  Head over to the donut "Viewer" and start
             making some tasty donuts!
           </p>
-          <span style={{fontSize: '600%'}}>🍩</span>
+          <span
+            aria-label="Donut"
+            role="img"
+            style={{fontSize: '600%'}}
+          >
+            🍩
+          </span>
         </div>
       )
     }

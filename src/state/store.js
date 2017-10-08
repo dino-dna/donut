@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore } from 'redux';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import promiseMiddleware from 'redux-promise';
 import thunkMiddleware from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux'
