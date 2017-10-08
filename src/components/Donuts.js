@@ -8,7 +8,7 @@ class Donuts extends Component {
     const { donuts } = this.props;
     if (!donuts || !donuts.length) {
       return (
-        <div>
+        <div className="Donuts Donuts-empty">
           <h1>We see that you’re very, very, hungry.</h1>
           <p>
             Thanks for stoppin’ in. Head over to the donut “Viewer” and start
@@ -17,7 +17,6 @@ class Donuts extends Component {
           <span
             aria-label="Donut"
             role="img"
-            style={{fontSize: '600%'}}
           >
             🍩
           </span>
@@ -25,8 +24,8 @@ class Donuts extends Component {
       )
     }
     return (
-      <div>
-        <h3 id='donut_list_header'>Your donuts, your highness...</h3>
+      <div className="Donuts Donuts-populated">
+        <h3>Your donuts, your highness…</h3>
         <div>
           <DonutList donuts={donuts} />
         </div>
