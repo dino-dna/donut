@@ -16,6 +16,15 @@
   margin-top: 0;
 }
 
+.Donuts-link {
+  color: inherit;
+}
+.Donuts-link:active,
+.Donuts-link:focus,
+.Donuts-link:hover {
+  opacity: .8;
+}
+
 /** Empty state: no donuts exist */
 .Donuts-empty {
   height: 100%;

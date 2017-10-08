@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import DonutList from './DonutList'
+import { Link } from 'react-router'
 import '../css/Donuts.css';
 
 class Donuts extends Component {
@@ -11,8 +12,16 @@ class Donuts extends Component {
         <div className="Donuts Donuts-empty">
           <h1>We see that you’re very, very, hungry.</h1>
           <p>
-            Thanks for stoppin’ in. Head over to the donut “Viewer” and start
-            making some tasty donuts!
+            Thanks for stoppin’ in. Head over to
+            {' '}
+            <Link
+              className="Donuts-link"
+              to="/view"
+            >
+              the donut “Viewer”
+            </Link>
+            {' '}
+            and start making some tasty donuts!
           </p>
           <span
             aria-label="Donut"
