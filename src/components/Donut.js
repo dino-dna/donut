@@ -139,19 +139,19 @@ export default class Donut extends Component {
     const frostingInnerRadius = frostRadius - frostStrokeWidth / 2
     const frostingOuterRadius = frostRadius + frostStrokeWidth / 2
     return (
-      <div className="Donut">
-        <svg viewBox="0 0 100 100">
-          <circle cx={50} cy={50} r={outerRadius} fill="#efcc9a" stroke="#20426a" strokeWidth="2" />
-          <circle cx={50} cy={50} r={innerRadius} fill="white" stroke="#20426a" strokeWidth="2" />
+      <div className='Donut'>
+        <svg viewBox='0 0 100 100'>
+          <circle cx={50} cy={50} r={outerRadius} fill='#efcc9a' stroke='#20426a' strokeWidth='2' />
+          <circle cx={50} cy={50} r={innerRadius} fill='white' stroke='#20426a' strokeWidth='2' />
           <circle
             cx={50}
             cy={50}
-            fill="transparent"
+            fill='transparent'
             opacity={DONUT_FROSTING_THICKNESS}
             r={frostRadius}
-            stroke="#f288a9"
+            stroke='#f288a9'
             strokeWidth={frostStrokeWidth} />
-          <g transform="translate(50, 50)">
+          <g transform='translate(50, 50)'>
             {this.renderSprinkles(frostingInnerRadius, frostingOuterRadius)}
           </g>
         </svg>

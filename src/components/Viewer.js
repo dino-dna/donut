@@ -8,7 +8,7 @@ class Viewer extends Component {
   render() {
     const { donut } = this.props;
     return (
-      <div className="Viewer">
+      <div className='Viewer'>
         <Donut {...donut} />
         <DonutSettingsController donut={donut} />
       </div>

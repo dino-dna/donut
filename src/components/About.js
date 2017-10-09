@@ -4,7 +4,7 @@ import '../css/About.css';
 export default class About extends Component {
   render() {
     return (
-      <div className="About">
+      <div className='About'>
         <h1>About</h1>
         <h2>What is it?</h2>
         <p>
@@ -17,20 +17,20 @@ export default class About extends Component {
         <p>
           So glad you asked.
         </p>
-        <figure className="profile">
-          <a href="https://github.com/swashcap/">
+        <figure className='profile'>
+          <a href='https://github.com/swashcap/'>
             <img
-              alt="swashcap avatar"
-              src="https://avatars0.githubusercontent.com/u/1858316"
+              alt='swashcap avatar'
+              src='https://avatars0.githubusercontent.com/u/1858316'
             />
             <figcaption>swashcap</figcaption>
           </a>
         </figure>
-        <figure className="profile">
-          <a href="https://github.com/cdaringe/">
+        <figure className='profile'>
+          <a href='https://github.com/cdaringe/'>
             <img
-              alt="cdaringe avatar"
-              src="https://avatars2.githubusercontent.com/u/1003261"
+              alt='cdaringe avatar'
+              src='https://avatars2.githubusercontent.com/u/1003261'
             />
             <figcaption>cdaringe</figcaption>
           </a>

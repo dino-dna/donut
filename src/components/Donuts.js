@@ -9,14 +9,14 @@ class Donuts extends Component {
     const { donuts } = this.props;
     if (!donuts || !donuts.length) {
       return (
-        <div className="Donuts Donuts-empty">
+        <div className='Donuts Donuts-empty'>
           <h1>We see that you’re very, very, hungry.</h1>
           <p>
             Thanks for stoppin’ in. Head over to
             {' '}
             <Link
-              className="Donuts-link"
-              to="/view"
+              className='Donuts-link'
+              to='/view'
             >
               the donut “Viewer”
             </Link>
@@ -24,8 +24,8 @@ class Donuts extends Component {
             and start making some tasty donuts!
           </p>
           <span
-            aria-label="Donut"
-            role="img"
+            aria-label='Donut'
+            role='img'
           >
             🍩
           </span>
@@ -33,7 +33,7 @@ class Donuts extends Component {
       )
     }
     return (
-      <div className="Donuts Donuts-populated">
+      <div className='Donuts Donuts-populated'>
         <h3>Your donuts, your highness…</h3>
         <div>
           <DonutList donuts={donuts} />
