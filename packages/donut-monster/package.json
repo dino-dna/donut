@@ -1,0 +1,38 @@
+{
+  "name": "donut-monster",
+  "version": "1.0.0",
+  "description": "Donut definition consuming service.",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "standard 'src/**/*'",
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "donut",
+    "hapi"
+  ],
+  "contributors": [
+    "Chris Dieringer <cdaringe@gmail.org>",
+    "Cory Reed <swashcap@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "good": "^7.3.0",
+    "good-console": "^6.4.0",
+    "good-squeeze": "^5.0.2",
+    "hapi": "^16.6.2"
+  },
+  "devDependencies": {
+    "standard": "^10.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dino-dna/donut.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dino-dna/donut/issues"
+  },
+  "homepage": "https://dino-dna.github.io/donut/"
+}
