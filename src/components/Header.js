@@ -8,7 +8,7 @@ class Header extends Component {
 
   render() {
     return (
-      <header className="Header" role="banner">
+      <header className='Header' role='banner'>
         <h1>Donut</h1>
         <ul>
           <li><Link to={`/`}>Donuts</Link></li>

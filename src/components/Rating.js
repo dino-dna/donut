@@ -3,11 +3,11 @@ import { getIndicator, getIndicatorParams } from '../donut-classifier'
 
 function getEmoji(val) {
   if (val > 0.9) {
-    return <span aria-label="good" role="img">😎</span>;
+    return <span aria-label='good' role='img'>😎</span>;
   } else if (val > 0.8) {
-    return <span aria-label="okay" role="img">😐</span>;
+    return <span aria-label='okay' role='img'>😐</span>;
   }
-  return <span aria-label="bad" role="img">😱</span>
+  return <span aria-label='bad' role='img'>😱</span>
 }
 
 export default function Rating (props) {

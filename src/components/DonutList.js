@@ -5,7 +5,7 @@ import '../css/DonutList.css';
 export default function DonutList (props) {
   const { donuts } = props;
   return (
-      <ul className="DonutList">
+      <ul className='DonutList'>
         {donuts.map((donut, i) => {
           return (
             <li key={i}>

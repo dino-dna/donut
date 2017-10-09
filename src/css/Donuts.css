@@ -1,4 +1,42 @@
-#donut_list_header {
+/**
+ * Donuts
+ */
+
+.Donuts {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  justify-content: center;
+  padding-top: 1rem;
+}
+.Donuts h1 {
+  margin: 0 0 .5rem;
+}
+.Donuts h3 {
+  margin-top: 0;
+}
+
+.Donuts-link {
+  color: inherit;
+}
+.Donuts-link:active,
+.Donuts-link:focus,
+.Donuts-link:hover {
+  opacity: .8;
+}
+
+/** Empty state: no donuts exist */
+.Donuts-empty {
+  height: 100%;
+}
+
+.Donuts-empty span[role=img] {
+  font-size: 600%;
+}
+
+/** Populated state: some donuts! */
+.Donuts-populated h3 {
   padding-left: 1rem;
   text-align: left;
 }
+
