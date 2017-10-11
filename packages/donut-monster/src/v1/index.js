@@ -1,15 +1,34 @@
 'use strict'
 
+const getBookshelf = require('bookshelf')
+const boom = require('boom')
 const joi = require('joi')
+const getKnex = require('knex')
+
+const bookshelf = getBookshelf(getKnex({
+  client: 'pg',
+  connection: {
+    charset: 'utf8',
+    database: 'postgres',
+    host: '127.0.0.1',
+    password: 'mysecretpassword',
+    user: 'postgres'
+  }
+}))
 
 const donut = joi.object().keys({
-  frostingCoverage: joi.number().min(0).max(1),
-  frostingThickness: joi.number().min(0).max(1),
-  innerRadius: joi.number().min(0).max(1),
-  outerRadius: joi.number().min(0).max(1),
-  sprinkleCoverage: joi.number().min(0).max(1)
+  frosting_coverage: joi.number().min(0).max(1).required(),
+  frosting_thickness: joi.number().min(0).max(1).required(),
+  inner_radius: joi.number().min(0).max(1).required(),
+  name: joi.string().min(3).max(255).required(),
+  outer_radius: joi.number().min(0).max(1).required(),
+  sprinkle_coverage: joi.number().min(0).max(1).required()
 })
-const donutId = joi.string()
+const donutId = joi.number().integer().positive()
+
+const Donut = bookshelf.Model.extend({
+  tableName: 'donuts'
+})
 
 module.exports.register = (server, options, next) => {
   server.route({
@@ -27,7 +46,9 @@ module.exports.register = (server, options, next) => {
       description: 'Get all donuts'
     },
     handler (request, reply) {
-      return reply()
+      return Donut.fetchAll()
+        .then(collection => reply(collection.toJSON()))
+        .catch(error => reply(boom.wrap(error)))
     },
     method: 'GET',
     path: '/donuts'
@@ -40,8 +61,10 @@ module.exports.register = (server, options, next) => {
         payload: donut
       }
     },
-    handler (request, reply) {
-      return reply()
+    handler ({ payload }, reply) {
+      return Donut.forge(payload).save()
+        .then(donut => reply(donut.toJSON()))
+        .catch(error => reply(boom.wrap(error)))
     },
     method: 'POST',
     path: '/donuts'
@@ -57,8 +80,24 @@ module.exports.register = (server, options, next) => {
         }
       }
     },
-    handler (request, reply) {
-      return reply()
+    handler (
+      {
+        params: { id },
+        payload
+      },
+      reply
+    ) {
+      return Donut.forge({ id })
+        .fetch()
+        .then((donut) => {
+          if (!donut) {
+            throw boom.notFound(`Couldn't find donut ${id}`)
+          }
+
+          return donut.set(payload).save()
+        })
+        .then(donut => reply(donut.toJSON()))
+        .catch(error => reply(boom.wrap(error)))
     },
     method: 'PUT',
     path: '/donuts/{id}'
@@ -73,8 +112,21 @@ module.exports.register = (server, options, next) => {
         }
       }
     },
-    handler (request, reply) {
-      return reply()
+    handler ({ params: { id } }, reply) {
+      return Donut.forge({ id })
+        .fetch()
+        .then((donut) => {
+          if (!donut) {
+            throw boom.notFound(`Couldn't find donut ${id}`)
+          }
+
+          return Promise.all([
+            donut.toJSON(),
+            donut.destroy()
+          ])
+        })
+        .then(([json]) => reply(json))
+        .catch(error => reply(boom.wrap(error)))
     },
     method: 'DELETE',
     path: '/donuts/{id}'

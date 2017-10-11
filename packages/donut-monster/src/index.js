@@ -2,17 +2,23 @@
 
 const good = require('good')
 const hapi = require('hapi')
-const { promisify } = require('util')
 
 const v1 = require('./v1/index.js')
 
-const server = new hapi.Server({
-  debug: {
-    request: '*'
+const server = new hapi.Server(
+  process.env.NODE_ENV !== 'test'
+  ? {
+    debug: {
+      request: '*'
+    }
   }
-})
+  : null
+)
 
-const register = promisify(server.register.bind(server))
+const logAndDie = (error) => {
+  console.error(error)
+  process.exit(1)
+}
 
 server.connection({
   host: 'localhost',
@@ -25,43 +31,47 @@ server.connection({
   }
 })
 
-const init = () => register({
-  register: good,
-  options: {
-    reporters: {
-      myConsoleReporter: [
-        {
-          module: 'good-squeeze',
-          name: 'Squeeze',
-          args: [{
-            log: '*',
-            response: '*'
-          }]
-        },
-        {
-          module: 'good-console'
-        },
-        'stdout'
-      ]
+server.register(
+  {
+    register: v1
+  },
+  {
+    routes: {
+      prefix: '/v1'
     }
   }
-})
-  .then(() => register(
-    { register: v1 },
-    {
-      routes: {
-        prefix: '/v1'
-      }
+)
+  .then(() => {
+    if (process.env.NODE_ENV !== 'test') {
+      return server.register({
+        register: good,
+        options: {
+          reporters: {
+            myConsoleReporter: [
+              {
+                module: 'good-squeeze',
+                name: 'Squeeze',
+                args: [{
+                  log: '*',
+                  response: '*'
+                }]
+              },
+              {
+                module: 'good-console'
+              },
+              'stdout'
+            ]
+          }
+        }
+      })
     }
-  ))
-  .then(() => server.start())
-  .then(() => console.log(`Server running at: ${server.info.uri}`))
+  })
+  .catch(logAndDie)
 
 if (require.main === module) {
-  init().catch((error) => {
-    console.error(error)
-    process.exit(1)
-  })
+  server.start()
+    .then(() => console.log(`Server running at: ${server.info.uri}`))
+    .catch(logAndDie)
 }
 
-module.exports = init
+module.exports = server
