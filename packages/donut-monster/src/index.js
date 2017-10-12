@@ -15,7 +15,6 @@ app.use(bodyParser())
 
 if (process.env.NODE_ENV !== 'test') app.use(logger())
 
-
 app.use(get('/', (ctx) => {
   ctx.body = '👹 🍩  nom nom nom DONUTS!!!\n'
 }))
