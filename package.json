@@ -1,38 +1,26 @@
 {
   "name": "donut",
-  "version": "0.0.1",
-  "homepage": "https://dino-dna.github.io/donut/",
-  "private": true,
-  "devDependencies": {
-    "@storybook/addon-knobs": "^3.2.12",
-    "@storybook/react": "^3.2.12",
-    "gh-pages": "^1.0.0",
-    "lerna": "^2.4.0",
-    "react-remarkable": "^1.1.1",
-    "react-scripts": "^1.0.14",
-    "redux-logger": "^3.0.6",
-    "storybook-host": "^4.1.4"
-  },
-  "dependencies": {
-    "gaussian": "^1.1.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-redux": "^5.0.3",
-    "react-router": "^3.2.0",
-    "react-router-redux": "^4.0.8",
-    "redux": "^3.6.0",
-    "redux-promise": "^0.5.3",
-    "redux-thunk": "^2.2.0"
-  },
+  "version": "1.0.0",
+  "description": "donut is a utility to create totally rad doughnuts!",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject",
-    "deploy": "npm run build && gh-pages -d build",
-    "storybook": "start-storybook -p 9009",
-    "build-storybook": "build-storybook"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": "./node_modules/react-scripts/config/eslint.js"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dino-dna/donut.git"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dino-dna/donut/issues"
+  },
+  "homepage": "https://github.com/dino-dna/donut#readme",
+  "contributors": [
+    "cdaringe",
+    "swashcap"
+  ],
+  "devDependencies": {
+    "lerna": "^2.4.0"
   }
 }
