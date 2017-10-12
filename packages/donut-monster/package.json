@@ -5,7 +5,6 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "standard '**/*.js'",
-    "migrate": "knex migrate:latest",
     "start": "node src/index.js",
     "test": "NODE_ENV=test ava test"
   },
