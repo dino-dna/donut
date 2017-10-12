@@ -1,77 +1,48 @@
 'use strict'
 
-const good = require('good')
-const hapi = require('hapi')
+const Koa = require('koa')
+const bodyParser = require('koa-bodyparser')
+const logger = require('koa-logger')
+const { get, post } = require('koa-route')
+const uuidv4 = require('uuid/v4')
+const zipObject = require('lodash.zipobject')
 
-const v1 = require('./v1/index.js')
+const app = new Koa()
+const donuts = new Map()
+const port = 3000
 
-const server = new hapi.Server(
-  process.env.NODE_ENV !== 'test'
-  ? {
-    debug: {
-      request: '*'
-    }
+app.use(bodyParser())
+
+if (process.env.NODE_ENV !== 'test') app.use(logger())
+
+
+app.use(get('/', (ctx) => {
+  ctx.body = '👹 🍩  nom nom nom DONUTS!!!\n'
+}))
+app.use(get('/donuts', (ctx) => {
+  ctx.body = zipObject(Array.from(donuts.entries()))
+}))
+app.use(get('/donuts/:id', (ctx, id) => {
+  if (!donuts.has(id)) {
+    return ctx.throw(404, `${id} not found`)
   }
-  : null
-)
+  ctx.body = {
+    [id]: donuts.get(id)
+  }
+}))
+app.use(post('/donuts', (ctx) => {
+  const id = uuidv4()
+  // TODO: validate
+  donuts.set(uuidv4(), ctx.request.body)
 
-const logAndDie = (error) => {
-  console.error(error)
-  process.exit(1)
+  ctx.body = {
+    [id]: ctx.request.body
+  }
+}))
+
+if (!module.parent) {
+  app.listen(port)
+  console.log(`donut-monster listening on ${port}`)
 }
 
-server.connection({
-  host: 'localhost',
-  port: 3000,
-  routes: {
-    cors: {
-      credentials: true,
-      origin: ['*']
-    }
-  }
-})
-
-server.register(
-  {
-    register: v1
-  },
-  {
-    routes: {
-      prefix: '/v1'
-    }
-  }
-)
-  .then(() => {
-    if (process.env.NODE_ENV !== 'test') {
-      return server.register({
-        register: good,
-        options: {
-          reporters: {
-            myConsoleReporter: [
-              {
-                module: 'good-squeeze',
-                name: 'Squeeze',
-                args: [{
-                  log: '*',
-                  response: '*'
-                }]
-              },
-              {
-                module: 'good-console'
-              },
-              'stdout'
-            ]
-          }
-        }
-      })
-    }
-  })
-  .catch(logAndDie)
-
-if (require.main === module) {
-  server.start()
-    .then(() => console.log(`Server running at: ${server.info.uri}`))
-    .catch(logAndDie)
-}
-
-module.exports = server
+module.exports = app
