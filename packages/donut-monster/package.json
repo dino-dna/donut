@@ -15,8 +15,8 @@
     "hapi"
   ],
   "contributors": [
-    "Chris Dieringer <cdaringe@gmail.org>",
-    "Cory Reed <swashcap@gmail.com>"
+    "cdaringe",
+    "swashcap"
   ],
   "license": "MIT",
   "dependencies": {
