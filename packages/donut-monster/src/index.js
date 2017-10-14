@@ -5,7 +5,6 @@ const bodyParser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const { get, post } = require('koa-route')
 const uuidv4 = require('uuid/v4')
-const zipObject = require('lodash.zipobject')
 
 const app = new Koa()
 const donuts = new Map()
@@ -19,7 +18,10 @@ app.use(get('/', (ctx) => {
   ctx.body = '👹 🍩  nom nom nom DONUTS!!!\n'
 }))
 app.use(get('/donuts', (ctx) => {
-  ctx.body = zipObject(Array.from(donuts.entries()))
+  ctx.body = Array.from(donuts.entries()).reduce((memo, [id, donut]) => {
+    memo[id] = donut
+    return memo
+  }, {})
 }))
 app.use(get('/donuts/:id', (ctx, id) => {
   if (!donuts.has(id)) {
