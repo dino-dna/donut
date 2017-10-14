@@ -34,6 +34,7 @@ app.use(post('/donuts', (ctx) => {
   // TODO: validate
   donuts.set(uuidv4(), ctx.request.body)
 
+  ctx.status = 201
   ctx.body = {
     [id]: ctx.request.body
   }
