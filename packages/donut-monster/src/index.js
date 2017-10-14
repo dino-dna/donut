@@ -3,10 +3,11 @@
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const logger = require('koa-logger')
-const { get, post } = require('koa-route')
+const { all, get, post } = require('koa-route')
+const websockify = require('koa-websocket')
 const uuidv4 = require('uuid/v4')
 
-const app = new Koa()
+const app = websockify(new Koa())
 const donuts = new Map()
 const port = 3000
 
@@ -40,6 +41,10 @@ app.use(post('/donuts', (ctx) => {
   ctx.body = {
     [id]: ctx.request.body
   }
+}))
+
+app.ws.use(all('/voodoo', (ctx) => {
+  ctx.websocket.send('👋 🍩')
 }))
 
 if (!module.parent) {
