@@ -4,9 +4,10 @@ const execa = require('execa')
 const debug = require('debug')('regression')
 
 /**
- * - it has a model
- * - it takes donuts
- * - it outputs a { model, donut }
+ * Runs a donut regression
+ * @param {Donut[]} donuts
+ * @param {string} image docker image
+ * @returns {Promise} resolves to regression coefficients
  */
 async function regression (donuts, image) {
   var Xm = {
@@ -31,7 +32,13 @@ async function regression (donuts, image) {
   }
   const child = execa('docker', [ 'run', '-i', '--rm', image || 'donut-regression' ])
   // await bb.delay(1000)
-  child.stdin.write(JSON.stringify({ X: Xn, Y, learners: ['ridge_regression'] }))
+  child.stdin.write(
+    JSON.stringify({
+      X: Xn,
+      Y,
+      learners: ['ridge_regression', 'linear_regression']
+    })
+  )
   child.stdin.end()
   const res = await child
   const coefficients = JSON.parse(res.stdout.toString())

@@ -5,7 +5,7 @@ import numpy as np
 
 class DonutLearner:
   @staticmethod
-  def linear_regression(donuts):
+  def linear_regression(X, Y):
     reg = linear_model.LinearRegression()
     return reg.fit(X, Y)
 
