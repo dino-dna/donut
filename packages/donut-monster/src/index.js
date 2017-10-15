@@ -8,9 +8,19 @@ const WebSocket = require('ws')
 const websockify = require('koa-websocket')
 const uuidv4 = require('uuid/v4')
 
+const { NEW_DONUT } = require('./messages.js')
+
 const app = websockify(new Koa())
 const donuts = new Map()
 const port = 3000
+
+const broadcast = (type, data) => {
+  app.ws.server.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify({ type, data }))
+    }
+  })
+}
 
 app.use(bodyParser())
 
@@ -40,11 +50,7 @@ app.use(post('/donuts', (ctx) => {
 
   donuts.set(uuidv4(), donut)
 
-  app.ws.server.clients.forEach((client) => {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(JSON.stringify(donut))
-    }
-  })
+  broadcast(NEW_DONUT, donut)
 
   ctx.status = 201
   ctx.body = {

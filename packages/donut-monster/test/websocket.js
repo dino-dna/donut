@@ -3,6 +3,7 @@ const test = require('ava')
 const WebSocket = require('ws')
 
 const app = require('../src/index.js')
+const { NEW_DONUT } = require('../src/messages')
 
 const server = app.listen()
 
@@ -40,7 +41,13 @@ test('Broadcasts new donuts', (t) => new Promise((resolve, reject) => {
   ws.on('error', reject)
   ws.on('message', message => {
     if (messageCount === 1) {
-      t.deepEqual(JSON.parse(message), donut)
+      t.deepEqual(
+        JSON.parse(message),
+        {
+          type: NEW_DONUT,
+          data: donut
+        }
+      )
       ws.terminate()
     }
     messageCount++
