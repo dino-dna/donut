@@ -1,0 +1,45 @@
+{
+  "name": "donut-monster",
+  "version": "1.0.0",
+  "description": "Donut definition consuming service.",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "standard '**/*.js'",
+    "precommit": "npm run lint && npm test",
+    "start": "node src/index.js",
+    "test": "NODE_ENV=test ava test"
+  },
+  "keywords": [
+    "api",
+    "donut",
+    "hapi"
+  ],
+  "contributors": [
+    "cdaringe",
+    "swashcap"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^3.1.0",
+    "koa-route": "^3.2.0",
+    "koa-websocket": "^4.0.0",
+    "uuid": "^3.1.0",
+    "ws": "^3.2.0"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0",
+    "husky": "^0.14.3",
+    "standard": "^10.0.3",
+    "supertest": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dino-dna/donut.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dino-dna/donut/issues"
+  },
+  "homepage": "https://dino-dna.github.io/donut/"
+}
