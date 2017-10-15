@@ -1,0 +1,37 @@
+{
+  "name": "donut-regression",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "docker build . -t donut-regression",
+    "test": "nyc --reporter=lcov ava test/**/*.test.js",
+    "precommit": "run-p check lint test check-vulnerablities",
+    "check": "counsel check",
+    "check-vulnerablities": "nsp check",
+    "lint": "standard",
+    "docs:clean": "jsdock clean",
+    "docs:build": "jsdock build",
+    "docs:publish": "jsdock publish"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^0.22.0",
+    "counsel": "^0.5.2",
+    "counsel-ruleset-nodelib": "^0.5.2",
+    "execa": "^0.8.0",
+    "husky": "^0.14.3",
+    "jsdock": "^1.0.3",
+    "npm-run-all": "^4.1.1",
+    "nsp": "^2.8.1",
+    "nyc": "^11.2.1",
+    "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "debug": "^3.1.0",
+    "lodash": "^4.17.4"
+  }
+}
