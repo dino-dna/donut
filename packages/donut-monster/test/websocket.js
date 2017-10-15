@@ -30,6 +30,7 @@ test('Broadcasts new donuts', (t) => new Promise((resolve, reject) => {
   }
   let messageCount = 0
 
+  ws.on('close', resolve)
   ws.on('open', () => supertest.agent(server)
     .post('/donuts')
     .send(donut)
@@ -40,7 +41,7 @@ test('Broadcasts new donuts', (t) => new Promise((resolve, reject) => {
   ws.on('message', message => {
     if (messageCount === 1) {
       t.deepEqual(JSON.parse(message), donut)
-      resolve()
+      ws.terminate()
     }
     messageCount++
   })
