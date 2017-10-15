@@ -3,15 +3,16 @@
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const logger = require('koa-logger')
-const { all, get, post } = require('koa-route')
+const { all, delete: del, get, post } = require('koa-route')
 const WebSocket = require('ws')
 const websockify = require('koa-websocket')
 const uuidv4 = require('uuid/v4')
 
-const { NEW_DONUT } = require('./messages.js')
+const { NEW_DONUT, SUBMIT_OFF, SUBMIT_ON } = require('./messages.js')
 
 const app = websockify(new Koa())
 const donuts = new Map()
+let isSubmit = false
 const port = 3000
 
 const broadcast = (type, data) => {
@@ -56,6 +57,21 @@ app.use(post('/donuts', (ctx) => {
   ctx.body = {
     [id]: donut
   }
+}))
+
+app.use(get('/is-submit-mode', (ctx) => {
+  ctx.body = isSubmit
+}))
+app.use(post('/is-submit-mode', (ctx) => {
+  isSubmit = true
+  broadcast(SUBMIT_ON)
+  ctx.body = isSubmit
+}))
+
+app.use(del('/is-submit-mode', (ctx) => {
+  isSubmit = false
+  broadcast(SUBMIT_OFF)
+  ctx.body = isSubmit
 }))
 
 app.ws.use(all('/voodoo', (ctx) => {
