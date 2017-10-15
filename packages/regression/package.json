@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "build": "docker build . -t donut-regression",
     "test": "nyc --reporter=lcov ava test/**/*.test.js",
     "precommit": "run-p check lint test check-vulnerablities",
     "check": "counsel check",
@@ -20,6 +21,7 @@
     "ava": "^0.22.0",
     "counsel": "^0.5.2",
     "counsel-ruleset-nodelib": "^0.5.2",
+    "execa": "^0.8.0",
     "husky": "^0.14.3",
     "jsdock": "^1.0.3",
     "npm-run-all": "^4.1.1",
@@ -28,9 +30,8 @@
     "standard": "^10.0.3"
   },
   "dependencies": {
-    "@smockle/regression": "^3.0.2",
-    "lodash": "^4.17.4",
-    "ml-regression-multivariate-linear": "^1.0.1",
-    "regression": "^2.0.0"
+    "bluebird": "^3.5.1",
+    "debug": "^3.1.0",
+    "lodash": "^4.17.4"
   }
 }

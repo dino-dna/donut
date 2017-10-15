@@ -5,6 +5,22 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "python run file",
+      "type": "python",
+      "request": "launch",
+      "stopOnEntry": true,
+      "pythonPath": "${config:python.pythonPath}",
+      "program": "${file}",
+      "cwd": "${workspaceRoot}",
+      "env": {},
+      "envFile": "${workspaceRoot}/.env",
+      "debugOptions": [
+        "WaitOnAbnormalExit",
+        "WaitOnNormalExit",
+        "RedirectOutput"
+      ]
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
@@ -13,8 +29,11 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/packages/donut-regression/test/index.js"
+      "name": "Run AVA test",
+      "program": "${workspaceRoot}/packages/regression/node_modules/ava/profile.js",
+      "args": [
+        "${file}"
+      ]
     }
   ]
 }
