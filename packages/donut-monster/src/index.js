@@ -4,11 +4,12 @@ const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const { all, delete: del, get, post } = require('koa-route')
+const regression = require('donut-regression')
 const WebSocket = require('ws')
 const websockify = require('koa-websocket')
 const uuidv4 = require('uuid/v4')
 
-const { NEW_DONUT, SUBMIT_OFF, SUBMIT_ON } = require('./messages.js')
+const { NEW_DONUT, NEW_REGRESSION, SUBMIT_OFF, SUBMIT_ON } = require('./messages.js')
 
 const app = websockify(new Koa())
 const donuts = new Map()
@@ -52,6 +53,16 @@ app.use(post('/donuts', (ctx) => {
   donuts.set(uuidv4(), donut)
 
   broadcast(NEW_DONUT, donut)
+
+  regression(Array.from(donuts.values()))
+    .then(coefficients => {
+      console.log('Coeffiecients!', coefficients);
+      broadcast(NEW_REGRESSION, coefficients)
+    })
+    .catch((error) => {
+      console.error(error)
+      process.exit(1);
+    });
 
   ctx.status = 201
   ctx.body = {
