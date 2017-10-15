@@ -13,7 +13,7 @@ const { NEW_DONUT, SUBMIT_OFF, SUBMIT_ON } = require('./messages.js')
 const app = websockify(new Koa())
 const donuts = new Map()
 let isSubmit = false
-const port = 3000
+const port = process.env.PORT || 666
 
 const broadcast = (type, data) => {
   app.ws.server.clients.forEach((client) => {
