@@ -21,7 +21,8 @@
     "cdaringe",
     "swashcap"
   ],
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "lerna": "^2.4.0"
   }
 }
