@@ -13,12 +13,6 @@ var keys = [
   'DONUT_OUTER_RADIUS'
 ]
 
-function maxDonut (array) {
-  return array.reduce(function (a, b) {
-    return a.DONUT_RATING > b.DONUT_RATING ? a : b
-  }, { DONUT_RATING: 0 })
-}
-
 ava('donut regression', async t => {
   var donnies = times(300).map(() => {
     const donut = keys.reduce((nut, key) => {
@@ -27,12 +21,10 @@ ava('donut regression', async t => {
     donut['DONUT_RATING'] = rater.getIndicator(donut)
     return donut
   })
-  var tMaxDonut = maxDonut(donnies)
   var res = await regression(donnies)
   const perfectDonut = keys.reduce((nut, key, i) => {
     return Object.assign(nut, { [key]: res.ridge_regression[i] })
   }, {})
   perfectDonut['DONUT_RATING'] = rater.getIndicator(perfectDonut)
-  debugger
   t.truthy(res.ridge_regression)
 })
