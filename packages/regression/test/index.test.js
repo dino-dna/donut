@@ -2,25 +2,10 @@
 
 var ava = require('ava')
 var regression = require('../')
-var times = require('lodash/times')
-var { rater } = require('donut-common')
-
-var keys = [
-  'DONUT_FROSTING_COVERAGE',
-  'DONUT_FROSTING_THICKNESS',
-  'DONUT_SPRINKLE_COVERAGE',
-  'DONUT_INNER_RADIUS',
-  'DONUT_OUTER_RADIUS'
-]
+var { getRandomDonuts, keys, rater } = require('donut-common')
 
 ava('donut regression', async t => {
-  var donnies = times(300).map(() => {
-    const donut = keys.reduce((nut, key) => {
-      return Object.assign(nut, { [key]: Math.random() })
-    }, {})
-    donut['DONUT_RATING'] = rater.getIndicator(donut)
-    return donut
-  })
+  var donnies = getRandomDonuts(300)
   var res = await regression(donnies)
   const perfectDonut = keys.reduce((nut, key, i) => {
     return Object.assign(nut, { [key]: res.ridge_regression[i] })
