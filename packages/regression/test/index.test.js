@@ -3,7 +3,7 @@
 var ava = require('ava')
 var regression = require('../')
 var times = require('lodash/times')
-var rater = require('common').rater
+var { rater } = require('donut-common')
 
 var keys = [
   'DONUT_FROSTING_COVERAGE',

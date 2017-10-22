@@ -13,7 +13,7 @@
     "storybook-host": "^4.1.4"
   },
   "dependencies": {
-    "common": "^0.0.1",
+    "donut-common": "^0.0.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.3",
