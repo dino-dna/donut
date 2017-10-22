@@ -2,6 +2,14 @@
   text-align: left;
   padding: 0 5vw;
 }
+.About-link {
+  color: inherit;
+}
+.About-link:active,
+.About-link:focus,
+.About-link:hover {
+  opacity: 0.8;
+}
 
 .profile {
   text-align: center;

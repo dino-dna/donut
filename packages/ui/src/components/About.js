@@ -13,6 +13,12 @@ export default class About extends Component {
           donuts either!  So, fear not, Donut is here to meet all of your donuty
           needs.
         </p>
+        <a
+          className='About-link'
+          href='https://github.com/dino-dna/donut'
+        >
+          Source code on GitHub
+        </a>
         <h2>Who made it?</h2>
         <p>
           So glad you asked.
