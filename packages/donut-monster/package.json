@@ -41,5 +41,6 @@
   "bugs": {
     "url": "https://github.com/dino-dna/donut/issues"
   },
-  "homepage": "https://dino-dna.github.io/donut/"
+  "homepage": "https://dino-dna.github.io/donut/",
+  "private": true
 }

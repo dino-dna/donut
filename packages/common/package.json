@@ -7,5 +7,6 @@
   "license": "ISC",
   "dependencies": {
     "gaussian": "^1.1.0"
-  }
+  },
+  "private": true
 }
