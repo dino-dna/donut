@@ -1,5 +1,5 @@
 import React from 'react'
-import { getIndicator, getIndicatorParams } from '../donut-classifier'
+import { getIndicator, getIndicatorParams } from 'donut-common/src/rater'
 
 function getEmoji(val) {
   if (val > 0.9) {

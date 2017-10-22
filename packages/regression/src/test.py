@@ -15,5 +15,5 @@ Y = np.array([
   0.9,
   0
 ])
-reg = DonutLearner.ridge_regression(X, Y)
-print reg
+res = DonutLearner.ridge_regression_with_sim_ann(X, Y)
+print res
