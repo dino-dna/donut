@@ -2,6 +2,7 @@
 
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
+const cors = require('koa-cors')
 const logger = require('koa-logger')
 const { all, delete: del, get, post } = require('koa-route')
 const regression = require('donut-regression')
@@ -25,6 +26,7 @@ const broadcast = (type, data) => {
 }
 
 app.use(bodyParser())
+app.use(cors())
 
 if (process.env.NODE_ENV !== 'test') app.use(logger())
 
