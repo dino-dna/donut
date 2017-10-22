@@ -2,6 +2,7 @@ import sys
 import json
 from sklearn import linear_model
 import numpy as np
+from scipy.optimize import basinhopping
 
 class DonutLearner:
   @staticmethod
@@ -13,6 +14,14 @@ class DonutLearner:
   def ridge_regression(X, Y):
     reg = linear_model.Ridge()
     return reg.fit(X, Y)
+
+  @staticmethod
+  def ridge_regression_with_sim_ann(X, Y):
+    reg = linear_model.Ridge().fit(X, Y)
+    def explore(x):
+      return -1 * reg.predict([x])
+    return basinhopping(explore, X[0])
+
 
   @staticmethod
   def from_stdin():
