@@ -23,24 +23,32 @@ export default class About extends Component {
         <p>
           So glad you asked.
         </p>
-        <figure className='profile'>
-          <a href='https://github.com/swashcap/'>
-            <img
-              alt='swashcap avatar'
-              src='https://avatars0.githubusercontent.com/u/1858316'
-            />
-            <figcaption>swashcap</figcaption>
-          </a>
-        </figure>
-        <figure className='profile'>
-          <a href='https://github.com/cdaringe/'>
-            <img
-              alt='cdaringe avatar'
-              src='https://avatars2.githubusercontent.com/u/1003261'
-            />
-            <figcaption>cdaringe</figcaption>
-          </a>
-        </figure>
+        <div className='About-profiles'>
+          <figure className='About-profile'>
+            <a
+              className='About-link'
+              href='https://github.com/swashcap/'
+            >
+              <img
+                alt='swashcap avatar'
+                src='https://avatars0.githubusercontent.com/u/1858316'
+              />
+              <figcaption>swashcap</figcaption>
+            </a>
+          </figure>
+          <figure className='About-profile'>
+            <a
+              className='About-link'
+              href='https://github.com/cdaringe/'
+            >
+              <img
+                alt='cdaringe avatar'
+                src='https://avatars2.githubusercontent.com/u/1003261'
+              />
+              <figcaption>cdaringe</figcaption>
+            </a>
+          </figure>
+        </div>
       </div>
     );
   }

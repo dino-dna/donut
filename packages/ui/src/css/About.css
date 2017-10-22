@@ -1,6 +1,9 @@
 .About {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 34em;
+  padding: 0 1rem;
   text-align: left;
-  padding: 0 5vw;
 }
 .About-link {
   color: inherit;
@@ -11,18 +14,24 @@
   opacity: 0.8;
 }
 
-.profile {
+/** Profiles */
+
+.About-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.About-profile {
+  margin: 0;
   text-align: center;
 }
-
-.profile img {
-  width: 20vw;
+.About-profile a {
+  display: block;
+  padding: 1rem;
+}
+.About-profile img {
+  width: 12rem;
 }
 
-.profile a {
-  color: white;
-}
-
-.profile a:visited {
-  color: lightgrey;
-}
