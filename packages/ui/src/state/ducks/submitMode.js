@@ -20,7 +20,9 @@ export const submitModeError = errorMessage => ({
 export const getSubmitMode = () => dispatch => {
   dispatch(submitModeRequest())
 
-  return makeRequest()
+  return makeRequest({
+    endpoint: '/is-submit-mode',
+  })
     .then(json => dispatch(submitModeReceive(json)))
     .catch((error) => {
       console.error(error);
@@ -34,7 +36,10 @@ export const toggleSubmitMode = () => (dispatch, getState) => {
   const { submitMode: { isOn } } = getState();
 
   return Promise.all([
-    makeRequest(isOn ? 'DELETE' : 'POST'),
+    makeRequest({
+      endpoint: '/is-submit-mode',
+      method: isOn ? 'DELETE' : 'POST',
+    }),
     // Show spinner for a bit:
     new Promise(resolve => setTimeout(resolve, 750)),
   ])

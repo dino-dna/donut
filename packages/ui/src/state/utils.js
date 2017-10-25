@@ -3,9 +3,16 @@
  *
  * @returns {Promise}
  */
-export const makeRequest = (method = 'GET') => fetch(
-  'http://localhost:3001/is-submit-mode',
-  { method }
+export const makeRequest = ({
+  data,
+  method = 'GET',
+  endpoint,
+}) => fetch(
+  `http://localhost:3001/${endpoint}`,
+  {
+    body: data ? JSON.stringify(data) : null,
+    method,
+  }
 )
   .then(response => {
     if (!response.ok) {
