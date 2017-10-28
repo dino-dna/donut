@@ -13,6 +13,7 @@
     "storybook-host": "^4.1.4"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "donut-common": "^0.0.1",
     "gaussian": "^1.1.0",
     "prop-types": "^15.6.0",
@@ -35,6 +36,5 @@
   },
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/config/eslint.js"
-  },
-  "private": true
+  }
 }

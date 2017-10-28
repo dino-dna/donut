@@ -36,11 +36,7 @@ export const upload = donuts => (dispatch, getState) => {
 
   if (!isOn) {
     return dispatch(uploadError('Submit mode not on'));
-  }
-
-  const hasUploaded = getHasUploaded();
-
-  if (hasUploaded) {
+  } else if (getHasUploaded()) {
     return dispatch(uploadError('Already uploaded'));
   }
 

@@ -2,11 +2,66 @@
  * Upload button.
  */
 
+.Upload {
+  bottom: 0;
+  display: none;
+  padding: .5rem;
+  position: absolute;
+  right: 0;
+}
+@media (min-width: 20em) {
+  .Upload {
+    padding: 0 .75rem .75rem 0;
+  }
+}
+
+/** Container states */
+.Upload-visible {
+  display: block;
+}
+.Upload-visible .Upload-Button {
+  animation: Upload-visible 200ms linear forwards;
+}
+
+@keyframes Upload-visible {
+  0% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.Upload-loading::before {
+  animation: Upload-loading 400ms linear infinite alternate;
+  content: '🍩';
+  display: block;
+  font-size: 250%;
+  height: 1em;
+  left: 50%;
+  line-height: 1;
+  margin: -.5em 0 0 -.5em;
+  position: absolute;
+  top: 50%;
+  width: 1em;
+  z-index: 1;
+}
+
+@keyframes Upload-loading {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
+
 .Upload-Button {
   background: #f487a9;
   border-radius: .25rem;
   border: none;
-  bottom: .5rem;
   color: #fff;
   cursor: pointer;
   display: block;
@@ -15,8 +70,6 @@
   font-weight: 700;
   line-height: inherit;
   padding: 0.75rem 1.25rem;
-  position: absolute;
-  right: .5rem;
   width: calc(100% - 1rem);
 }
 .Upload-Button:focus,
@@ -25,6 +78,15 @@
 }
 .Upload-Button:active {
   background: #c15476;
+}
+
+.Upload-Button[disabled],
+.Upload-Button[disabled]:active,
+.Upload-Button[disabled]:focus,
+.Upload-Button[disabled]:hover {
+  background: #f487a9;
+  cursor: not-allowed;
+  opacity: 0.67;
 }
 
 @media (min-width: 20em) {
