@@ -7,7 +7,13 @@ const DonutViewer = ({ donuts }) => (
 );
 
 DonutViewer.propTypes = {
-  donuts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  donuts: PropTypes.arrayOf(PropTypes.shape({
+    frostingCoverage: PropTypes.number.isRequired,
+    frostingThickness: PropTypes.number.isRequired,
+    innerRadius: PropTypes.number.isRequired,
+    outerRadius: PropTypes.number.isRequired,
+    sprinkleCoverage: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 export default DonutViewer;
