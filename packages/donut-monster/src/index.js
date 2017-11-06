@@ -1,9 +1,11 @@
 'use strict'
 
-const { messages } = require('donut-common')
+const { messages, rater } = require('donut-common')
+const regression = require('donut-regression')
 const http = require('http')
 const socketIo = require('socket.io')
 const uuidv4 = require('uuid/v4')
+const debounce = require('lodash/debounce')
 
 const donuts = new Map()
 const server = http.createServer()
@@ -13,6 +15,23 @@ const io = socketIo(server, {
   serveClient: false
 })
 let submitMode = false
+
+const donutsRunner = debounce(
+  async () => {
+    const res = await regression(
+      Array.from(donuts.values()).map(nut => {
+        nut.DONUT_RATING = rater.getIndicator(nut)
+        return nut
+      })
+    )
+
+    io.emit(messages.NEW_REGRESSION_RESULTS, res)
+  },
+  3000,
+  {
+    maxWait: 3000
+  }
+)
 
 io.on('connection', (socket) => {
   socket.emit(messages.INIT_CLIENT, {
@@ -29,6 +48,8 @@ io.on('connection', (socket) => {
     for (const [id, donut] of toEnter) {
       donuts.set(id, donut)
     }
+
+    donutsRunner()
 
     socket.emit(messages.UPLOAD_DONUTS, toEnter)
   })

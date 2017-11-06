@@ -58,6 +58,7 @@ class App extends Component {
         coefficients: toProps(coefficients)
       });
     });
+    socket.on(messages.NEW_REGRESSION_RESULTS, console.log)
   }
 
   componentWillUnmount() {
