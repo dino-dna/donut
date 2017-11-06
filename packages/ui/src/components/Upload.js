@@ -18,7 +18,7 @@ const Upload = ({
   const containerClassName = classNames('Upload', {
     'Upload-disabled': disabled,
     'Upload-loading': isLoading,
-    'Upload-visible': true, // isOn,
+    'Upload-visible': isOn,
   });
 
   // TODO: Use/style errorMessage

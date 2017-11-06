@@ -20,7 +20,7 @@
   display: block;
 }
 .Upload-visible .Upload-Button {
-  animation: Upload-visible 200ms linear forwards;
+  animation: Upload-visible 300ms linear forwards;
 }
 
 @keyframes Upload-visible {
