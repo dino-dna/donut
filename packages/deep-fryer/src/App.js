@@ -1,9 +1,34 @@
 import React, { Component } from 'react';
-import WebSocket from 'ws';
+import io from 'socket.io-client/dist/socket.io.slim.js';
+import { messages } from 'donut-common';
 
 import DonutCoefficientViewer from './DonutCoefficientViewer';
 import DonutViewer from './DonutViewer';
 import './App.css';
+
+/**
+ * Messages contain 'donut' model(s). Singular model is an array of
+ * length 5, where the indexed items represent properties:
+ *
+ *   DONUT_FROSTING_COVERAGE
+ *   DONUT_FROSTING_THICKNESS
+ *   DONUT_SPRINKLE_COVERAGE
+ *   DONUT_INNER_RADIUS
+ *   DONUT_OUTER_RADIUS
+ */
+const toProps = ([
+  frostingCoverage,
+  frostingThickness,
+  sprinkleCoverage,
+  innerRadius,
+  outerRadius
+]) => ({
+  frostingCoverage,
+  frostingThickness,
+  sprinkleCoverage,
+  innerRadius,
+  outerRadius
+});
 
 class App extends Component {
   constructor(props, context) {
@@ -17,59 +42,30 @@ class App extends Component {
   }
 
   componentWillMount() {
-    const ws = this.ws = new WebSocket('ws://localhost:3001/voodoo');
+    const socket = this.socket = io('http://localhost:3001')
 
-    ws.on('error', error => this.handleError);
-    ws.on('message', (message) => {
-      try {
-        const { data, type } = JSON.parse(message);
-
-        /**
-         * Messages contain 'donut' model(s). Singular model is an array of
-         * length 5, where the indexed items represent properties:
-         *
-         *   DONUT_FROSTING_COVERAGE
-         *   DONUT_FROSTING_THICKNESS
-         *   DONUT_SPRINKLE_COVERAGE
-         *   DONUT_INNER_RADIUS
-         *   DONUT_OUTER_RADIUS
-         */
-        const toProps = ([
-          frostingCoverage, 
-          frostingThickness,
-          sprinkleCoverage,
-          innerRadius,
-          outerRadius
-        ]) => ({
-          frostingCoverage, 
-          frostingThickness,
-          sprinkleCoverage,
-          innerRadius,
-          outerRadius
-        });
-
-        if (type === 'NEW_DONUTS') {
-          this.setState({
-            ...this.state,
-            donuts: [...this.state.donuts, ...data.map(toProps)]
-          });
-        } else if (type === 'NEW_COEFFICIENTS') {
-          this.setState({
-            ...this.state,
-            coefficients: toProps(data)
-          });
-        }
-      } catch (error) {
-        this.handleError(error);
-      }
+    socket.on('error', error => this.handleError);
+    socket.on(messages.INIT_CLIENT, console.log)
+    socket.on(messages.NEW_DONUTS, (donuts) => {
+      this.setState({
+        ...this.state,
+        donuts: [...this.state.donuts, ...donuts.map(toProps)]
+      });
+    });
+    socket.on(messages.NEW_COEFFICIENTS, (coefficients) => {
+      this.setState({
+        ...this.state,
+        coefficients: toProps(coefficients)
+      });
     });
   }
 
   componentWillUnmount() {
-    this.ws.once('close', () => {
-      delete this.ws;
+    this.socket.once('disconnect', () => {
+      this.socket.removeAllListeners();
+      delete this.socket;
     });
-    this.ws.terminate();
+    this.socket.close();
   }
 
   handleError(error) {
