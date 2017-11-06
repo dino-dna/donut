@@ -1,5 +1,3 @@
-import { makeRequest } from '../utils';
-
 const __SOOPER_SECRETS__ = 'DONUTS_HAS_UPLOADED';
 
 const getHasUploaded = () => {
@@ -12,9 +10,10 @@ const getHasUploaded = () => {
   return JSON.parse(hasUploaded);
 };
 
+// TODO: Rename action creator
 export const UPLOAD_REQUEST = 'UPLOAD_REQUEST';
 export const uploadRequest = donuts => ({
-  data: donuts,
+  payload: donuts,
   type: UPLOAD_REQUEST,
 });
 
@@ -25,10 +24,11 @@ export const uploadSuccess = () => ({
 
 export const UPLOAD_ERROR = 'UPLOAD_ERROR'
 export const uploadError = errorMessage => ({
-  data: errorMessage,
+  payload: errorMessage,
   type: UPLOAD_ERROR,
 });
 
+/*
 export const upload = donuts => (dispatch, getState) => {
   dispatch(uploadRequest());
 
@@ -41,7 +41,7 @@ export const upload = donuts => (dispatch, getState) => {
   }
 
   return makeRequest({
-    data: donuts,
+    payload: donuts,
     endpoint: '/donuts',
     method: 'POST',
   })
@@ -54,6 +54,7 @@ export const upload = donuts => (dispatch, getState) => {
       dispatch(uploadError(error.message));
     });
 };
+*/
 
 const initialState = {
   errorMessage: null,
@@ -61,11 +62,11 @@ const initialState = {
   isLoading: false,
 };
 
-const reducer = (state = initialState, { data, type }) => {
+const reducer = (state = initialState, { payload, type }) => {
   switch (type) {
     case UPLOAD_ERROR:
       return Object.assign({}, state, {
-        errorMessage: data,
+        errorMessage: payload,
         isLoading: false,
       });
     case UPLOAD_REQUEST:

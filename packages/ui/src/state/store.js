@@ -6,11 +6,13 @@ import { routerMiddleware } from 'react-router-redux'
 import { hashHistory } from 'react-router'
 
 import getRootReducer from './root-reducer';
+import socketMiddleware from '../middleware/socket';
 
 const finalCreateStore = applyMiddleware(
   routerMiddleware(hashHistory),
   thunkMiddleware,
   promiseMiddleware,
+  socketMiddleware,
   createLogger({ collapsed: true })
 )(createStore);
 

@@ -4,17 +4,12 @@ import { connect } from 'react-redux'
 import '../css/Admin.css';
 
 import {
-  getSubmitMode,
-  toggleSubmitMode,
+  submitModeRequest,
 } from '../state/ducks/submitMode';
 
 class Admin extends Component {
-  componentWillMount() {
-    this.props.getSubmitMode();
-  }
-
   render() {
-    const { errorMessage, isOn, loading, toggleSubmitMode } = this.props;
+    const { errorMessage, isOn, loading, submitModeRequest } = this.props;
 
     /* eslint-disable jsx-a11y/accessible-emoji */
     const message = errorMessage ?
@@ -31,7 +26,7 @@ class Admin extends Component {
         <button
           className={`Admin-button Admin-button-${isOn ? 'on' : 'off'}`}
           disabled={loading}
-          onClick={toggleSubmitMode}
+          onClick={() => submitModeRequest(!isOn)}
           type='button'
         >
           {isOn ? 'Disable Donuts' : 'Enable Donuts'}
@@ -65,7 +60,6 @@ Admin.propTypes = {
 export default connect(
   ({ submitMode }) => submitMode,
   {
-    getSubmitMode,
-    toggleSubmitMode,
+    submitModeRequest,
   }
 )(Admin);

@@ -18,9 +18,9 @@ io.on('connection', (socket) => {
   socket.emit(messages.INIT_CLIENT, {
     submitMode
   })
-  socket.on(messages.NEW_DONUTS, (newDonuts) => {
+  socket.on(messages.UPLOAD_DONUTS, (newDonuts) => {
     if (!submitMode) {
-      return
+      return socket.emit(messages.UPLOAD_DONUTS, [])
     }
 
     // TODO: validate, check for pre-existing donuts
@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
       donuts.set(id, donut)
     }
 
-    socket.emit('NEW_DONUTS', toEnter)
+    socket.emit(messages.UPLOAD_DONUTS, toEnter)
   })
   socket.on(messages.SUBMIT_MODE, (newMode) => {
     submitMode = !!newMode

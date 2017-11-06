@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux'
 import '../css/Upload.css'
 
-import { upload as uploadDonuts } from '../state/ducks/upload.js'
+import { uploadRequest } from '../state/ducks/upload.js'
 
 const Upload = ({
   donuts,
@@ -12,7 +12,7 @@ const Upload = ({
   hasUploaded,
   isOn,
   isLoading,
-  uploadDonuts,
+  uploadRequest,
 }) => {
   const disabled = false // !isOn || isLoading || hasUploaded;
   const containerClassName = classNames('Upload', {
@@ -32,7 +32,7 @@ const Upload = ({
       <button
         className='Upload-Button'
         disabled={disabled}
-        onClick={() => uploadDonuts(donuts)}
+        onClick={() => uploadRequest(donuts)}
         type='button'
       >
         Upload
@@ -51,7 +51,7 @@ Upload.propTypes = {
   hasUploaded: PropTypes.bool.isRequired,
   isOn: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  uploadDonuts: PropTypes.func.isRequired,
+  uploadRequest: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -60,5 +60,5 @@ export default connect(
     submitMode: { isOn },
     upload,
   }) => ({ ...upload, isOn, donuts }),
-  { uploadDonuts }
+  { uploadRequest }
 )(Upload);
