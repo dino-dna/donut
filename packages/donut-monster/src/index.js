@@ -6,6 +6,7 @@ const http = require('http')
 const socketIo = require('socket.io')
 const uuidv4 = require('uuid/v4')
 const debounce = require('lodash/debounce')
+const debug = require('debug')('donut:monster')
 
 const donuts = new Map()
 const server = http.createServer()
@@ -18,6 +19,7 @@ let submitMode = false
 
 const donutsRunner = debounce(
   async () => {
+    debug('Running regression with %d donuts', donuts.size)
     const res = await regression(
       Array.from(donuts.values()).map(nut => {
         nut.DONUT_RATING = rater.getIndicator(nut)
@@ -25,6 +27,7 @@ const donutsRunner = debounce(
       })
     )
 
+    debug('Regression results %o', res)
     io.emit(messages.NEW_REGRESSION_RESULTS, res)
   },
   3000,
@@ -34,10 +37,13 @@ const donutsRunner = debounce(
 )
 
 io.on('connection', (socket) => {
+  debug('Client connected %s', socket.id)
+
   socket.emit(messages.INIT_CLIENT, {
     submitMode
   })
   socket.on(messages.UPLOAD_DONUTS, (newDonuts) => {
+    debug('Client %s uploaded %d donuts', socket.id, newDonuts.length)
     if (!submitMode) {
       return socket.emit(messages.UPLOAD_DONUTS, [])
     }
@@ -54,9 +60,13 @@ io.on('connection', (socket) => {
     socket.emit(messages.UPLOAD_DONUTS, toEnter)
   })
   socket.on(messages.SUBMIT_MODE, (newMode) => {
+    debug(`Received new submit mode: ${newMode}`)
     submitMode = !!newMode
 
     io.emit(messages.SUBMIT_MODE, submitMode)
+  })
+  socket.on('disconnect', (reason) => {
+    debug('Client %s disconnected: %s', socket.id, reason)
   })
 })
 
