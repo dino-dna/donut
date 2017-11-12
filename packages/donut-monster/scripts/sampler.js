@@ -24,7 +24,16 @@ socket.on('error', error => {
   throw error
 })
 
-socket.on(messages.INIT_CLIENT, () => {
-  uploadDonuts()
-  setInterval(uploadDonuts, 5000)
+socket.on(messages.INIT_CLIENT, ({ submitMode }) => {
+  const start = () => {
+    uploadDonuts()
+    setInterval(uploadDonuts, 5000)
+  }
+
+  if (!submitMode) {
+    socket.once(messages.SUBMIT_MODE, start)
+    socket.emit(messages.SUBMIT_MODE, true)
+  } else {
+    start()
+  }
 })
