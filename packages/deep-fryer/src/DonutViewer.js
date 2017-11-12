@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const DonutViewer = ({ donuts }) => (
-  <div className="DonutViewer">
+  <div className='DonutViewer'>
   </div>
 );
 

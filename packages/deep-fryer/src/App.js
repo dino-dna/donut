@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import io from 'socket.io-client/dist/socket.io.slim.js';
 import { messages } from 'donut-common';
 
+import ConnectionBadge from './ConnectionBadge';
 import DonutCoefficientViewer from './DonutCoefficientViewer';
 import DonutViewer from './DonutViewer';
+import ErrorAlert from './ErrorAlert';
 import './App.css';
 
 /**
@@ -36,16 +38,32 @@ class App extends Component {
 
     this.state = {
       coefficients: null,
+      connected: false,
       donuts: [],
       errors: [],
+      submitMode: false,
     };
+
+    this.handleSubmitModeChange = this.handleSubmitModeChange.bind(this);
   }
 
   componentWillMount() {
     const socket = this.socket = io('http://localhost:3001')
 
     socket.on('error', error => this.handleError);
-    socket.on(messages.INIT_CLIENT, console.log)
+    socket.on('disconnect', () => {
+      this.setState({
+        ...this.state,
+        connected: false,
+      });
+    });
+    socket.on('connect', () => {
+      this.setState({
+        ...this.state,
+        connected: true,
+      });
+    });
+    socket.on(messages.INIT_CLIENT, this.handleSubmitModeChange)
     socket.on(messages.NEW_DONUTS, (donuts) => {
       this.setState({
         ...this.state,
@@ -59,6 +77,7 @@ class App extends Component {
       });
     });
     socket.on(messages.NEW_REGRESSION_RESULTS, console.log)
+    socket.on(messages.SUBMIT_MODE, this.handleSubmitModeChange);
   }
 
   componentWillUnmount() {
@@ -75,8 +94,22 @@ class App extends Component {
     error.date = Date.now();
 
     this.setState({
-      donuts: this.state.donuts,
-      errors: this.state.errors.concat(error),
+      ...this.state,
+      errors: [...this.state.errors, error],
+    });
+  }
+
+  handleErrorAlertClick(index) {
+    this.setState({
+      ...this.state,
+      errors: this.state.errors.filter((e, i) => i !== index),
+    });
+  }
+
+  handleSubmitModeChange({ submitMode }) {
+    this.setState({
+      ...this.state,
+      submitMode,
     });
   }
 
@@ -85,11 +118,13 @@ class App extends Component {
 
     if (errors.length) {
       return (
-        <div className="App-errors">
-          {errors.map(({ date, message }) => (
-            <div className="App-errors-item" key={date}>
-              {message}
-            </div>
+        <div className='App-errors'>
+          {errors.map(({ date, message }, index) => (
+            <ErrorAlert
+              key={date}
+              message={message}
+              onClick={() => this.handleErrorAlertClick(index)}
+            />
           ))}
         </div>
       );
@@ -97,13 +132,16 @@ class App extends Component {
   }
 
   render() {
-    const { coefficients, donuts } = this.state;
+    const { coefficients, connected, donuts } = this.state;
 
     return (
-      <div className="App">
+      <div className='App'>
         {this.renderErrors()}
         <DonutCoefficientViewer coefficients={coefficients} />
         <DonutViewer donuts={donuts} />
+        <div className='App-badge'>
+          <ConnectionBadge connected={connected} />
+        </div>
       </div>
     );
   }

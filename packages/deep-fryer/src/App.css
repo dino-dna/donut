@@ -1,28 +1,21 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+/* TODO: move global styles to separate stylesheet */
+html {
+  background: #234069;
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
+/** Badge */
+
+.App-badge {
+  bottom: .5rem;
+  position: fixed;
+  right: .5rem;
 }
 
-.App-intro {
-  font-size: large;
+/** Errors */
+.App-errors {
+  padding: .5rem .5rem 0;
 }
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.App-errors .ErrorAlert + .ErrorAlert {
+  margin-top: .5rem;
 }
