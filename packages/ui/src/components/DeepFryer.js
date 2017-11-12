@@ -6,7 +6,7 @@ import ConnectionBadge from './ConnectionBadge';
 import DonutCoefficientViewer from './DonutCoefficientViewer';
 import DonutViewer from './DonutViewer';
 import ErrorAlert from './ErrorAlert';
-import './App.css';
+import '../css/DeepFryer.css';
 
 /**
  * Messages contain 'donut' model(s). Singular model is an array of
@@ -32,7 +32,7 @@ const toProps = ([
   outerRadius
 });
 
-class App extends Component {
+class DeepFryer extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -147,4 +147,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default DeepFryer;

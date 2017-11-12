@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './ErrorAlert.css';
+import '../css/ErrorAlert.css';
 
 const ErrorAlert = ({ message, onClick }) => (
   <div

@@ -1,7 +1,7 @@
 import React from 'react';
 import { bool } from 'prop-types';
 
-import './ConnectionBadge.css';
+import '../css/ConnectionBadge.css';
 
 const ConnectionBadge = ({ connected }) => {
   const modifier = connected ?

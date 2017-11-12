@@ -5,6 +5,7 @@ import Donuts from './components/Donuts';
 import Viewer from './components/Viewer';
 import About from './components/About';
 import Admin from './components/Admin';
+import DeepFryer from './components/DeepFryer';
 import { Provider } from 'react-redux';
 import { configure as configureStore } from './state/store';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router'
@@ -23,6 +24,7 @@ ReactDOM.render(
         <Route path="view" component={Viewer}/>
         <Route path="about" component={About}/>
         <Route path="admin" component={Admin}/>
+        <Route path="fryer" component={DeepFryer}/>
       </Route>
     </Router>
   </Provider>,
