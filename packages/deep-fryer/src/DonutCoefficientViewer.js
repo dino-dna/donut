@@ -6,21 +6,29 @@ const DonutCoefficientViewer = ({ coefficients }) => {
 
   if (coefficients) {
     const {
-      frostingCoverage,
-      frostingThickness,
-      innerRadius,
-      outerRadius,
-      sprinkleCoverage,
+      linear_regression,
+      ridge_regression
     } = coefficients;
 
     content = (
-      <ul>
-        <li>Frosting coverage: <code>{frostingCoverage}</code></li>
-        <li>Frosting thickness: <code>{frostingThickness}</code></li>
-        <li>Inner radius: <code>{innerRadius}</code></li>
-        <li>Outer radius: <code>{outerRadius}</code></li>
-        <li>Sprinkle coverage: <code>{sprinkleCoverage}</code></li>
-      </ul>
+      <div>
+        <h1>Linear regression</h1>
+        <ul>
+          <li>Frosting coverage: <code>{linear_regression[0]}</code></li>
+          <li>Frosting thickness: <code>{linear_regression[1]}</code></li>
+          <li>Inner radius: <code>{linear_regression[2]}</code></li>
+          <li>Outer radius: <code>{linear_regression[3]}</code></li>
+          <li>Sprinkle coverage: <code>{linear_regression[4]}</code></li>
+        </ul>
+        <h1>Ridge regression</h1>
+        <ul>
+          <li>Frosting coverage: <code>{ridge_regression[0]}</code></li>
+          <li>Frosting thickness: <code>{ridge_regression[1]}</code></li>
+          <li>Inner radius: <code>{ridge_regression[2]}</code></li>
+          <li>Outer radius: <code>{ridge_regression[3]}</code></li>
+          <li>Sprinkle coverage: <code>{ridge_regression[4]}</code></li>
+        </ul>
+      </div>
     );
   } else {
     content = <span>Awaiting coefficients…</span>;
@@ -35,11 +43,8 @@ const DonutCoefficientViewer = ({ coefficients }) => {
 
 DonutCoefficientViewer.propTypes = {
   coefficients: PropTypes.shape({
-    frostingCoverage: PropTypes.number.isRequired,
-    frostingThickness: PropTypes.number.isRequired,
-    innerRadius: PropTypes.number.isRequired,
-    outerRadius: PropTypes.number.isRequired,
-    sprinkleCoverage: PropTypes.number.isRequired,
+    linear_regression: PropTypes.arrayOf(PropTypes.number).isRequired,
+    ridge_regression: PropTypes.arrayOf(PropTypes.number).isRequired
   }),
 };
 

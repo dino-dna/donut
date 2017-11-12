@@ -70,13 +70,13 @@ class App extends Component {
         donuts: [...this.state.donuts, ...donuts.map(toProps)]
       });
     });
-    socket.on(messages.NEW_COEFFICIENTS, (coefficients) => {
+    socket.on(messages.NEW_REGRESSION_RESULTS, (coefficients) => {
       this.setState({
         ...this.state,
-        coefficients: toProps(coefficients)
+        coefficients,
       });
     });
-    socket.on(messages.NEW_REGRESSION_RESULTS, console.log)
+
     socket.on(messages.SUBMIT_MODE, this.handleSubmitModeChange);
   }
 
