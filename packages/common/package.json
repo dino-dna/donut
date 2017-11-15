@@ -1,5 +1,5 @@
 {
-  "name": "common",
+  "name": "donut-common",
   "version": "0.0.1",
   "description": "",
   "main": "src/index.js",
@@ -7,5 +7,6 @@
   "license": "ISC",
   "dependencies": {
     "gaussian": "^1.1.0"
-  }
+  },
+  "private": true
 }

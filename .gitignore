@@ -8,5 +8,5 @@ build
 
 # misc
 .DS_Store
-npm-debug.log
+*.log
 yarn.lock

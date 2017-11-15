@@ -1,0 +1,30 @@
+/**
+ * Connection badge.
+ */
+.ConnectionBadge {
+  background: white;
+  border-radius: 3px;
+  color: #234069;
+  display: inline-block;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  opacity: .85;
+  padding: .6rem .8rem;
+}
+.ConnectionBadge:before {
+  border-radius: 50%;
+  border: thin solid #234069;
+  content: '';
+  display: inline-block;
+  height: .65rem;
+  margin-right: 0.3rem;
+  vertical-align: top;
+  width: .65rem;
+}
+.ConnectionBadge-connected:before {
+  background-color: #96d2b2;
+}
+.ConnectionBadge-disconnected:before {
+  background-color: #e27736;
+}

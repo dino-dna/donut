@@ -1,0 +1,40 @@
+/**
+ * Error alert
+ */
+
+.ErrorAlert {
+  background-color: #e27736;
+  border-radius: 3px;
+  color: white;
+  font-size: 100%;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: .6rem .8rem;
+  position: relative;
+}
+.ErrorAlert span[role=img] {
+  font-size: 110%;
+  line-height: 1;
+  margin-right: .4rem;
+  vertical-align: bottom;
+}
+.ErrorAlert button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 120%;
+  font-weight: 400;
+  height: 100%;
+  line-height: 1;
+  margin: 0;
+  padding: .4rem .7rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.ErrorAlert button:active,
+.ErrorAlert button:focus,
+.ErrorAlert button:hover {
+  opacity: .8;
+}

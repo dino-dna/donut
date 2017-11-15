@@ -1,0 +1,128 @@
+/**
+ * Admin.
+ *
+ * Styles for the *super secret* admin page
+ */
+.Admin {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  justify-content: center;
+  padding-top: 1rem;
+  position: relative;
+}
+
+/** Loading state */
+
+.Admin.is-loading > * {
+  opacity: .33;
+}
+.Admin.is-loading:before {
+  content: '👹';
+  font-size: 600%;
+  height: 1em;
+  left: 50%;
+  line-height: 1;
+  margin: -.5em 0 0 -.5em;
+  position: absolute;
+  top: 50%;
+  width: 1em;
+  z-index: 2;
+}
+.Admin.is-loading:after {
+  animation: isLoading 2.5s linear infinite;
+  content: '🍩';
+  font-size: 300%;
+  height: 1em;
+  left: 50%;
+  line-height: 1;
+  margin: -3em 0 0 -.5em;
+  position: absolute;
+  top: 50%;
+  transform-origin: .5em 3em;
+  width: 1em;
+  z-index: 2;
+}
+@keyframes isLoading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+/** Error message */
+
+.Admin-error-message {
+  background: gold;
+  color: black;
+  display: inline-block;
+  left: 45%;
+  padding: .5rem;
+  position: absolute;
+  transform: rotate(-6deg);
+  top: 1rem;
+  z-index: 2;
+}
+
+/** Button */
+
+.Admin-button {
+  align-self: center;
+  background: firebrick;
+  border: none;
+  border-radius: 50%;
+  box-shadow:
+    .5px 1px black,
+    1px 2px black,
+    1.5px 3px black,
+    2px 4px black,
+    2.5px 5px black,
+    3px 6px black;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 200%;
+  font-weight: 700;
+  height: 10em;
+  padding: 0;
+  transition-duration: 80ms;
+  transition-property: background, box-shadow, text-shadow, transform;
+  text-align: center;
+  text-shadow:
+    -0.5px -1px black,
+    -1px -2px black;
+  width: 10em;
+}
+.Admin-button:focus,
+.Admin-button:hover {
+  background-color: crimson;
+  transform: translate(-1px, -1px);
+}
+.Admin-button:active {
+  background-color: red;
+  box-shadow:
+    -.5px -1px black,
+    -1px -2px black,
+    -1.5px -3px black,
+    -2px -4px black,
+    -2.5px -5px black,
+    -3px -6px black,
+    -3.5px -7px black,
+    -4px -8px black,
+    -4.5px -9px black,
+    -5px -10px black;
+  text-shadow:
+    -0.5px -1px black,
+    -1px -2px black;
+  transform: translate(2px, 2px);
+}
+
+.Admin-button-on {
+
+}
+.Admin-button-off {
+
+}

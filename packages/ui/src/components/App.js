@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
+import Upload from './Upload'
 import '../css/App.css';
 
 class App extends Component {
@@ -8,6 +9,7 @@ class App extends Component {
       <div className='App'>
         <Header />
         { this.props.children }
+        <Upload />
       </div>
     );
   }
