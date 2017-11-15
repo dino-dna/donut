@@ -19,3 +19,9 @@
 .DeepFryer-errors .ErrorAlert + .ErrorAlert {
   margin-top: .5rem;
 }
+
+/** Prediction */
+
+.DeepFryer .DonutPredictionViewer {
+
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import '../css/DonutPredictionViewer.css';
+
 const DonutPredictionViewer = ({ models }) => {
   let content;
 

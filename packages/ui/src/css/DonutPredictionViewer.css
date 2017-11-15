@@ -1,0 +1,32 @@
+/**
+ * Prediction viewer.
+ */
+
+.DonutPredictionViewer {
+  background: white;
+  color: #234069;
+  padding: 1rem;
+  text-align: left;
+}
+
+.DonutPredictionViewer h1 {
+  font-size: 120%;
+  line-height: inherit;
+  margin: 0 0 1rem;
+}
+
+.DonutPredictionViewer ul {
+  padding-left: 1.5rem;
+}
+.DonutPredictionViewer li + li {
+  padding-top: 0.25rem;
+}
+
+.DonutPredictionViewer code {
+  background: #eee;
+  border-radius: 3px;
+  font-size: 90%;
+  font-weight: 700;
+  line-height: 1;
+  padding: .1rem .3rem;
+}
