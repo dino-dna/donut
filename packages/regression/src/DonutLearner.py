@@ -3,24 +3,23 @@ import json
 from sklearn import linear_model
 import numpy as np
 from scipy.optimize import basinhopping
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
 
 class DonutLearner:
-  @staticmethod
-  def linear_regression(X, Y):
-    reg = linear_model.LinearRegression()
-    return reg.fit(X, Y)
-
-  @staticmethod
-  def ridge_regression(X, Y):
-    reg = linear_model.Ridge()
-    return reg.fit(X, Y)
 
   @staticmethod
   def ridge_regression_with_sim_ann(X, Y):
-    reg = linear_model.Ridge().fit(X, Y)
+    # reg = linear_model.Ridge().fit(X, Y)
+    model = make_pipeline(PolynomialFeatures(4), linear_model.Ridge())
+    reg = model.fit(X, Y)
     def explore(x):
-      return -1 * reg.predict([x])
-    return basinhopping(explore, X[0])
+      all_zero_plus = np.all(x >= 0)
+      all_one_or_under = np.all(x <= 1)
+      if all_one_or_under and all_zero_plus:
+        return -1 * reg.predict([x])
+      return 0
+    return basinhopping(explore, X[0], niter=1000)
 
 
   @staticmethod
@@ -29,10 +28,11 @@ class DonutLearner:
     request = json.load(sys.stdin)
     response = {}
     for learner in request['learners']:
-      sys.stderr.write('Execing learner: %s\n' % learner)
-      reg = getattr(DonutLearner, learner)(request['X'], request['Y'])
-      response[learner] = reg.coef_.tolist()
-    sys.stderr.write('writing resonse\n')
+      X = request['X']
+      sys.stderr.write(f'Execing learner ({len(X)} records): {learner}\n')
+      reg = getattr(DonutLearner, learner)(X, request['Y'])
+      response[learner] = list(reg.x)
+    sys.stderr.write('writing response\n')
     sys.stdout.write(json.dumps(response))
 
 if __name__ == "__main__":

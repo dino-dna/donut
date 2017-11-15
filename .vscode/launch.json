@@ -12,19 +12,24 @@
       "pythonPath": "${config:python.pythonPath}",
       "program": "${file}",
       "cwd": "${workspaceRoot}",
-      "env": {},
       "envFile": "${workspaceRoot}/.env",
       "debugOptions": [
         "WaitOnAbnormalExit",
         "WaitOnNormalExit",
         "RedirectOutput"
-      ]
+      ],
+      "env": {
+        "DEBUG": "donut*"
+      }
     },
     {
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${file}"
+      "program": "${file}",
+      "env": {
+        "DEBUG": "donut*"
+      }
     },
     {
       "type": "node",
@@ -33,7 +38,13 @@
       "program": "${workspaceRoot}/packages/regression/node_modules/ava/profile.js",
       "args": [
         "${file}"
-      ]
+      ],
+      "skipFiles": [
+        "<node_internals>/**/*.js"
+      ],
+      "env": {
+        "DEBUG": "donut*"
+      }
     }
   ]
 }

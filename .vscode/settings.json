@@ -1,5 +1,5 @@
 {
   "standard.enable": false,
-  "python.pythonPath": "/Users/cdieringer/.pyenv/versions/donut/bin/python",
-  "python.venvPath": "/Users/cdieringer/.pyenv/versions/donut"
+  "python.pythonPath": "/Users/cdieringer/.pyenv/versions/donut-regression/bin/python",
+  "python.venvPath": "/Users/cdieringer/.pyenv/versions/donut-regression"
 }

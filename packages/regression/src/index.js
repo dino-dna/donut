@@ -1,7 +1,7 @@
 'use strict'
 
 const execa = require('execa')
-const debug = require('debug')('regression')
+const debug = require('debug')('donut:regression')
 
 /**
  * Runs a donut regression
@@ -30,17 +30,20 @@ async function regression (donuts, image) {
     if (!('DONUT_RATING' in donut)) throw new Error('missing attribute DONUT_RATING')
     Y.push(donut['DONUT_RATING'])
   }
-  const child = execa('docker', [ 'run', '-i', '--rm', image || 'donut-regression' ])
-  // await bb.delay(1000)
+  const child = execa(
+    'docker',
+    [ 'run', '-i', '--rm', image || 'donut-regression' ]
+  )
   child.stdin.write(
     JSON.stringify({
       X: Xn,
       Y,
-      learners: ['ridge_regression', 'linear_regression']
+      learners: ['ridge_regression_with_sim_ann']
     })
   )
   child.stdin.end()
   const res = await child
+  debug(`regression logs: ${res.stderr}`)
   const coefficients = JSON.parse(res.stdout.toString())
   debug(coefficients)
   return coefficients
