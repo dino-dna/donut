@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import zipObject from 'lodash/zipObject';
+import common from 'donut-common';
 
+import Donut from './Donut';
 import '../css/DonutPredictionViewer.css';
 
 const DonutPredictionViewer = ({ models }) => {
@@ -8,27 +11,19 @@ const DonutPredictionViewer = ({ models }) => {
 
   if (models) {
     const {
-      linear_regression,
-      ridge_regression
+      ridge_regression_with_sim_ann: ridge,
     } = models;
 
     content = (
       <div>
-        <h1>Linear regression</h1>
-        <ul>
-          <li>Frosting coverage: <code>{linear_regression[0]}</code></li>
-          <li>Frosting thickness: <code>{linear_regression[1]}</code></li>
-          <li>Inner radius: <code>{linear_regression[2]}</code></li>
-          <li>Outer radius: <code>{linear_regression[3]}</code></li>
-          <li>Sprinkle coverage: <code>{linear_regression[4]}</code></li>
-        </ul>
         <h1>Ridge regression</h1>
+        <Donut {...zipObject(common.keys, ridge)} />
         <ul>
-          <li>Frosting coverage: <code>{ridge_regression[0]}</code></li>
-          <li>Frosting thickness: <code>{ridge_regression[1]}</code></li>
-          <li>Inner radius: <code>{ridge_regression[2]}</code></li>
-          <li>Outer radius: <code>{ridge_regression[3]}</code></li>
-          <li>Sprinkle coverage: <code>{ridge_regression[4]}</code></li>
+          <li>Frosting coverage: <code>{ridge[0]}</code></li>
+          <li>Frosting thickness: <code>{ridge[1]}</code></li>
+          <li>Inner radius: <code>{ridge[2]}</code></li>
+          <li>Outer radius: <code>{ridge[3]}</code></li>
+          <li>Sprinkle coverage: <code>{ridge[4]}</code></li>
         </ul>
       </div>
     );
@@ -45,8 +40,7 @@ const DonutPredictionViewer = ({ models }) => {
 
 DonutPredictionViewer.propTypes = {
   models: PropTypes.shape({
-    linear_regression: PropTypes.arrayOf(PropTypes.number).isRequired,
-    ridge_regression: PropTypes.arrayOf(PropTypes.number).isRequired
+    ridge_regression_with_sim_ann: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
 };
 

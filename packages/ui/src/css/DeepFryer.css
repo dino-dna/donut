@@ -21,7 +21,6 @@
 }
 
 /** Prediction */
-
 .DeepFryer .DonutPredictionViewer {
-
+  width: 50%;
 }

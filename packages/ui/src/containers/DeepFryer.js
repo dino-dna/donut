@@ -54,8 +54,7 @@ DeepFryer.propTypes = {
     message: PropTypes.string.isRequired,
   })).isRequired,
   models: PropTypes.shape({
-    linear_regression: PropTypes.arrayOf(PropTypes.number).isRequired,
-    ridge_regression: PropTypes.arrayOf(PropTypes.number).isRequired,
+    ridge_regression_with_sim_ann: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
   onErrorClick: PropTypes.func.isRequired,
 };
