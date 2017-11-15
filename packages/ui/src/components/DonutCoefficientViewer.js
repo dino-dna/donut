@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const DonutCoefficientViewer = ({ coefficients }) => {
+const DonutCoefficientViewer = ({ models }) => {
   let content;
 
-  if (coefficients) {
+  if (models) {
     const {
       linear_regression,
       ridge_regression
-    } = coefficients;
+    } = models;
 
     content = (
       <div>
@@ -31,7 +31,7 @@ const DonutCoefficientViewer = ({ coefficients }) => {
       </div>
     );
   } else {
-    content = <span>Awaiting coefficients…</span>;
+    content = <span>Awaiting models…</span>;
   }
 
   return (
@@ -42,7 +42,7 @@ const DonutCoefficientViewer = ({ coefficients }) => {
 };
 
 DonutCoefficientViewer.propTypes = {
-  coefficients: PropTypes.shape({
+  models: PropTypes.shape({
     linear_regression: PropTypes.arrayOf(PropTypes.number).isRequired,
     ridge_regression: PropTypes.arrayOf(PropTypes.number).isRequired
   }),

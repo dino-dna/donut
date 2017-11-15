@@ -11,6 +11,12 @@ import {
   uploadSuccess,
 } from '../state/ducks/upload';
 
+import {
+  connected,
+  disconnected,
+  setModels,
+} from '../state/ducks/fryer';
+
 let socket;
 
 export default ({ dispatch, getState }) => next => action => {
@@ -24,6 +30,8 @@ export default ({ dispatch, getState }) => next => action => {
     };
 
     socket = io('http://localhost:3001');
+    socket.on('connect', () => dispatch(connected()))
+    socket.on('disconnect', () => dispatch(disconnected()))
     socket.on(messages.INIT_CLIENT, ({ submitMode }) => {
       dispatch(submitModeReceive(submitMode));
     });
@@ -33,6 +41,11 @@ export default ({ dispatch, getState }) => next => action => {
     });
     socket.on(messages.UPLOAD_DONUTS, () => {
       dispatch(uploadSuccess());
+    })
+
+    // TODO: Only listen for new results in an 'admin' mode
+    socket.on(messages.NEW_REGRESSION_RESULTS, (models) => {
+      dispatch(setModels(models));
     })
   }
 
