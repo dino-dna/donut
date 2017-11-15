@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "postinstall": "lerna bootstrap",
     "test": "lerna test"
   },
   "repository": {
