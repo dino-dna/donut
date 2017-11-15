@@ -6,5 +6,4 @@ ENV NODE_ENV=production
 RUN npm install
 RUN mkdir src
 COPY src src
-EXPOSE 3000
-CMD ["npm", "start"]
+# node package will auto-run `npm start`!
