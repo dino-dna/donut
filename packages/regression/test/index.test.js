@@ -1,15 +1,26 @@
 'use strict'
 
-var ava = require('ava')
+var ava = require('ava').default
+var zipObject = require('lodash/zipObject')
+var values = require('lodash/values')
 var regression = require('../')
-var { getRandomDonuts, keys, rater } = require('donut-common')
+var rater = require('common').rater
+// var generateDonnies = require('./fixture/generate')
+var keys = require('./fixture/donut-keys')
 
 ava('donut regression', async t => {
-  var donnies = getRandomDonuts(300)
+  var donnies = require('./fixture/donuts.json')
+  donnies = donnies.X.map((rawnut, i) => {
+    var nut = zipObject(values(keys), rawnut) // generateDonnies(300)
+    nut.DONUT_RATING = donnies.Y[i]
+    return nut
+  })
   var res = await regression(donnies)
+  var firstRegression = Object.keys(res)[0]
   const perfectDonut = keys.reduce((nut, key, i) => {
-    return Object.assign(nut, { [key]: res.ridge_regression[i] })
+    return Object.assign(nut, { [key]: res[firstRegression][i] })
   }, {})
-  perfectDonut['DONUT_RATING'] = rater.getIndicator(perfectDonut)
-  t.truthy(res.ridge_regression)
+  t.truthy(perfectDonut.DONUT_FROSTING_COVERAGE)
+  var perfectRating = rater.getIndicator(perfectDonut)
+  t.truthy(perfectRating > 0.8)
 })
