@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import ConnectionBadge from '../components/ConnectionBadge';
-import DonutCoefficientViewer from '../components/DonutCoefficientViewer';
+import DonutPredictionViewer from '../components/DonutPredictionViewer';
 import DonutViewer from '../components/DonutViewer';
 import ErrorAlert from '../components/ErrorAlert';
 import { removeError } from '../state/ducks/fryer';
@@ -33,7 +33,7 @@ const DeepFryer = ({
   return (
     <div className='DeepFryer'>
       {errorsComponent}
-      <DonutCoefficientViewer models={models} />
+      <DonutPredictionViewer models={models} />
       <DonutViewer donuts={donuts} />
       <div className='DeepFryer-badge'>
         <ConnectionBadge connected={connected} />

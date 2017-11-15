@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const DonutCoefficientViewer = ({ models }) => {
+const DonutPredictionViewer = ({ models }) => {
   let content;
 
   if (models) {
@@ -35,18 +35,18 @@ const DonutCoefficientViewer = ({ models }) => {
   }
 
   return (
-    <div className='DonutCoefficientViewer'>
+    <div className='DonutPredictionViewer'>
       {content}
     </div>
   );
 };
 
-DonutCoefficientViewer.propTypes = {
+DonutPredictionViewer.propTypes = {
   models: PropTypes.shape({
     linear_regression: PropTypes.arrayOf(PropTypes.number).isRequired,
     ridge_regression: PropTypes.arrayOf(PropTypes.number).isRequired
   }),
 };
 
-export default DonutCoefficientViewer;
+export default DonutPredictionViewer;
 
