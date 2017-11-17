@@ -28,10 +28,10 @@ function getIndicator({
   DONUT_INNER_RADIUS,
   DONUT_OUTER_RADIUS,
 }) {
-  return .6 * DONUT_FROSTING_COVERAGE +
+  return .4 * DONUT_FROSTING_COVERAGE +
     .3 * rateThickness(DONUT_FROSTING_THICKNESS) +
-    .05 * rateRadius(DONUT_OUTER_RADIUS, DONUT_INNER_RADIUS) +
-    .05 * DONUT_SPRINKLE_COVERAGE
+    .15 * rateRadius(DONUT_OUTER_RADIUS, DONUT_INNER_RADIUS) +
+    .15 * DONUT_SPRINKLE_COVERAGE
 }
 
 function getIndicatorParams({

@@ -8,5 +8,8 @@
   "dependencies": {
     "gaussian": "^1.1.0"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "lodash": "^4.17.4"
+  }
 }
