@@ -6,7 +6,7 @@
   "scripts": {
     "build": "docker build . -t donut-regression",
     "test": "nyc --reporter=lcov ava test/**/*.test.js",
-    "precommit": "run-p check lint test check-vulnerablities",
+    "precommit": "run-p check check-vulnerablities",
     "check": "counsel check",
     "check-vulnerablities": "nsp check",
     "lint": "standard",
@@ -27,8 +27,7 @@
     "jsdock": "^1.0.3",
     "npm-run-all": "^4.1.1",
     "nsp": "^2.8.1",
-    "nyc": "^11.2.1",
-    "standard": "^10.0.3"
+    "nyc": "^11.2.1"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
