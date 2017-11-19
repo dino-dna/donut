@@ -9,7 +9,7 @@ from sklearn.preprocessing import PolynomialFeatures
 
 
 def log(msg):
-  sys.stderr.write(f'{msg}\n')
+  sys.stderr.write(f'donut:py_regression: {msg}\n')
 
 class DonutLearner:
 
@@ -25,7 +25,7 @@ class DonutLearner:
       return score
     minimized = differential_evolution(explore, ((0, 1), (0, 1), (0, 1), (0, 1), (0, 1)))
     return {
-      'minimized': minimized,
+      'X_min': list(minimized.x),
       'score': reg.score(X, Y)
     }
     # return fmin(explore, X[0])
@@ -48,16 +48,16 @@ class DonutLearner:
 
   @staticmethod
   def from_stdin():
-    sys.stderr.write('Reading input\n')
+    log('reading input')
     request = json.load(sys.stdin)
     response = {}
     for learner in request['learners']:
       X = request['X']
-      sys.stderr.write(f'Execing learner ({len(X)} records): {learner}\n')
+      log(f'execing learner ({len(X)} records): {learner}')
       reg = getattr(DonutLearner, learner)(X, request['Y'])
-      response[learner] = list(reg.x)
-    sys.stderr.write('writing response\n')
-    sys.stdout.write(json.dumps(response))
+      response[learner] = reg
+    log('writing response')
+    print(json.dumps(response)) # send to stdout for parsing
 
 if __name__ == "__main__":
   if os.getenv('DEBUG'):

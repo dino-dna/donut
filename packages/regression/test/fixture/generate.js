@@ -45,7 +45,7 @@ function generateDonnies (numDonnies) {
 module.exports = generateDonnies
 
 if (!module.parent) {
-  var donnies = generateDonnies(300)
+  var donnies = generateDonnies(parseInt(process.argv[2], 10) || 5000)
   var regressionReadyDonnies = {
     X: [],
     Y: []
