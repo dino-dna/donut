@@ -18,8 +18,10 @@ function rateThickness(val) {
 }
 
 /**
+ * Get donut indicator
+ *
  * @param {Object} donut
- * @returns {Object}
+ * @returns {number} Indicator rating donut quality
  */
 function getIndicator({
   DONUT_FROSTING_COVERAGE,

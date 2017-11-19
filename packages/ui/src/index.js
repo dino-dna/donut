@@ -5,7 +5,7 @@ import Donuts from './components/Donuts';
 import Viewer from './components/Viewer';
 import About from './components/About';
 import Admin from './components/Admin';
-import DeepFryer from './components/DeepFryer';
+import DeepFryer from './containers/DeepFryer';
 import { Provider } from 'react-redux';
 import { configure as configureStore } from './state/store';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router'
