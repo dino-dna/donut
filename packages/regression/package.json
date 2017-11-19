@@ -6,29 +6,16 @@
   "scripts": {
     "build": "docker build . -t donut-regression",
     "pretest": "run-s build",
-    "test": "ava test/**/*.test.js",
-    "precommit": "run-p check lint test check-vulnerablities",
-    "check": "counsel check",
-    "check-vulnerablities": "nsp check",
-    "lint": "standard",
-    "docs:clean": "jsdock clean",
-    "docs:build": "jsdock build",
-    "docs:publish": "jsdock publish"
+    "test": "ava test/**/*.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "ava": "^0.22.0",
-    "counsel": "^0.5.2",
-    "counsel-ruleset-nodelib": "^0.5.2",
-    "donut-common": "^0.0.1",
+    "donut-common": "0.0.1",
     "execa": "^0.8.0",
-    "husky": "^0.14.3",
-    "jsdock": "^1.0.3",
-    "npm-run-all": "^4.1.2",
-    "nsp": "^2.8.1",
-    "standard": "^10.0.3"
+    "npm-run-all": "^4.1.2"
   },
   "dependencies": {
     "bluebird": "^3.5.1",

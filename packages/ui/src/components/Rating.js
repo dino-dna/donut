@@ -1,23 +1,23 @@
 import React from 'react'
 import { getIndicator, getIndicatorParams } from 'donut-common/src/rater'
 
-function getEmoji(val) {
+function getEmoji (val) {
   if (val > 0.9) {
-    return <span aria-label='good' role='img'>😎</span>;
+    return <span aria-label='good' role='img'>😎</span>
   } else if (val > 0.8) {
-    return <span aria-label='okay' role='img'>😐</span>;
+    return <span aria-label='okay' role='img'>😐</span>
   }
   return <span aria-label='bad' role='img'>😱</span>
 }
 
 export default function Rating (props) {
-  const indicator = getIndicator(props);
+  const indicator = getIndicator(props)
   const {
     frostingCoverage,
     frostingThickness,
     radius,
     sprinkleCoverage
-  } = getIndicatorParams(props);
+  } = getIndicatorParams(props)
 
   return (
     <dl>
@@ -35,5 +35,5 @@ export default function Rating (props) {
       <dt>Sprinkles:</dt>
       <dd>{getEmoji(sprinkleCoverage)}</dd>
     </dl>
-  );
+  )
 }

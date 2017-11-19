@@ -1,12 +1,12 @@
-import { applyMiddleware, createStore } from 'redux';
-import { createLogger } from 'redux-logger';
-import promiseMiddleware from 'redux-promise';
-import thunkMiddleware from 'redux-thunk';
+import { applyMiddleware, createStore } from 'redux'
+import { createLogger } from 'redux-logger'
+import promiseMiddleware from 'redux-promise'
+import thunkMiddleware from 'redux-thunk'
 import { routerMiddleware } from 'react-router-redux'
 import { hashHistory } from 'react-router'
 
-import getRootReducer from './root-reducer';
-import socketMiddleware from '../middleware/socket';
+import getRootReducer from './root-reducer'
+import socketMiddleware from '../middleware/socket'
 
 const finalCreateStore = applyMiddleware(
   routerMiddleware(hashHistory),
@@ -14,19 +14,19 @@ const finalCreateStore = applyMiddleware(
   promiseMiddleware,
   socketMiddleware,
   createLogger({ collapsed: true })
-)(createStore);
+)(createStore)
 
-let store;
+let store
 
-export function configure(initialState) {
-  store = finalCreateStore(getRootReducer(), initialState);
+export function configure (initialState) {
+  store = finalCreateStore(getRootReducer(), initialState)
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./root-reducer', () => store.replaceReducer(getRootReducer()));
+    module.hot.accept('./root-reducer', () => store.replaceReducer(getRootReducer()))
   }
 
-  return store;
+  return store
 }
 
-export function get() { return store; }
+export function get () { return store }

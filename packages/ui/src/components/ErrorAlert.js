@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import '../css/ErrorAlert.css';
+import '../css/ErrorAlert.css'
 
 const ErrorAlert = ({ message, onClick }) => (
   <div
@@ -10,7 +10,7 @@ const ErrorAlert = ({ message, onClick }) => (
   >
     <span
       aria-hidden='true'
-      aria-label="Bomb emoji"
+      aria-label='Bomb emoji'
       role='img'
     >
       💣
@@ -24,14 +24,14 @@ const ErrorAlert = ({ message, onClick }) => (
       <span aria-hidden='true'>✕</span>
     </button>
   </div>
-);
+)
 
 ErrorAlert.propTypes = {
   /** Error alert message */
   message: PropTypes.string.isRequired,
 
   /** Error alert close click handler */
-  onClick: PropTypes.func.isRequired,
-};
+  onClick: PropTypes.func.isRequired
+}
 
-export default ErrorAlert;
+export default ErrorAlert

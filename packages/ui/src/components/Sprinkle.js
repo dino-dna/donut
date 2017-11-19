@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import memoize from 'lodash/memoize'
 
 export const attrs = memoize((scale) => {
@@ -35,7 +35,7 @@ function Sprinkle (props) {
       style={{ transformOrigin: `${xOffset}px ${yOffset}px`, transform: `translate(-${xOffset}px, -${yOffset}px) rotate(${deg}deg)` }}
       d={sprinklePath}
       fill={color}
-    ></path>
+     />
   )
 }
 
