@@ -21,7 +21,7 @@
     "ava": "^0.22.0",
     "counsel": "^0.5.2",
     "counsel-ruleset-nodelib": "^0.5.2",
-    "donut-common": "^0.0.1",
+    "donut-common": "0.0.1",
     "execa": "^0.8.0",
     "husky": "^0.14.3",
     "jsdock": "^1.0.3",
