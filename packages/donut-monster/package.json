@@ -5,8 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "sampler": "node scripts/sampler.js",
-    "start": "node src/index.js",
-    "test": "NODE_ENV=test ava test"
+    "start": "node src/index.js"
   },
   "keywords": [
     "api",

@@ -5,11 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "build": "docker build . -t donut-regression",
-    "test": "nyc --reporter=lcov ava test/**/*.test.js",
-    "lint": "standard",
-    "docs:clean": "jsdock clean",
-    "docs:build": "jsdock build",
-    "docs:publish": "jsdock publish"
+    "pretest": "run-s build",
+    "test": "ava test/**/*.test.js"
   },
   "keywords": [],
   "author": "",
@@ -18,8 +15,7 @@
     "ava": "^0.22.0",
     "donut-common": "0.0.1",
     "execa": "^0.8.0",
-    "jsdock": "^1.0.3",
-    "nyc": "^11.2.1"
+    "npm-run-all": "^4.1.2"
   },
   "dependencies": {
     "bluebird": "^3.5.1",

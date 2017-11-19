@@ -3,10 +3,9 @@
 var ava = require('ava').default
 var zipObject = require('lodash/zipObject')
 var values = require('lodash/values')
+var isNumber = require('lodash/isNumber')
 var regression = require('../')
-var rater = require('donut-common').rater
-// var generateDonnies = require('./fixture/generate')
-var keys = require('./fixture/donut-keys')
+var { rater, keys } = require('donut-common')
 
 ava('donut regression', async t => {
   var donnies = require('./fixture/donuts.json')
@@ -15,12 +14,13 @@ ava('donut regression', async t => {
     nut.DONUT_RATING = donnies.Y[i]
     return nut
   })
-  var res = await regression(donnies)
-  var firstRegression = Object.keys(res)[0]
-  const perfectDonut = keys.reduce((nut, key, i) => {
-    return Object.assign(nut, { [key]: res[firstRegression][i] })
-  }, {})
-  t.truthy(perfectDonut.DONUT_FROSTING_COVERAGE)
-  var perfectRating = rater.getIndicator(perfectDonut)
+  var numDonuts = 5000
+  var { ridge_regression_with_sim_ann: { X_min, donut, score } } = await regression(donnies.slice(0, numDonuts))
+  t.truthy(isNumber(score), 'reports numeric score')
+  t.truthy(Array.isArray(X_min), 'provides a set of optimal inputs')
+  t.truthy(donut, 'result has donut')
+  t.truthy(donut.DONUT_FROSTING_COVERAGE)
+  var perfectRating = rater.getIndicator(donut)
   t.truthy(perfectRating > 0.8)
+  console.log(`actual rating: ${perfectRating} // `)
 })

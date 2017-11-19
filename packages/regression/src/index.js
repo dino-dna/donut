@@ -2,6 +2,7 @@
 
 const execa = require('execa')
 const debug = require('debug')('donut:regression')
+const { keys } = require('donut-common')
 
 /**
  * Runs a donut regression
@@ -10,12 +11,9 @@ const debug = require('debug')('donut:regression')
  * @returns {Promise} resolves to regression coefficients
  */
 async function regression (donuts, image) {
-  var Xm = {
-    DONUT_FROSTING_COVERAGE: [],
-    DONUT_FROSTING_THICKNESS: [],
-    DONUT_SPRINKLE_COVERAGE: [],
-    DONUT_INNER_RADIUS: [],
-    DONUT_OUTER_RADIUS: []
+  var Xm = {}
+  for (var i in keys) {
+    Xm[keys[i]] = []
   }
   var Xn = []
   var Y = []
@@ -44,9 +42,16 @@ async function regression (donuts, image) {
   child.stdin.end()
   const res = await child
   debug(`regression logs: ${res.stderr}`)
-  const coefficients = JSON.parse(res.stdout.toString())
-  debug(coefficients)
-  return coefficients
+  const report = JSON.parse(res.stdout.toString())
+  // transform X_min to donut POJO
+  for (var algoName in report) {
+    var algoRes = report[algoName]
+    algoRes.donut = keys.reduce((donut, key, i) => {
+      return Object.assign(donut, { [key]: report[algoName].X_min[i] })
+    }, {})
+  }
+  debug(`regression report: ${report}`)
+  return report
 }
 
 module.exports = regression
