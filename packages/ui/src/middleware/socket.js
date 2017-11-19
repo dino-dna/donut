@@ -12,6 +12,7 @@ import {
 } from '../state/ducks/upload'
 
 import {
+  addDonuts,
   connected,
   disconnected,
   setModels
@@ -38,6 +39,9 @@ export default ({ dispatch, getState }) => next => action => {
     socket.on('error', handleError)
     socket.on(messages.SUBMIT_MODE, (newMode) => {
       dispatch(submitModeReceive(newMode))
+    })
+    socket.on(messages.DONUT_FIREHOSE, (donuts) => {
+      dispatch(addDonuts(donuts.map(([key, donut]) => donut)))
     })
     socket.on(messages.UPLOAD_DONUTS, () => {
       dispatch(uploadSuccess())

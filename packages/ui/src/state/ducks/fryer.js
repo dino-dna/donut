@@ -74,7 +74,7 @@ export default function reducer (state = initialState, { payload, type }) {
     case FRYER_ADD_DONUTS:
       return {
         ...state,
-        donuts: [...state.donuts, payload]
+        donuts: [...state.donuts, ...payload]
       }
     case FRYER_SET_MODELS:
       return {
