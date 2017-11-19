@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import round from 'lodash/round'
-import zipObject from 'lodash/zipObject'
-import common from 'donut-common'
 
 import Donut from './Donut'
 import '../css/DonutPredictionViewer.css'
@@ -12,19 +10,23 @@ const DonutPredictionViewer = ({ models }) => {
 
   if (models) {
     const {
-      ridge_regression_with_sim_ann: ridge
+      ridge_regression_with_sim_ann: {
+        donut,
+        score
+      }
     } = models
 
     content = (
       <div>
         <h1>Ridge regression</h1>
-        <Donut {...zipObject(common.keys, ridge)} />
+        <Donut {...donut} />
         <ul>
-          <li>Frosting coverage: <code>{round(ridge[0], 4)}</code></li>
-          <li>Frosting thickness: <code>{round(ridge[1], 4)}</code></li>
-          <li>Inner radius: <code>{round(ridge[2], 4)}</code></li>
-          <li>Outer radius: <code>{round(ridge[3], 4)}</code></li>
-          <li>Sprinkle coverage: <code>{round(ridge[4], 4)}</code></li>
+          <li>Frosting coverage: <code>{round(donut.DONUT_FROSTING_COVERAGE, 4)}</code></li>
+          <li>Frosting thickness: <code>{round(donut.DONUT_FROSTING_THICKNESS, 4)}</code></li>
+          <li>Inner radius: <code>{round(donut.DONUT_INNER_RADIUS, 4)}</code></li>
+          <li>Outer radius: <code>{round(donut.DONUT_OUTER_RADIUS, 4)}</code></li>
+          <li>Sprinkle coverage: <code>{round(donut.DONUT_SPRINKLE_COVERAGE, 4)}</code></li>
+          <li>Score: <code>${score}</code></li>
         </ul>
       </div>
     )
@@ -41,7 +43,16 @@ const DonutPredictionViewer = ({ models }) => {
 
 DonutPredictionViewer.propTypes = {
   models: PropTypes.shape({
-    ridge_regression_with_sim_ann: PropTypes.arrayOf(PropTypes.number).isRequired
+    ridge_regression_with_sim_ann: PropTypes.shape({
+      donut: PropTypes.shape({
+        DONUT_FROSTING_COVERAGE: PropTypes.number.isRequired,
+        DONUT_FROSTING_THICKNESS: PropTypes.number.isRequired,
+        DONUT_INNER_RADIUS: PropTypes.number.isRequired,
+        DONUT_OUTER_RADIUS: PropTypes.number.isRequired,
+        DONUT_SPRINKLE_COVERAGE: PropTypes.number.isRequired
+      }).isRequired,
+      score: PropTypes.number.isRequired
+    }).isRequired
   })
 }
 

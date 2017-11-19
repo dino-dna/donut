@@ -61,7 +61,16 @@ DeepFryer.propTypes = {
     message: PropTypes.string.isRequired
   })).isRequired,
   models: PropTypes.shape({
-    ridge_regression_with_sim_ann: PropTypes.arrayOf(PropTypes.number).isRequired
+    ridge_regression_with_sim_ann: PropTypes.shape({
+      donut: PropTypes.shape({
+        DONUT_FROSTING_COVERAGE: PropTypes.number.isRequired,
+        DONUT_FROSTING_THICKNESS: PropTypes.number.isRequired,
+        DONUT_INNER_RADIUS: PropTypes.number.isRequired,
+        DONUT_OUTER_RADIUS: PropTypes.number.isRequired,
+        DONUT_SPRINKLE_COVERAGE: PropTypes.number.isRequired
+      }).isRequired,
+      score: PropTypes.number.isRequired
+    })
   }),
   onErrorClick: PropTypes.func.isRequired
 }
