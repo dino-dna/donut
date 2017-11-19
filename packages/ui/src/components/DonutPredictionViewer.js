@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import round from 'lodash/round'
 import zipObject from 'lodash/zipObject'
 import common from 'donut-common'
 
@@ -19,11 +20,11 @@ const DonutPredictionViewer = ({ models }) => {
         <h1>Ridge regression</h1>
         <Donut {...zipObject(common.keys, ridge)} />
         <ul>
-          <li>Frosting coverage: <code>{ridge[0]}</code></li>
-          <li>Frosting thickness: <code>{ridge[1]}</code></li>
-          <li>Inner radius: <code>{ridge[2]}</code></li>
-          <li>Outer radius: <code>{ridge[3]}</code></li>
-          <li>Sprinkle coverage: <code>{ridge[4]}</code></li>
+          <li>Frosting coverage: <code>{round(ridge[0], 4)}</code></li>
+          <li>Frosting thickness: <code>{round(ridge[1], 4)}</code></li>
+          <li>Inner radius: <code>{round(ridge[2], 4)}</code></li>
+          <li>Outer radius: <code>{round(ridge[3], 4)}</code></li>
+          <li>Sprinkle coverage: <code>{round(ridge[4], 4)}</code></li>
         </ul>
       </div>
     )
