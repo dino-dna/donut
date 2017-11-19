@@ -6,11 +6,8 @@ var { rater, keys } = require('donut-common')
 var debug = require('debug')('donut:regression:test')
 
 function generateDonut () {
-  const valuesOnlyDonut = []
   const donut = keys.reduce((nut, key) => {
     const value = Math.random()
-    // TERRIBLE EVIL SIDE EFFECT WARNING 👹
-    valuesOnlyDonut.push(value)
     return Object.assign(nut, { [key]: value })
   }, {})
   const rating = rater.getIndicator(donut)
@@ -44,6 +41,11 @@ function generateDonnies (numDonnies) {
 
 module.exports = generateDonnies
 
+/**
+ * run node generate.js <num-donuts>
+ * to build a json file w/ <num-donuts> random donuts in it.
+ * at least 20% of donuts will have a rating of > 0.8.
+ */
 if (!module.parent) {
   var donnies = generateDonnies(parseInt(process.argv[2], 10) || 5000)
   var regressionReadyDonnies = {
