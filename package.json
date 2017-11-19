@@ -8,7 +8,7 @@
     "clean": "lerna clean --yes",
     "lint": "standard",
     "postinstall": "lerna bootstrap",
-    "precommit": "npm run lint && lerna run precommit && npm run test",
+    "precommit": "npm run lint && npm run test",
     "test": "lerna run test"
   },
   "repository": {
