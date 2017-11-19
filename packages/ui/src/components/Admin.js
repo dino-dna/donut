@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import '../css/Admin.css';
+import '../css/Admin.css'
 
 import {
-  submitModeRequest,
-} from '../state/ducks/submitMode';
+  submitModeRequest
+} from '../state/ducks/submitMode'
 
 class Admin extends Component {
-  render() {
-    const { errorMessage, isOn, loading, submitModeRequest } = this.props;
+  render () {
+    const { errorMessage, isOn, loading, submitModeRequest } = this.props
 
     /* eslint-disable jsx-a11y/accessible-emoji */
-    const message = errorMessage ?
-      <div className='Admin-error-message'>
+    const message = errorMessage
+      ? <div className='Admin-error-message'>
         <span aria-hidden='true'>🚨</span>
         {errorMessage}
-      </div> :
-      undefined;
+      </div>
+      : undefined
     /* eslint-enable jsx-a11y/accessible-emoji */
 
     return (
@@ -32,13 +32,13 @@ class Admin extends Component {
           {isOn ? 'Disable Donuts' : 'Enable Donuts'}
         </button>
       </div>
-    );
+    )
   }
 }
 
 Admin.defaultProps = {
-  errorMessage: '',
-};
+  errorMessage: ''
+}
 
 Admin.propTypes = {
   /** API request error */
@@ -54,12 +54,12 @@ Admin.propTypes = {
   loading: PropTypes.bool.isRequired,
 
   /** Enable or disable 'submit mode' */
-  toggleSubmitMode: PropTypes.func.isRequired,
-};
+  toggleSubmitMode: PropTypes.func.isRequired
+}
 
 export default connect(
   ({ submitMode }) => submitMode,
   {
-    submitModeRequest,
+    submitModeRequest
   }
-)(Admin);
+)(Admin)

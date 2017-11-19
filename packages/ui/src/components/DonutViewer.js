@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const DonutViewer = ({ donuts }) => (
-  <div className='DonutViewer'>
-  </div>
-);
+  <div className='DonutViewer' />
+)
 
 DonutViewer.propTypes = {
   donuts: PropTypes.arrayOf(PropTypes.shape({
@@ -12,8 +11,8 @@ DonutViewer.propTypes = {
     frostingThickness: PropTypes.number.isRequired,
     innerRadius: PropTypes.number.isRequired,
     outerRadius: PropTypes.number.isRequired,
-    sprinkleCoverage: PropTypes.number.isRequired,
-  })).isRequired,
-};
+    sprinkleCoverage: PropTypes.number.isRequired
+  })).isRequired
+}
 
-export default DonutViewer;
+export default DonutViewer

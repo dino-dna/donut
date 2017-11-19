@@ -1,54 +1,54 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import DonutSettings from './DonutSettings';
-import * as dnut from '../state/ducks/donut';
-import { addDonut } from '../state/ducks/donuts';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import DonutSettings from './DonutSettings'
+import * as dnut from '../state/ducks/donut'
+import { addDonut } from '../state/ducks/donuts'
 
 class DonutSettingsController extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.onChangeFrostingCoverage = this.onChangeFrostingCoverage.bind(this)
     this.onChangeFrostingThickness = this.onChangeFrostingThickness.bind(this)
     this.onChangeSprinkleCoverage = this.onChangeSprinkleCoverage.bind(this)
     this.onChangeInnerRadius = this.onChangeInnerRadius.bind(this)
     this.onChangeOuterRadius = this.onChangeOuterRadius.bind(this)
-    this.onSave = this.onSave.bind(this);
+    this.onSave = this.onSave.bind(this)
   }
   onChangeFrostingCoverage (value) {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     dispatch(dnut.setDonutAttribute({
       attribute: dnut.DONUT_FROSTING_COVERAGE, value
-      }));
+    }))
   }
   onChangeFrostingThickness (value) {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     dispatch(dnut.setDonutAttribute({
       attribute: dnut.DONUT_FROSTING_THICKNESS, value
-      }));
+    }))
   }
   onChangeSprinkleCoverage (value) {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     dispatch(dnut.setDonutAttribute({
       attribute: dnut.DONUT_SPRINKLE_COVERAGE, value
-      }));
+    }))
   }
   onChangeInnerRadius (value) {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     dispatch(dnut.setDonutAttribute({
       attribute: dnut.DONUT_INNER_RADIUS, value
-      }));
+    }))
   }
   onChangeOuterRadius (value) {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     dispatch(dnut.setDonutAttribute({
       attribute: dnut.DONUT_OUTER_RADIUS, value
-      }));
+    }))
   }
-  onSave(donut) {
-    this.props.dispatch(addDonut(donut));
+  onSave (donut) {
+    this.props.dispatch(addDonut(donut))
   }
-  render() {
-    const { donut } = this.props;
+  render () {
+    const { donut } = this.props
     return <DonutSettings
       donut={donut}
       onChangeFrostingCoverage={this.onChangeFrostingCoverage}
@@ -61,11 +61,10 @@ class DonutSettingsController extends Component {
   }
 }
 
-DonutSettingsController.displayName = 'DonutSettingsController';
+DonutSettingsController.displayName = 'DonutSettingsController'
 
 DonutSettingsController.propTypes = {
 
-};
+}
 
-
-export default connect()(DonutSettingsController);
+export default connect()(DonutSettingsController)

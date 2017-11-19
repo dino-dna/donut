@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
-import '../css/DonutSettings.css';
+import React, { Component } from 'react'
+import '../css/DonutSettings.css'
 
 class DonutSettings extends Component {
-  constructor(props) {
-    super(props);
-    this.handleSave = this.handleSave.bind(this);
+  constructor (props) {
+    super(props)
+    this.handleSave = this.handleSave.bind(this)
   }
-  handleSave(event) {
-    const { donut, onSave } = this.props;
-    event.preventDefault();
-    onSave(donut);
+  handleSave (event) {
+    const { donut, onSave } = this.props
+    event.preventDefault()
+    onSave(donut)
   }
-  render() {
+  render () {
     const {
       donut: {
         DONUT_FROSTING_COVERAGE,
         DONUT_FROSTING_THICKNESS,
         DONUT_SPRINKLE_COVERAGE,
         DONUT_INNER_RADIUS,
-        DONUT_OUTER_RADIUS,
+        DONUT_OUTER_RADIUS
       },
       onChangeFrostingCoverage,
       onChangeFrostingThickness,
       onChangeSprinkleCoverage,
       onChangeInnerRadius,
-      onChangeOuterRadius,
-    } = this.props;
+      onChangeOuterRadius
+    } = this.props
 
     return (
       <form className='DonutSettings'>
@@ -88,10 +88,10 @@ class DonutSettings extends Component {
 
         <button onClick={this.handleSave} type='submit'>Save</button>
       </form>
-    );
+    )
   }
 }
 
-DonutSettings.displayName = 'DonutSettings';
+DonutSettings.displayName = 'DonutSettings'
 
-export default DonutSettings;
+export default DonutSettings

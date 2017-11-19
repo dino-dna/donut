@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import '../css/About.css';
+import React, { Component } from 'react'
+import '../css/About.css'
 
 export default class About extends Component {
-  render() {
+  render () {
     return (
       <div className='About'>
         <h1>About</h1>
@@ -50,6 +50,6 @@ export default class About extends Component {
           </figure>
         </div>
       </div>
-    );
+    )
   }
 }

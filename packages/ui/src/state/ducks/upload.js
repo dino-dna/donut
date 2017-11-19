@@ -1,32 +1,33 @@
-const __SOOPER_SECRETS__ = 'DONUTS_HAS_UPLOADED';
+/* global localStorage */
+const __SOOPER_SECRETS__ = 'DONUTS_HAS_UPLOADED'
 
 const getHasUploaded = () => {
-  const hasUploaded = localStorage[__SOOPER_SECRETS__];
+  const hasUploaded = localStorage[__SOOPER_SECRETS__]
 
   if (typeof hasUploaded !== 'string') {
-    return false;
+    return false
   }
 
-  return JSON.parse(hasUploaded);
-};
+  return JSON.parse(hasUploaded)
+}
 
 // TODO: Rename action creator
-export const UPLOAD_REQUEST = 'UPLOAD_REQUEST';
+export const UPLOAD_REQUEST = 'UPLOAD_REQUEST'
 export const uploadRequest = donuts => ({
   payload: donuts,
-  type: UPLOAD_REQUEST,
-});
+  type: UPLOAD_REQUEST
+})
 
-export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
+export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS'
 export const uploadSuccess = () => ({
-  type: UPLOAD_SUCCESS,
-});
+  type: UPLOAD_SUCCESS
+})
 
 export const UPLOAD_ERROR = 'UPLOAD_ERROR'
 export const uploadError = errorMessage => ({
   payload: errorMessage,
-  type: UPLOAD_ERROR,
-});
+  type: UPLOAD_ERROR
+})
 
 /*
 export const upload = donuts => (dispatch, getState) => {
@@ -59,28 +60,28 @@ export const upload = donuts => (dispatch, getState) => {
 const initialState = {
   errorMessage: null,
   hasUploaded: getHasUploaded(),
-  isLoading: false,
-};
+  isLoading: false
+}
 
 const reducer = (state = initialState, { payload, type }) => {
   switch (type) {
     case UPLOAD_ERROR:
       return Object.assign({}, state, {
         errorMessage: payload,
-        isLoading: false,
-      });
+        isLoading: false
+      })
     case UPLOAD_REQUEST:
       return Object.assign({}, state, {
-        isLoading: true,
-      });
+        isLoading: true
+      })
     case UPLOAD_SUCCESS:
       return Object.assign({}, state, {
         isLoading: false,
-        hasUploaded: true,
-      });
+        hasUploaded: true
+      })
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default reducer;
+export default reducer

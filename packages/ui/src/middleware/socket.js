@@ -1,23 +1,23 @@
-import io from 'socket.io-client/dist/socket.io.slim.js';
-import { messages } from 'donut-common';
+import io from 'socket.io-client/dist/socket.io.slim.js'
+import { messages } from 'donut-common'
 import {
   SUBMIT_MODE_REQUEST,
   submitModeError,
-  submitModeReceive,
-} from '../state/ducks/submitMode';
+  submitModeReceive
+} from '../state/ducks/submitMode'
 
 import {
   UPLOAD_REQUEST,
-  uploadSuccess,
-} from '../state/ducks/upload';
+  uploadSuccess
+} from '../state/ducks/upload'
 
 import {
   connected,
   disconnected,
-  setModels,
-} from '../state/ducks/fryer';
+  setModels
+} from '../state/ducks/fryer'
 
-let socket;
+let socket
 
 export default ({ dispatch, getState }) => next => action => {
   // Hijack the first action to boot
@@ -25,27 +25,27 @@ export default ({ dispatch, getState }) => next => action => {
   // queue message->action here
   if (!socket) {
     const handleError = (error) => {
-      console.error(error);
-      dispatch(submitModeError(error.message));
-    };
+      console.error(error)
+      dispatch(submitModeError(error.message))
+    }
 
-    socket = io('http://localhost:3001');
+    socket = io('http://localhost:3001')
     socket.on('connect', () => dispatch(connected()))
     socket.on('disconnect', () => dispatch(disconnected()))
     socket.on(messages.INIT_CLIENT, ({ submitMode }) => {
-      dispatch(submitModeReceive(submitMode));
-    });
+      dispatch(submitModeReceive(submitMode))
+    })
     socket.on('error', handleError)
-    socket.on(messages.SUBMIT_MODE, (newMode) =>  {
-      dispatch(submitModeReceive(newMode));
-    });
+    socket.on(messages.SUBMIT_MODE, (newMode) => {
+      dispatch(submitModeReceive(newMode))
+    })
     socket.on(messages.UPLOAD_DONUTS, () => {
-      dispatch(uploadSuccess());
+      dispatch(uploadSuccess())
     })
 
     // TODO: Only listen for new results in an 'admin' mode
     socket.on(messages.NEW_REGRESSION_RESULTS, (models) => {
-      dispatch(setModels(models));
+      dispatch(setModels(models))
     })
   }
 
@@ -53,14 +53,13 @@ export default ({ dispatch, getState }) => next => action => {
     socket.emit(
       messages.SUBMIT_MODE,
       action.payload
-    );
+    )
   } else if (action.type === UPLOAD_REQUEST) {
     socket.emit(
       messages.UPLOAD_DONUTS,
       action.payload
-    );
+    )
   }
 
-  return next(action);
-};
-
+  return next(action)
+}

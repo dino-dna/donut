@@ -4,7 +4,7 @@ var ava = require('ava').default
 var zipObject = require('lodash/zipObject')
 var values = require('lodash/values')
 var regression = require('../')
-var rater = require('common').rater
+var rater = require('donut-common').rater
 // var generateDonnies = require('./fixture/generate')
 var keys = require('./fixture/donut-keys')
 

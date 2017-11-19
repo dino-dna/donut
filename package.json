@@ -1,12 +1,15 @@
 {
   "name": "donut",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "donut is a utility to create totally rad doughnuts!",
   "main": "index.js",
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean --yes",
+    "lint": "standard",
     "postinstall": "lerna bootstrap",
-    "test": "lerna test"
+    "precommit": "npm run lint && lerna run precommit && npm run test",
+    "test": "lerna run test"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,8 @@
   ],
   "devDependencies": {},
   "dependencies": {
-    "lerna": "^2.4.0"
+    "husky": "^0.14.3",
+    "lerna": "^2.5.1",
+    "standard": "^10.0.3"
   }
 }

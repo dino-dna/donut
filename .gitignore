@@ -10,3 +10,5 @@ build
 .DS_Store
 *.log
 yarn.lock
+coverage
+.nyc_output
