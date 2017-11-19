@@ -5,7 +5,6 @@ donut is a utility to create totally rad doughnuts!
 ## usage
 
 - `git clone ...`, `npm install`, `npm start`
-- make donuts great again
 
 ## why
 

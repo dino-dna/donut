@@ -9,7 +9,7 @@ module.exports = {
   UPLOAD_DONUTS: 'UPLOAD_DONUTS',
 
   // Server-emitted stream of all clients' donuts
-  ALL_DONUTS: 'ALL_DONUTS',
+  DONUT_FIREHOSE: 'DONUT_FIREHOSE',
 
   // Client-emitted setting of 'submit mode'
   // Server-emitted value of 'submit mode' when changed

@@ -57,6 +57,7 @@ io.on('connection', (socket) => {
 
     donutsRunner()
 
+    io.emit(messages.DONUT_FIREHOSE, toEnter)
     socket.emit(messages.UPLOAD_DONUTS, toEnter)
   })
   socket.on(messages.SUBMIT_MODE, (newMode) => {

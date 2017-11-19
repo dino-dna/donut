@@ -10,6 +10,7 @@ const ErrorAlert = ({ message, onClick }) => (
   >
     <span
       aria-hidden='true'
+      aria-label="Bomb emoji"
       role='img'
     >
       💣
