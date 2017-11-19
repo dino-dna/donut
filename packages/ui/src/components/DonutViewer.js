@@ -7,11 +7,12 @@ const DonutViewer = ({ donuts }) => (
 
 DonutViewer.propTypes = {
   donuts: PropTypes.arrayOf(PropTypes.shape({
-    frostingCoverage: PropTypes.number.isRequired,
-    frostingThickness: PropTypes.number.isRequired,
-    innerRadius: PropTypes.number.isRequired,
-    outerRadius: PropTypes.number.isRequired,
-    sprinkleCoverage: PropTypes.number.isRequired
+    DONUT_FROSTING_COVERAGE: PropTypes.number.isRequired,
+    DONUT_FROSTING_THICKNESS: PropTypes.number.isRequired,
+    DONUT_INNER_RADIUS: PropTypes.number.isRequired,
+    DONUT_OUTER_RADIUS: PropTypes.number.isRequired,
+    DONUT_RATING: PropTypes.number.isRequired,
+    DONUT_SPRINKLE_COVERAGE: PropTypes.number.isRequired
   })).isRequired
 }
 
