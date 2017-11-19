@@ -28,7 +28,7 @@
   "devDependencies": {},
   "dependencies": {
     "husky": "^0.14.3",
-    "lerna": "^2.4.0",
+    "lerna": "^2.5.1",
     "standard": "^10.0.3"
   }
 }
