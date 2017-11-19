@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types';
-import classNames from 'classnames'; 
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import { connect } from 'react-redux'
 import '../css/Upload.css'
 
@@ -12,19 +12,19 @@ const Upload = ({
   hasUploaded,
   isOn,
   isLoading,
-  uploadRequest,
+  uploadRequest
 }) => {
   const disabled = false // !isOn || isLoading || hasUploaded;
   const containerClassName = classNames('Upload', {
     'Upload-disabled': disabled,
     'Upload-loading': isLoading,
-    'Upload-visible': isOn,
-  });
+    'Upload-visible': isOn
+  })
 
   // TODO: Use/style errorMessage
-  const errorMessageComponent = errorMessage ?
-    <p className="Upload-error-message">{errorMessage}</p> :
-    undefined;
+  const errorMessageComponent = errorMessage
+    ? <p className='Upload-error-message'>{errorMessage}</p>
+    : undefined
 
   return (
     <div className={containerClassName}>
@@ -38,12 +38,12 @@ const Upload = ({
         Upload
       </button>
     </div>
-  );
-};
+  )
+}
 
 Upload.defaultProps = {
-  errorMessage: undefined,
-};
+  errorMessage: undefined
+}
 
 Upload.propTypes = {
   donuts: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -51,14 +51,14 @@ Upload.propTypes = {
   hasUploaded: PropTypes.bool.isRequired,
   isOn: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  uploadRequest: PropTypes.func.isRequired,
-};
+  uploadRequest: PropTypes.func.isRequired
+}
 
 export default connect(
   ({
     donuts,
     submitMode: { isOn },
-    upload,
+    upload
   }) => ({ ...upload, isOn, donuts }),
   { uploadRequest }
-)(Upload);
+)(Upload)

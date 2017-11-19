@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import zipObject from 'lodash/zipObject';
-import common from 'donut-common';
+import React from 'react'
+import PropTypes from 'prop-types'
+import zipObject from 'lodash/zipObject'
+import common from 'donut-common'
 
-import Donut from './Donut';
-import '../css/DonutPredictionViewer.css';
+import Donut from './Donut'
+import '../css/DonutPredictionViewer.css'
 
 const DonutPredictionViewer = ({ models }) => {
-  let content;
+  let content
 
   if (models) {
     const {
-      ridge_regression_with_sim_ann: ridge,
-    } = models;
+      ridge_regression_with_sim_ann: ridge
+    } = models
 
     content = (
       <div>
@@ -26,23 +26,22 @@ const DonutPredictionViewer = ({ models }) => {
           <li>Sprinkle coverage: <code>{ridge[4]}</code></li>
         </ul>
       </div>
-    );
+    )
   } else {
-    content = <span>Awaiting models…</span>;
+    content = <span>Awaiting models…</span>
   }
 
   return (
     <div className='DonutPredictionViewer'>
       {content}
     </div>
-  );
-};
+  )
+}
 
 DonutPredictionViewer.propTypes = {
   models: PropTypes.shape({
-    ridge_regression_with_sim_ann: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }),
-};
+    ridge_regression_with_sim_ann: PropTypes.arrayOf(PropTypes.number).isRequired
+  })
+}
 
-export default DonutPredictionViewer;
-
+export default DonutPredictionViewer

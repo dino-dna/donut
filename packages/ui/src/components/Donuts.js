@@ -1,12 +1,12 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
 import DonutList from './DonutList'
 import { Link } from 'react-router'
-import '../css/Donuts.css';
+import '../css/Donuts.css'
 
 class Donuts extends Component {
-  render() {
-    const { donuts } = this.props;
+  render () {
+    const { donuts } = this.props
     if (!donuts || !donuts.length) {
       return (
         <div className='Donuts Donuts-empty'>
@@ -39,8 +39,8 @@ class Donuts extends Component {
           <DonutList donuts={donuts} />
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default connect(({ donuts }) => ({ donuts }))(Donuts);
+export default connect(({ donuts }) => ({ donuts }))(Donuts)
