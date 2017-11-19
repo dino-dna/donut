@@ -42,7 +42,7 @@ function generateDonnies (numDonnies) {
 module.exports = generateDonnies
 
 /**
- * run node generate.js <num-donuts>
+ * run DEBUG=donut* node generate.js <num-donuts>
  * to build a json file w/ <num-donuts> random donuts in it.
  * at least 20% of donuts will have a rating of > 0.8.
  */
