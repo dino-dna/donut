@@ -4,7 +4,7 @@
   "description": "donut is a utility to create totally rad doughnuts!",
   "main": "index.js",
   "scripts": {
-    "bootstrap": "lerna bootstrap || ./scripts/symlink.sh",
+    "bootstrap": "lerna bootstrap",
     "clean": "lerna clean --yes",
     "lint": "standard",
     "postinstall": "lerna bootstrap",
