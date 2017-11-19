@@ -2,7 +2,7 @@
 
 var times = require('lodash/times')
 var keys = require('./donut-keys')
-var rater = require('common').rater
+var rater = require('donut-common').rater
 
 function generateDonnies (numDonnies) {
   var donnies = times(numDonnies).map(() => {
