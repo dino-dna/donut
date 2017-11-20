@@ -48,13 +48,29 @@ DeepFryer.defaultProps = {
 
 DeepFryer.propTypes = {
   connected: PropTypes.bool.isRequired,
-  donuts: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  donuts: PropTypes.arrayOf(PropTypes.shape({
+    DONUT_FROSTING_COVERAGE: PropTypes.number.isRequired,
+    DONUT_FROSTING_THICKNESS: PropTypes.number.isRequired,
+    DONUT_INNER_RADIUS: PropTypes.number.isRequired,
+    DONUT_OUTER_RADIUS: PropTypes.number.isRequired,
+    DONUT_RATING: PropTypes.number.isRequired,
+    DONUT_SPRINKLE_COVERAGE: PropTypes.number.isRequired
+  })).isRequired,
   errors: PropTypes.arrayOf(PropTypes.shape({
     date: PropTypes.number.isRequired,
     message: PropTypes.string.isRequired
   })).isRequired,
   models: PropTypes.shape({
-    ridge_regression_with_sim_ann: PropTypes.arrayOf(PropTypes.number).isRequired
+    ridge_regression_with_sim_ann: PropTypes.shape({
+      donut: PropTypes.shape({
+        DONUT_FROSTING_COVERAGE: PropTypes.number.isRequired,
+        DONUT_FROSTING_THICKNESS: PropTypes.number.isRequired,
+        DONUT_INNER_RADIUS: PropTypes.number.isRequired,
+        DONUT_OUTER_RADIUS: PropTypes.number.isRequired,
+        DONUT_SPRINKLE_COVERAGE: PropTypes.number.isRequired
+      }).isRequired,
+      score: PropTypes.number.isRequired
+    })
   }),
   onErrorClick: PropTypes.func.isRequired
 }
