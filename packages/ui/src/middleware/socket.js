@@ -41,7 +41,7 @@ export default ({ dispatch, getState }) => next => action => {
       dispatch(submitModeReceive(newMode))
     })
     socket.on(messages.DONUT_FIREHOSE, (donuts) => {
-      dispatch(addDonuts(donuts.map(([key, donut]) => donut)))
+      dispatch(addDonuts(donuts))
     })
     socket.on(messages.UPLOAD_DONUTS, () => {
       dispatch(uploadSuccess())
