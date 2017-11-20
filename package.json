@@ -9,6 +9,7 @@
     "lint": "standard",
     "postinstall": "lerna bootstrap",
     "precommit": "npm run lint && npm run test",
+    "present": "cleaver watch index.md",
     "test": "lerna run test"
   },
   "repository": {
@@ -25,7 +26,9 @@
     "cdaringe",
     "swashcap"
   ],
-  "devDependencies": {},
+  "devDependencies": {
+    "cleaver": "^0.8.5"
+  },
   "dependencies": {
     "husky": "^0.14.3",
     "lerna": "^2.5.1",
