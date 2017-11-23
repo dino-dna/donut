@@ -3,6 +3,7 @@
  */
 
 .DeepFryer {
+  display: flex;
 }
 
 /** Badge */
@@ -22,5 +23,12 @@
 
 /** Prediction */
 .DeepFryer .DonutPredictionViewer {
+  height: calc(100vh - 2.75rem);
+  width: 50%;
+}
+
+/** Firehose */
+.DeepFryer .DonutViewer {
+  height: calc(100vh - 2.75rem);
   width: 50%;
 }

@@ -1,13 +1,57 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { TransitionGroup } from 'react-transition-group'
+
+import Fade from './Fade'
+import '../css/DonutViewer.css'
 
 class DonutViewer extends Component {
+  constructor (...args) {
+    super(...args)
+    this.state = {
+      donuts: []
+    }
+  }
+
+  /**
+   * Handle new donuts via dispatched props.
+   *
+   * @param {Object} newProps
+   * @param {Array[]} newProps.donuts
+   */
+  componentWillReceiveProps ({ donuts }) {
+    const delay = 500
+    const lifespan = 3000
+
+    donuts.forEach((donut, index) => {
+      // Add donuts to state:
+      setTimeout(() => {
+        this.setState({
+          donuts: [...this.state.donuts, donut]
+        })
+      }, delay * index)
+
+      // Remove donut from state:
+      setTimeout(() => {
+        this.setState({
+          donuts: this.state.donuts.filter(d => d !== donut)
+        })
+      }, lifespan + delay * index)
+    })
+  }
+
   render () {
     return (
       <div className='DonutViewer'>
-        {this.props.donuts.map(([id, donut]) => (
-          <div>{id}</div>
-        ))}
+        <TransitionGroup className='DonutViewer-TransitionGroup'>
+          {this.state.donuts.map(([id, donut]) => (
+            <Fade key={id}>
+              <div>
+                <div className='DonutViewer-item'>{id}</div>
+              </div>
+            </Fade>
+          ))}
+        </TransitionGroup>
       </div>
     )
   }

@@ -1,0 +1,29 @@
+/**
+ * Donut viewer.
+ * @TODO Rename
+ */
+
+.DonutViewer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.DonutViewer-TransitionGroup {
+  position: relative;
+}
+
+.DonutViewer-item {
+  animation: 4.5s ease-in-out forwards donutViewerSlideUp;
+  position: absolute;
+  text-align: center;
+}
+
+@keyframes donutViewerSlideUp {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-100px);
+  }
+}
