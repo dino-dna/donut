@@ -1,5 +1,6 @@
 import React from 'react'
 import Donut from './Donut'
+import Rating from './Rating'
 import '../css/DonutList.css'
 
 export default function DonutList (props) {
@@ -10,6 +11,7 @@ export default function DonutList (props) {
         return (
           <li key={i}>
             <Donut {...donut} />
+            <Rating {...donut} />
           </li>
         )
       })}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import round from 'lodash/round'
 
 import Donut from './Donut'
+import Rating from './Rating'
 import '../css/DonutPredictionViewer.css'
 
 const DonutPredictionViewer = ({ models }) => {
@@ -20,6 +21,7 @@ const DonutPredictionViewer = ({ models }) => {
       <div>
         <h1>Ridge regression</h1>
         <Donut {...donut} />
+        <Rating {...donut} />
         <ul>
           <li>Frosting coverage: <code>{round(donut.DONUT_FROSTING_COVERAGE, 4)}</code></li>
           <li>Frosting thickness: <code>{round(donut.DONUT_FROSTING_THICKNESS, 4)}</code></li>
