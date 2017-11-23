@@ -28,7 +28,10 @@
 }
 
 /** Firehose */
-.DeepFryer .DonutViewer {
-  height: calc(100vh - 2.75rem);
-  width: 50%;
+@media (min-width: 32em) {
+  .DeepFryer .DonutViewer {
+    height: calc(100vh - 2.75rem);
+    overflow: hidden;
+    width: 50%;
+  }
 }

@@ -14,16 +14,29 @@
 }
 
 .DonutViewer-item {
-  animation: 4.5s ease-in-out forwards donutViewerSlideUp;
+  animation: 6s ease-in-out forwards donutViewerSlideUp;
+  height: 0;
+  padding-bottom: 50%;
   position: absolute;
   text-align: center;
+}
+.DonutViewer-item .Donut {
+  margin-top: -50%;
+}
+@media (min-width: 32em) {
+  .DonutViewer-item {
+    width: 50%
+  }
+  .DonutViewer-item-odd {
+    right: 0;
+  }
 }
 
 @keyframes donutViewerSlideUp {
   from {
-    transform: translateY(0px);
+    transform: translateY(10vh);
   }
   to {
-    transform: translateY(-100px);
+    transform: translateY(-30vh);
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { TransitionGroup } from 'react-transition-group'
 
+import Donut from './Donut'
 import Fade from './Fade'
 import '../css/DonutViewer.css'
 
@@ -23,18 +24,18 @@ class DonutViewer extends Component {
     const delay = 500
     const lifespan = 3000
 
-    donuts.forEach((donut, index) => {
+    donuts.forEach(([id, donut], index) => {
       // Add donuts to state:
       setTimeout(() => {
         this.setState({
-          donuts: [...this.state.donuts, donut]
+          donuts: [...this.state.donuts, [id, donut, index]]
         })
       }, delay * index)
 
       // Remove donut from state:
       setTimeout(() => {
         this.setState({
-          donuts: this.state.donuts.filter(d => d !== donut)
+          donuts: this.state.donuts.filter(([_id]) => _id !== id)
         })
       }, lifespan + delay * index)
     })
@@ -44,10 +45,12 @@ class DonutViewer extends Component {
     return (
       <div className='DonutViewer'>
         <TransitionGroup className='DonutViewer-TransitionGroup'>
-          {this.state.donuts.map(([id, donut]) => (
+          {this.state.donuts.map(([id, donut, index]) => (
             <Fade key={id}>
               <div>
-                <div className='DonutViewer-item'>{id}</div>
+                <div className={`DonutViewer-item ${index % 2 ? 'DonutViewer-item-odd' : ''}`}>
+                  <Donut {...donut} />
+                </div>
               </div>
             </Fade>
           ))}
