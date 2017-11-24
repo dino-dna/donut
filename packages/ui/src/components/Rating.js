@@ -1,6 +1,8 @@
 import React from 'react'
 import { getIndicator, getIndicatorParams } from 'donut-common/src/rater'
 
+import '../css/Rating.css'
+
 function getEmoji (val) {
   if (val > 0.9) {
     return <span aria-label='good' role='img'>😎</span>
@@ -20,7 +22,7 @@ export default function Rating (props) {
   } = getIndicatorParams(props)
 
   return (
-    <dl>
+    <dl className='Rating'>
       <dt>Overall:</dt>
       <dd>{getEmoji(indicator)}</dd>
 

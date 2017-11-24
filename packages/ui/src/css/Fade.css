@@ -1,0 +1,32 @@
+/**
+ * Fade.
+ */
+.fade {
+  opacity: 0;
+}
+
+.fade-enter {
+  opacity: 0.01;
+  transform: translateY(75vh);
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition-duration: 750ms;
+  transition-property: opacity transform;
+  transition-timing-function: ease-out;
+  transform: none;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: none;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0.01;
+  transition-duration: 750ms;
+  transition-property: opacity transform;
+  transition-timing-function: ease-in;
+  transform: translateY(-75vh);
+}

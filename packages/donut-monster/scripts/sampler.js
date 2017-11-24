@@ -10,7 +10,7 @@ const { getRandomDonuts, messages } = require('donut-common')
 const socket = io('http://localhost:3001')
 const uploadDonuts = () => {
   const randos = []
-  const count = 100
+  const count = 10
 
   // This could take a while...
   while (randos.length < count) {
@@ -38,7 +38,7 @@ socket.on('error', error => {
 socket.on(messages.INIT_CLIENT, ({ submitMode }) => {
   const start = () => {
     uploadDonuts()
-    setInterval(uploadDonuts, 3000)
+    setInterval(uploadDonuts, 13000)
   }
 
   if (!submitMode) {

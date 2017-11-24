@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Sprinkle, { attrs as sprinkleAttrs } from './Sprinkle'
 import zip from 'lodash/zip'
-import Rating from './Rating'
 import '../css/Donut.css'
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -156,7 +155,6 @@ export default class Donut extends Component {
             {this.renderSprinkles(frostingInnerRadius, frostingOuterRadius)}
           </g>
         </svg>
-        <Rating {...this.props} />
       </div>
     )
   }

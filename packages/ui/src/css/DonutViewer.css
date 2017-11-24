@@ -1,0 +1,42 @@
+/**
+ * Donut viewer.
+ * @TODO Rename
+ */
+
+.DonutViewer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.DonutViewer-TransitionGroup {
+  position: relative;
+}
+
+.DonutViewer-item {
+  animation: 6s ease-in-out forwards donutViewerSlideUp;
+  height: 0;
+  padding-bottom: 50%;
+  position: absolute;
+  text-align: center;
+}
+.DonutViewer-item .Donut {
+  margin-top: -50%;
+}
+@media (min-width: 32em) {
+  .DonutViewer-item {
+    width: 50%
+  }
+  .DonutViewer-item-odd {
+    right: 0;
+  }
+}
+
+@keyframes donutViewerSlideUp {
+  from {
+    transform: translateY(10vh);
+  }
+  to {
+    transform: translateY(-30vh);
+  }
+}

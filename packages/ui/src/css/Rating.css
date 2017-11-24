@@ -1,26 +1,24 @@
-.Donut {
-  padding: 1rem;
-}
-.Donut svg {
-  margin: 0 auto 1em;
-  width: 90%;
-}
-.Donut dl {
+/**
+ * Rating.
+ */
+
+.Rating {
+  background: white;
+  color: #779;
   display: flex;
   flex-wrap: wrap;
   margin: 0;
-  padding: 0;
+  padding: 0 1rem 1rem 1rem;
   text-align: left;
 }
-.Donut dt,
-.Donut dd {
+.Rating dt,
+.Rating dd {
   border-top: thin solid #c4c4e6;
   flex-shrink: 0;
   padding-top: .5rem;
   padding-bottom: .5rem;
   width: 50%;
 }
-.Donut dd {
+.Rating dd {
   margin: 0;
 }
-

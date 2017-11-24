@@ -1,9 +1,13 @@
 .Viewer {
   display: flex;
 }
+.Viewer-donut {
+  background: #fff;
+  color: #779;
+}
 
 @media (min-width: 32em) {
-  .Viewer .Donut {
+  .Viewer-donut {
     max-width: 32em;
     width: 50%;
   }
