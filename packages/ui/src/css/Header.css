@@ -1,30 +1,88 @@
 .Header {
   background: #f487a9;
   color: #fff;
-  display: flex;
-  justify-content: space-between;
-}
-.Header h1,
-.Header a {
-  font-size: 125%;
-  padding: .75rem 1rem;
-}
-.Header h1 {
-  float: left;
-  margin: 0;
-  line-height: inherit;
+  text-align: center;
 }
 .Header a {
+  border-bottom: .25em solid transparent;
   color: inherit;
   display: inline-block;
+  font-size: 100%;
+  font-weight: 700;
+  line-height: inherit;
+  margin: 0 .25em;
+  padding: 1.5em .5em 1.25em;
   text-decoration: none;
-  padding: .5em;
 }
+.Header a:active {
+  border-bottom-color: rgba(255, 255, 255 .75);
+}
+.Header a:focus,
+.Header a:hover {
+  border-bottom-color: rgba(255, 255, 255, .5);
+}
+
+@media (min-width: 20em) {
+  .Header a {
+    font-size: 115%;
+  }
+}
+@media (min-width: 32em) {
+  .Header a {
+    font-size: 125%;
+    padding-top: 1.25em;
+    padding-bottom: 1em;
+  }
+}
+
+.Header a.is-active {
+  border-bottom-color: #fff;
+}
+
 .Header ul {
   list-style: none;
-  float: right;
   margin: 0;
+  padding: 0;
 }
 .Header li {
-  display: inline;
+  display: inline-block;
+}
+.Header li:first-child a {
+  margin-left: 0;
+}
+.Header li:last-child a {
+  margin-right: 0;
+}
+
+.Header .Header-button {
+  background: #fff;
+  color: #f487a9;
+  border: .125em solid #fff;
+  border-radius: .25rem;
+  display: inline-block;
+  line-height: 1;
+  margin-left: .5em;
+  padding: .75em .55em;
+}
+@media (min-width: 20em) {
+  .Header .Header-button {
+    margin-left: .75em;
+  }
+}
+@media (min-width: 32em) {
+  .Header .Header-button {
+    padding: .6em .8em .6em .6em;
+  }
+}
+.Header .Header-button:active {
+  border-color: rgba(35, 64, 105, .95);
+}
+.Header .Header-button:focus,
+.Header .Header-button:hover {
+  border-color: rgba(35, 64, 105, .85);
+}
+
+.Header .Header-button.is-active {
+  border-color: #234069;
+  color: #234069;
 }
