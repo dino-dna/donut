@@ -1,17 +1,17 @@
-.Viewer {
+.Create {
   display: flex;
 }
-.Viewer-donut {
+.Create-donut {
   background: #fff;
   color: #779;
 }
 
 @media (min-width: 32em) {
-  .Viewer-donut {
+  .Create-donut {
     max-width: 32em;
     width: 50%;
   }
-  .Viewer .DonutSettings {
+  .Create .DonutAttributeControls {
     flex-grow: 2;
   }
 }

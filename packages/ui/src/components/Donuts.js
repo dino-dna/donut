@@ -16,9 +16,9 @@ class Donuts extends Component {
             {' '}
             <Link
               className='Donuts-link'
-              to='/view'
+              to='/create'
             >
-              the donut “Viewer”
+              the donut “Creator”
             </Link>
             {' '}
             and start making some tasty donuts!

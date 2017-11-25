@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import '../css/DonutSettings.css'
+import PropTypes from 'prop-types'
+import '../css/DonutAttributeControls.css'
 
-class DonutSettings extends Component {
+class DonutAttributeControls extends Component {
   constructor (props) {
     super(props)
     this.handleSave = this.handleSave.bind(this)
@@ -28,9 +29,9 @@ class DonutSettings extends Component {
     } = this.props
 
     return (
-      <form className='DonutSettings'>
+      <form className='DonutAttributeControls'>
         <h2>Make your donut:</h2>
-        <div className='DonutSettings-control'>
+        <div className='DonutAttributeControls-control'>
           <label>Frosting Coverage:</label>
           <input
             onChange={(evt) => onChangeFrostingCoverage(evt.target.value)}
@@ -41,7 +42,7 @@ class DonutSettings extends Component {
             value={DONUT_FROSTING_COVERAGE}
           />
         </div>
-        <div className='DonutSettings-control'>
+        <div className='DonutAttributeControls-control'>
           <label>Frosting Thickness:</label>
           <input
             onChange={(evt) => onChangeFrostingThickness(evt.target.value)}
@@ -52,7 +53,7 @@ class DonutSettings extends Component {
             value={DONUT_FROSTING_THICKNESS}
           />
         </div>
-        <div className='DonutSettings-control'>
+        <div className='DonutAttributeControls-control'>
           <label>Sprinkle Coverage:</label>
           <input
             onChange={(evt) => onChangeSprinkleCoverage(evt.target.value)}
@@ -63,7 +64,7 @@ class DonutSettings extends Component {
             value={DONUT_SPRINKLE_COVERAGE}
           />
         </div>
-        <div className='DonutSettings-control'>
+        <div className='DonutAttributeControls-control'>
           <label>Inner Radius:</label>
           <input
             onChange={(evt) => onChangeInnerRadius(evt.target.value)}
@@ -74,7 +75,7 @@ class DonutSettings extends Component {
             value={DONUT_INNER_RADIUS}
           />
         </div>
-        <div className='DonutSettings-control'>
+        <div className='DonutAttributeControls-control'>
           <label>Outer Radius:</label>
           <input
             onChange={(evt) => onChangeOuterRadius(evt.target.value)}
@@ -92,6 +93,22 @@ class DonutSettings extends Component {
   }
 }
 
-DonutSettings.displayName = 'DonutSettings'
+DonutAttributeControls.displayName = 'DonutAttributeControls'
 
-export default DonutSettings
+DonutAttributeControls.propTypes = {
+  donut: PropTypes.shape({
+    DONUT_FROSTING_COVERAGE: PropTypes.number.isRequired,
+    DONUT_FROSTING_THICKNESS: PropTypes.number.isRequired,
+    DONUT_SPRINKLE_COVERAGE: PropTypes.number.isRequired,
+    DONUT_INNER_RADIUS: PropTypes.number.isRequired,
+    DONUT_OUTER_RADIUS: PropTypes.number.isRequired
+  }).isRequired,
+  onChangeFrostingCoverage: PropTypes.func.isRequired,
+  onChangeFrostingThickness: PropTypes.func.isRequired,
+  onChangeInnerRadius: PropTypes.func.isRequired,
+  onChangeOuterRadius: PropTypes.func.isRequired,
+  onChangeSprinkleCoverage: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired
+}
+
+export default DonutAttributeControls

@@ -7,15 +7,17 @@ import '../css/Header.css'
 
 const Header = ({ isAdmin }) => {
   const links = [
-    ['/', 'Donuts'],
-    ['/view', 'Viewer'],
-    ['/about', 'About']
+    <Link to='/'>Donuts</Link>,
+    <Link to='/about'>About</Link>,
+    <Link className='Header-button' to='/create'>New Donut</Link>
   ]
 
   if (isAdmin) {
-    links.push(
-      ['/admin', 'Admin'],
-      ['/fryer', 'Firehose']
+    links.splice(
+      2,
+      0,
+      <Link to='/admin'>Admin</Link>,
+      <Link to='/fryer'>Firehose</Link>
     )
   }
 
@@ -23,8 +25,8 @@ const Header = ({ isAdmin }) => {
     <header className='Header' role='banner'>
       <h1>Donut</h1>
       <ul>
-        {links.map(([path, name]) => (
-          <li key={path}><Link to={path}>{name}</Link></li>
+        {links.map((link) => (
+          <li key={link.to}>{link}</li>
         ))}
       </ul>
     </header>

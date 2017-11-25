@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './components/App'
 import Donuts from './components/Donuts'
-import Viewer from './components/Viewer'
+import Create from './containers/Create'
 import About from './components/About'
 import Admin from './components/Admin'
 import DeepFryer from './containers/DeepFryer'
@@ -21,7 +21,7 @@ ReactDOM.render(
     <Router history={history}>
       <Route path='/' component={App}>
         <IndexRoute component={Donuts} />
-        <Route path='view' component={Viewer} />
+        <Route path='create' component={Create} />
         <Route path='about' component={About} />
         <Route path='admin' component={Admin} />
         <Route path='fryer' component={DeepFryer} />
