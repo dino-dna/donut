@@ -25,3 +25,10 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/** Badge */
+.App .ConnectionBadge {
+  bottom: .5rem;
+  left: .5rem;
+  position: fixed;
+}

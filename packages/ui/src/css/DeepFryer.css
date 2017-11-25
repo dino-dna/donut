@@ -6,13 +6,6 @@
   display: flex;
 }
 
-/** Badge */
-.DeepFryer-badge {
-  bottom: .5rem;
-  left: .5rem;
-  position: fixed;
-}
-
 /** Errors */
 .DeepFryer-errors {
   padding: .5rem .5rem 0;

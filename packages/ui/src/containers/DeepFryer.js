@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import ConnectionBadge from '../components/ConnectionBadge'
 import DonutPredictionViewer from '../components/DonutPredictionViewer'
 import DonutViewer from '../components/DonutViewer'
 import ErrorAlert from '../components/ErrorAlert'
@@ -10,7 +9,6 @@ import { removeError } from '../state/ducks/fryer'
 import '../css/DeepFryer.css'
 
 const DeepFryer = ({
-  connected,
   donuts,
   errors,
   models,
@@ -35,9 +33,6 @@ const DeepFryer = ({
       {errorsComponent}
       <DonutPredictionViewer models={models} />
       <DonutViewer donuts={donuts} />
-      <div className='DeepFryer-badge'>
-        <ConnectionBadge connected={connected} />
-      </div>
     </div>
   )
 }
@@ -47,7 +42,6 @@ DeepFryer.defaultProps = {
 }
 
 DeepFryer.propTypes = {
-  connected: PropTypes.bool.isRequired,
   donuts: PropTypes.arrayOf(PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({
