@@ -3,6 +3,7 @@
  */
 
 .Donuts {
+  align-items: center;
   display: flex;
   flex-direction: column;
   flex-grow: 2;
@@ -10,19 +11,38 @@
   padding-top: 1rem;
 }
 .Donuts h1 {
-  margin: 0 0 .5rem;
+  margin: 0 0 1.5rem;
 }
 .Donuts h3 {
   margin-top: 0;
 }
 
 .Donuts-link {
+  background: rgba(255, 255, 255, 0.1);
+  border: .125em solid rgba(255, 255, 255, .75);
+  border-radius: .25rem;
   color: inherit;
+  display: inline-block;
+  font-weight: 700;
+  padding: 1em 1.25em;
+  text-decoration: none;
 }
-.Donuts-link:active,
+@media (min-width: 32em) {
+  .Donuts-link {
+    font-size: 125%;
+  }
+}
+
+.Donuts-link:active {
+  background: #fff;
+  border-color: rgba(35, 64, 105, .95);
+  color: #234069;
+}
 .Donuts-link:focus,
 .Donuts-link:hover {
-  opacity: .8;
+  background: #fff;
+  border-color: rgba(35, 64, 105, .85);
+  color: #234069;
 }
 
 /** Empty state: no donuts exist */
@@ -32,6 +52,7 @@
 
 .Donuts-empty span[role=img] {
   font-size: 600%;
+  margin-bottom: 1rem;
 }
 
 /** Populated state: some donuts! */

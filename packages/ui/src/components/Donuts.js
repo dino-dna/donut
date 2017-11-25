@@ -11,24 +11,18 @@ class Donuts extends Component {
       return (
         <div className='Donuts Donuts-empty'>
           <h1>We see that you’re very, very, hungry.</h1>
-          <p>
-            Thanks for stoppin’ in. Head over to
-            {' '}
-            <Link
-              className='Donuts-link'
-              to='/create'
-            >
-              the donut “Creator”
-            </Link>
-            {' '}
-            and start making some tasty donuts!
-          </p>
           <span
             aria-label='Donut'
             role='img'
           >
             🍩
           </span>
+          <Link
+            className='Donuts-link'
+            to='/create'
+          >
+            <span aria-hidden='true'>+</span> New Donuts
+          </Link>
         </div>
       )
     }
