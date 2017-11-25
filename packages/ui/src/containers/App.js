@@ -4,14 +4,12 @@ import { connect } from 'react-redux'
 
 import ConnectionBadge from '../components/ConnectionBadge'
 import Header from '../components/Header'
-import Upload from '../components/Upload'
 import '../css/App.css'
 
 const App = ({ children, connected }) => (
   <div className='App'>
     <Header />
     {children}
-    <Upload />
     <ConnectionBadge connected={connected} />
   </div>
 )

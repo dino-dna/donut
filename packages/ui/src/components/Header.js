@@ -52,7 +52,7 @@ const Header = ({ isAdmin }) => {
     <header className='Header' role='banner'>
       <ul>
         {links.map((link) => (
-          <li key={link.to}>{link}</li>
+          <li key={link.props.to}>{link}</li>
         ))}
       </ul>
     </header>

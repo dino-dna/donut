@@ -3,11 +3,6 @@
  */
 
 .Donuts {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 2;
-  justify-content: center;
   padding-top: 1rem;
 }
 .Donuts h1 {
@@ -15,6 +10,8 @@
 }
 .Donuts h3 {
   margin-top: 0;
+  padding-left: 1rem;
+  text-align: left;
 }
 
 .Donuts-link {
@@ -46,18 +43,20 @@
 }
 
 /** Empty state: no donuts exist */
-.Donuts-empty {
+.Donuts.is-empty {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  flex-wrap: nowrap;
+  justify-content: center;
   height: 100%;
 }
 
-.Donuts-empty span[role=img] {
+.Donuts.is-empty span[role=img] {
+  display: block;
   font-size: 600%;
   margin-bottom: 1rem;
 }
 
-/** Populated state: some donuts! */
-.Donuts-populated h3 {
-  padding-left: 1rem;
-  text-align: left;
-}
 
