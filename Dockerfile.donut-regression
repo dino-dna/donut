@@ -1,6 +1,5 @@
-FROM python:3.6-slim
-RUN pip install -U numpy scipy scikit-learn
+FROM frolvlad/alpine-python-machinelearning
 RUN mkdir -p /app
 COPY packages/regression/src/DonutLearner.py /app/DonutLearner.py
 WORKDIR /app
-CMD ["python", "DonutLearner.py"]
+CMD ["python3", "DonutLearner.py"]
