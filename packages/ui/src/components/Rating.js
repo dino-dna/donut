@@ -22,20 +22,33 @@ export default function Rating (props) {
   } = getIndicatorParams(props)
 
   return (
-    <dl className='Rating'>
-      <dt>Overall:</dt>
-      <dd>{getEmoji(indicator)}</dd>
-
-      <dt>Frosting coverage:</dt>
-      <dd>{getEmoji(frostingCoverage)}</dd>
-
-      <dt>Frosting thickness:</dt>
-      <dd>{getEmoji(frostingThickness)}</dd>
-
-      <dt>Radius:</dt>
-      <dd>{getEmoji(radius)}</dd>
-      <dt>Sprinkles:</dt>
-      <dd>{getEmoji(sprinkleCoverage)}</dd>
-    </dl>
+    <div className='Rating'>
+      <table>
+        <thead>
+          <tr>
+            <th scope='row'>Overall</th>
+            <td>{getEmoji(indicator)}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope='row'>Frosting coverage:</th>
+            <td>{getEmoji(frostingCoverage)}</td>
+          </tr>
+          <tr>
+            <th scope='row'>Frosting thickness:</th>
+            <td>{getEmoji(frostingThickness)}</td>
+          </tr>
+          <tr>
+            <th scope='row'>Radius:</th>
+            <td>{getEmoji(radius)}</td>
+          </tr>
+          <tr>
+            <th scope='row'>Sprinkles:</th>
+            <td>{getEmoji(sprinkleCoverage)}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   )
 }

@@ -1,16 +1,34 @@
 .DonutList {
-  display: flex;
-  flex-wrap: wrap;
   list-style: none;
-  margin: 0;
-  padding: .5em;
-  clear: both;
+  margin: 0 -.5rem;
+  padding: 0;
 }
+
 .DonutList li {
-  width: 50%;
   padding: .5rem;
 }
 .DonutList .Donut {
   background: #fff;
-  color: #779;
+  color: #234069;
+  padding-bottom: .5em;
+}
+
+@media (min-width: 32em) {
+  .DonutList {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .DonutList li {
+    width: 50%;
+  }
+}
+@media (min-width: 40em) {
+  .DonutList li {
+    width: 33.33%;
+  }
+}
+@media (min-width: 48em) {
+  .DonutList li {
+    width: 25%;
+  }
 }
