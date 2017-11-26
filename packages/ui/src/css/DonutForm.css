@@ -1,35 +1,61 @@
-.DonutAttributeControls {
-  text-align: left;
-  padding: 1rem;
+.DonutForm {
+  text-align: center;
 }
 
-.DonutAttributeControls-control {
+.DonutForm h2 {
+  margin: 0 0 1em;
+  text-align: center;
+}
+
+.DonutForm-control {
+  text-align: left;
   margin-bottom: 1.5rem;
 }
-.DonutAttributeControls-control label {
+.DonutForm-control label {
   display: block;
   margin-bottom: .5rem;
+}
+
+.DonutForm-group {
+  position: relative;
+  padding-right: 4em;
+}
+.DonutForm-group .DonutForm-rating {
+  display: block;
+  padding-top: .8em;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 0;
+  width: 4em;
+}
+.DonutForm-group:last-of-type .DonutForm-rating {
+  padding-top: 3em;
+}
+
+.DonutForm-group .DonutForm-rating span[role=img] {
+  font-size: 175%;
 }
 
 /**
  * Override basic `range` styles.
  * {@link https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/}
  */
-.DonutAttributeControls input[type=range] {
+.DonutForm input[type=range] {
   -webkit-appearance: none;
   width: 100%;
   background: transparent;
 }
 
-.DonutAttributeControls input[type=range]::-webkit-slider-thumb {
+.DonutForm input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
 
-.DonutAttributeControls input[type=range]:focus {
+.DonutForm input[type=range]:focus {
   outline: none;
 }
 
-.DonutAttributeControls input[type=range]::-ms-track {
+.DonutForm input[type=range]::-ms-track {
   width: 100%;
   cursor: pointer;
   background: transparent;
@@ -38,7 +64,7 @@
 }
 
 
-.DonutAttributeControls input[type=range]::-webkit-slider-thumb {
+.DonutForm input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 2rem;
   width: 1rem;
@@ -50,7 +76,7 @@
   border: 2px solid #20426a;
 }
 
-.DonutAttributeControls input[type=range]::-moz-range-thumb {
+.DonutForm input[type=range]::-moz-range-thumb {
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   border: 1px solid #000000;
   height: 36px;
@@ -59,7 +85,7 @@
   background: #ffffff;
   cursor: pointer;
 }
-.DonutAttributeControls input[type=range]::-ms-thumb {
+.DonutForm input[type=range]::-ms-thumb {
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   border: 1px solid #000000;
   height: 36px;
@@ -70,7 +96,7 @@
 }
 
 
-.DonutAttributeControls input[type=range]::-webkit-slider-runnable-track {
+.DonutForm input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: .5rem;
   cursor: pointer;
@@ -80,11 +106,11 @@
   border: thin solid #20426a;
 }
 
-.DonutAttributeControls input[type=range]:focus::-webkit-slider-runnable-track {
+.DonutForm input[type=range]:focus::-webkit-slider-runnable-track {
   background: #efcc9a;
 }
 
-.DonutAttributeControls input[type=range]::-moz-range-track {
+.DonutForm input[type=range]::-moz-range-track {
   width: 100%;
   height: 8.4px;
   cursor: pointer;
@@ -94,7 +120,7 @@
   border: 0.2px solid #010101;
 }
 
-.DonutAttributeControls input[type=range]::-ms-track {
+.DonutForm input[type=range]::-ms-track {
   width: 100%;
   height: 8.4px;
   cursor: pointer;
@@ -103,30 +129,31 @@
   border-width: 16px 0;
   color: transparent;
 }
-.DonutAttributeControls input[type=range]::-ms-fill-lower {
+.DonutForm input[type=range]::-ms-fill-lower {
   background: #2a6495;
   border: 0.2px solid #010101;
   border-radius: 2.6px;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
 }
-.DonutAttributeControls input[type=range]:focus::-ms-fill-lower {
+.DonutForm input[type=range]:focus::-ms-fill-lower {
   background: #3071a9;
 }
-.DonutAttributeControls input[type=range]::-ms-fill-upper {
+.DonutForm input[type=range]::-ms-fill-upper {
   background: #3071a9;
   border: 0.2px solid #010101;
   border-radius: 2.6px;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
 }
-.DonutAttributeControls input[type=range]:focus::-ms-fill-upper {
+.DonutForm input[type=range]:focus::-ms-fill-upper {
   background: #367ebd;
 }
 
 
 /** Button */
-.DonutAttributeControls button {
+.DonutForm button {
   background: #fff;
   border: none;
+  border-radius: .25rem;
   color: #f288a9;
   cursor: pointer;
   display: inline-block;
@@ -135,9 +162,9 @@
   line-height: 1.25;
   padding: .75rem 1rem;
 }
-.DonutAttributeControls button:focus,
-.DonutAttributeControls button:hover,
-.DonutAttributeControls button:active {
+.DonutForm button:focus,
+.DonutForm button:hover,
+.DonutForm button:active {
   background: #f288a9;
   color: #fff;
 }

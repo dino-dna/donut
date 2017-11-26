@@ -30,7 +30,11 @@ export default ({ dispatch, getState }) => next => action => {
       dispatch(submitModeError(error.message))
     }
 
-    socket = io('http://localhost:3001')
+    socket = io(
+      process.env.REACT_APP_HOST
+        ? process.env.REACT_APP_HOST
+        : 'http://localhost:3001'
+    )
     socket.on('connect', () => dispatch(connected()))
     socket.on('disconnect', () => dispatch(disconnected()))
     socket.on(messages.INIT_CLIENT, ({ submitMode }) => {

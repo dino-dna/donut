@@ -3,7 +3,7 @@ import { getIndicator, getIndicatorParams } from 'donut-common/src/rater'
 
 import '../css/Rating.css'
 
-function getEmoji (val) {
+export function getEmoji (val) {
   if (val > 0.9) {
     return <span aria-label='good' role='img'>😎</span>
   } else if (val > 0.8) {

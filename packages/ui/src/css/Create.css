@@ -1,9 +1,8 @@
 .Create {
-  display: flex;
+  padding: 0 1rem 3.5rem;
 }
-.Create-donut {
-  background: #fff;
-  color: #779;
+.Create .Donut {
+  padding: 0;
 }
 
 @media (min-width: 32em) {
@@ -11,7 +10,7 @@
     max-width: 32em;
     width: 50%;
   }
-  .Create .DonutAttributeControls {
+  .Create .DonutForm {
     flex-grow: 2;
   }
 }

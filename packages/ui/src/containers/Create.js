@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Donut from '../components/Donut'
-import Rating from '../components/Rating'
-import DonutAttributeControls from '../components/DonutAttributeControls'
+import DonutForm from '../components/DonutForm'
 import '../css/Create.css'
 import {
   DONUT_FROSTING_COVERAGE,
@@ -25,11 +24,8 @@ const Create = ({
   onChangeSprinkleCoverage
 }) => (
   <div className='Create'>
-    <div className='Create-donut'>
-      <Donut {...donut} />
-      <Rating {...donut} />
-    </div>
-    <DonutAttributeControls
+    <Donut {...donut} />
+    <DonutForm
       donut={donut}
       onChangeFrostingCoverage={onChangeFrostingCoverage}
       onChangeFrostingThickness={onChangeFrostingThickness}
