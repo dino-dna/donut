@@ -45,7 +45,6 @@ class DonutForm extends Component {
 
     return (
       <form className='DonutForm'>
-        <h2>Make your donut:</h2>
         <div className='DonutForm-group'>
           <div className='DonutForm-control'>
             <label>Frosting Coverage:</label>
