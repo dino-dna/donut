@@ -7,24 +7,52 @@ import '../css/Header.css'
 
 const Header = ({ isAdmin }) => {
   const links = [
-    ['/', 'Donuts'],
-    ['/view', 'Viewer'],
-    ['/about', 'About']
+    <Link
+      activeClassName='is-active'
+      onlyActiveOnIndex
+      to='/'
+    >
+      Donuts
+    </Link>,
+    <Link
+      activeClassName='is-active'
+      to='/about'
+    >
+      About
+    </Link>,
+    <Link
+      activeClassName='is-active'
+      className='Header-button'
+      to='/create'
+    >
+      <span aria-hidden='true'>+</span> New Donut
+    </Link>
   ]
 
   if (isAdmin) {
-    links.push(
-      ['/admin', 'Admin'],
-      ['/fryer', 'Firehose']
+    links.splice(
+      2,
+      0,
+      <Link
+        activeClassName='is-active'
+        to='/admin'
+      >
+        Admin
+      </Link>,
+      <Link
+        activeClassName='is-active'
+        to='/fryer'
+      >
+        Firehose
+      </Link>
     )
   }
 
   return (
     <header className='Header' role='banner'>
-      <h1>Donut</h1>
       <ul>
-        {links.map(([path, name]) => (
-          <li key={path}><Link to={path}>{name}</Link></li>
+        {links.map((link) => (
+          <li key={link.props.to}>{link}</li>
         ))}
       </ul>
     </header>

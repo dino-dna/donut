@@ -1,20 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { connect } from 'react-redux'
 import '../css/Upload.css'
 
-import { uploadRequest } from '../state/ducks/upload.js'
-
 const Upload = ({
-  donuts,
   errorMessage,
   hasUploaded,
   isOn,
   isLoading,
   uploadRequest
 }) => {
-  const disabled = false // !isOn || isLoading || hasUploaded;
+  const disabled = !isOn || isLoading || hasUploaded
   const containerClassName = classNames('Upload', {
     'Upload-disabled': disabled,
     'Upload-loading': isLoading,
@@ -32,7 +28,7 @@ const Upload = ({
       <button
         className='Upload-Button'
         disabled={disabled}
-        onClick={() => uploadRequest(donuts)}
+        onClick={uploadRequest}
         type='button'
       >
         Upload
@@ -46,7 +42,6 @@ Upload.defaultProps = {
 }
 
 Upload.propTypes = {
-  donuts: PropTypes.arrayOf(PropTypes.object).isRequired,
   errorMessage: PropTypes.string,
   hasUploaded: PropTypes.bool.isRequired,
   isOn: PropTypes.bool.isRequired,
@@ -54,11 +49,4 @@ Upload.propTypes = {
   uploadRequest: PropTypes.func.isRequired
 }
 
-export default connect(
-  ({
-    donuts,
-    submitMode: { isOn },
-    upload
-  }) => ({ ...upload, isOn, donuts }),
-  { uploadRequest }
-)(Upload)
+export default Upload

@@ -1,0 +1,27 @@
+.Create {
+
+}
+@media (max-width: 31.999em) {
+  .Create .Donut {
+    padding: 0;
+  }
+}
+@media (min-width: 32em) {
+  .Create {
+    align-items: center;
+    display: flex;
+    min-height: calc(100vh - 4.56em);
+    flex-wrap: nowrap;
+  }
+  .Create .Donut {
+    height: calc(100vh - 4.56em);
+    width: 66.67%;
+  }
+  .Create .Donut svg {
+    max-height: 100%;
+    max-width: 100%;
+  }
+  .Create .DonutForm {
+    width: 33.33%
+  }
+}

@@ -1,16 +1,8 @@
 import React from 'react'
 import { getIndicator, getIndicatorParams } from 'donut-common/src/rater'
 
+import RatingIndicator from './RatingIndicator'
 import '../css/Rating.css'
-
-function getEmoji (val) {
-  if (val > 0.9) {
-    return <span aria-label='good' role='img'>😎</span>
-  } else if (val > 0.8) {
-    return <span aria-label='okay' role='img'>😐</span>
-  }
-  return <span aria-label='bad' role='img'>😱</span>
-}
 
 export default function Rating (props) {
   const indicator = getIndicator(props)
@@ -22,20 +14,43 @@ export default function Rating (props) {
   } = getIndicatorParams(props)
 
   return (
-    <dl className='Rating'>
-      <dt>Overall:</dt>
-      <dd>{getEmoji(indicator)}</dd>
-
-      <dt>Frosting coverage:</dt>
-      <dd>{getEmoji(frostingCoverage)}</dd>
-
-      <dt>Frosting thickness:</dt>
-      <dd>{getEmoji(frostingThickness)}</dd>
-
-      <dt>Radius:</dt>
-      <dd>{getEmoji(radius)}</dd>
-      <dt>Sprinkles:</dt>
-      <dd>{getEmoji(sprinkleCoverage)}</dd>
-    </dl>
+    <div className='Rating'>
+      <table>
+        <thead>
+          <tr>
+            <th scope='row'>Overall</th>
+            <td>
+              <RatingIndicator rating={indicator} />
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope='row'>Frosting coverage:</th>
+            <td>
+              <RatingIndicator rating={frostingCoverage} />
+            </td>
+          </tr>
+          <tr>
+            <th scope='row'>Frosting thickness:</th>
+            <td>
+              <RatingIndicator rating={frostingThickness} />
+            </td>
+          </tr>
+          <tr>
+            <th scope='row'>Radius:</th>
+            <td>
+              <RatingIndicator rating={radius} />
+            </td>
+          </tr>
+          <tr>
+            <th scope='row'>Sprinkles:</th>
+            <td>
+              <RatingIndicator rating={sprinkleCoverage} />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   )
 }

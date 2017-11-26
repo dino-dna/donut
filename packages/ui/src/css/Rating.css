@@ -4,21 +4,35 @@
 
 .Rating {
   background: white;
-  color: #779;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0 1rem 1rem 1rem;
+  color: #234069;
+  padding: 0 1rem .5rem 1rem;
   text-align: left;
 }
-.Rating dt,
-.Rating dd {
-  border-top: thin solid #c4c4e6;
-  flex-shrink: 0;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
-  width: 50%;
-}
-.Rating dd {
+.Rating table {
+  border-collapse: collapse;
   margin: 0;
+  width: 100%;
+}
+.Rating thead {
+  font-weight: 700;
+}
+.Rating tr {
+  border-top: thin solid #c4c4e6;
+}
+.Rating th,
+.Rating td {
+  padding: .25em 0;
+}
+.Rating th {
+  font-weight: inherit;
+}
+
+@media (min-width: 20em) {
+  .Rating th {
+    width: 70%;
+  }
+  .Rating td {
+    padding-top: .5em;
+    padding-bottom: .5em;
+  }
 }
