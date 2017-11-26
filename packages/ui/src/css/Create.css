@@ -6,11 +6,34 @@
 }
 
 @media (min-width: 32em) {
-  .Create-donut {
-    max-width: 32em;
+  .Create {
+    align-items: center;
+    display: flex;
+    min-height: calc(100vh - 4.56em);
+    padding: 1rem;
+    flex-wrap: nowrap;
+  }
+  .Create .Donut {
     width: 50%;
   }
   .Create .DonutForm {
     flex-grow: 2;
+  }
+}
+@media (min-width: 40em) {
+  .Create .Donut {
+    width: 66.67%;
+  }
+  .Create .DonutForm {
+    width: 33.33%;
+  }
+}
+
+@media (min-width: 48em) {
+  .Create .Donut {
+    width: 75%;
+  }
+  .Create .DonutForm {
+    width: 25%;
   }
 }
