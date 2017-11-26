@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import '../css/DonutForm.css'
 
-import { getEmoji } from './Rating'
+import RatingIndicator from './RatingIndicator'
 import { getIndicatorParams } from 'donut-common/src/rater'
 
 class DonutForm extends Component {
@@ -58,7 +58,7 @@ class DonutForm extends Component {
               value={DONUT_FROSTING_COVERAGE}
             />
           </div>
-          <span className='DonutForm-rating'>{getEmoji(frostingCoverage)}</span>
+          <RatingIndicator rating={frostingCoverage} />
         </div>
         <div className='DonutForm-group'>
           <div className='DonutForm-control'>
@@ -73,7 +73,7 @@ class DonutForm extends Component {
               value={DONUT_FROSTING_THICKNESS}
             />
           </div>
-          <span className='DonutForm-rating'>{getEmoji(frostingThickness)}</span>
+          <RatingIndicator rating={frostingThickness} />
         </div>
         <div className='DonutForm-group'>
           <div className='DonutForm-control'>
@@ -88,7 +88,7 @@ class DonutForm extends Component {
               value={DONUT_SPRINKLE_COVERAGE}
             />
           </div>
-          <span className='DonutForm-rating'>{getEmoji(sprinkleCoverage)}</span>
+          <RatingIndicator rating={sprinkleCoverage} />
         </div>
         <div className='DonutForm-group'>
           <div className='DonutForm-control'>
@@ -115,7 +115,7 @@ class DonutForm extends Component {
               value={DONUT_OUTER_RADIUS}
             />
           </div>
-          <span className='DonutForm-rating'>{getEmoji(radius)}</span>
+          <RatingIndicator rating={radius} />
         </div>
 
         <button onClick={this.handleSave} type='submit'>Save</button>

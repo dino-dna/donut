@@ -19,21 +19,18 @@
 .DonutForm-group .DonutForm-control + .DonutForm-control {
   margin-top: .75em;
 }
-.DonutForm-group .DonutForm-rating {
+.DonutForm-group .RatingIndicator {
   display: block;
-  padding-top: .8em;
+  font-size: 175%;
+  padding-top: .7em;
   position: absolute;
   right: 0;
   text-align: right;
   top: 0;
   width: 4em;
 }
-.DonutForm-group:last-of-type .DonutForm-rating {
-  padding-top: 3em;
-}
-
-.DonutForm-group .DonutForm-rating span[role=img] {
-  font-size: 175%;
+.DonutForm-group:last-of-type .RatingIndicator {
+  padding-top: 1.8em;
 }
 
 /**

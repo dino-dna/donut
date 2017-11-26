@@ -1,16 +1,8 @@
 import React from 'react'
 import { getIndicator, getIndicatorParams } from 'donut-common/src/rater'
 
+import RatingIndicator from './RatingIndicator'
 import '../css/Rating.css'
-
-export function getEmoji (val) {
-  if (val > 0.9) {
-    return <span aria-label='good' role='img'>😎</span>
-  } else if (val > 0.8) {
-    return <span aria-label='okay' role='img'>😐</span>
-  }
-  return <span aria-label='bad' role='img'>😱</span>
-}
 
 export default function Rating (props) {
   const indicator = getIndicator(props)
@@ -27,25 +19,35 @@ export default function Rating (props) {
         <thead>
           <tr>
             <th scope='row'>Overall</th>
-            <td>{getEmoji(indicator)}</td>
+            <td>
+              <RatingIndicator rating={indicator} />
+            </td>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope='row'>Frosting coverage:</th>
-            <td>{getEmoji(frostingCoverage)}</td>
+            <td>
+              <RatingIndicator rating={frostingCoverage} />
+            </td>
           </tr>
           <tr>
             <th scope='row'>Frosting thickness:</th>
-            <td>{getEmoji(frostingThickness)}</td>
+            <td>
+              <RatingIndicator rating={frostingThickness} />
+            </td>
           </tr>
           <tr>
             <th scope='row'>Radius:</th>
-            <td>{getEmoji(radius)}</td>
+            <td>
+              <RatingIndicator rating={radius} />
+            </td>
           </tr>
           <tr>
             <th scope='row'>Sprinkles:</th>
-            <td>{getEmoji(sprinkleCoverage)}</td>
+            <td>
+              <RatingIndicator rating={sprinkleCoverage} />
+            </td>
           </tr>
         </tbody>
       </table>
