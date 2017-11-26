@@ -9,7 +9,9 @@ import '../css/App.css'
 const App = ({ children, connected }) => (
   <div className='App'>
     <Header />
-    {children}
+    <main className='App-main'>
+      {children}
+    </main>
     <ConnectionBadge connected={connected} />
   </div>
 )

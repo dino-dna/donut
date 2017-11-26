@@ -15,6 +15,11 @@
   position: relative;
   padding-right: 3.5rem;
 }
+@media (min-width: 32em) {
+  .DonutForm-group {
+    margin-bottom: 2em;
+  }
+}
 
 .DonutForm-group .DonutForm-control + .DonutForm-control {
   margin-top: .75em;

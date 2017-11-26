@@ -1,11 +1,11 @@
 .DonutList {
   list-style: none;
-  margin: 0 -.5rem;
+  margin: 0 -.5em;
   padding: 0;
 }
 
 .DonutList li {
-  padding: .5rem;
+  padding: .5em;
 }
 .DonutList .Donut {
   background: #fff;
@@ -17,6 +17,11 @@
   .DonutList {
     display: flex;
     flex-wrap: wrap;
+    margin-right: -1em;
+    margin-left: -1em;
+  }
+  .DonutList li {
+    padding: 1em;
   }
   .DonutList li {
     width: 50%;
