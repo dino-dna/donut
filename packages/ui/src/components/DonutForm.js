@@ -47,8 +47,9 @@ class DonutForm extends Component {
       <form className='DonutForm'>
         <div className='DonutForm-group'>
           <div className='DonutForm-control'>
-            <label>Frosting Coverage:</label>
+            <label htmlFor='DonutForm-frostingCoverage'>Frosting Coverage:</label>
             <input
+              id='DonutForm-frostingCoverage'
               onChange={(evt) => onChangeFrostingCoverage(evt.target.value)}
               type='range'
               min='0'
@@ -61,8 +62,9 @@ class DonutForm extends Component {
         </div>
         <div className='DonutForm-group'>
           <div className='DonutForm-control'>
-            <label>Frosting Thickness:</label>
+            <label htmlFor='DonutForm-frostingThickness'>Frosting Thickness:</label>
             <input
+              id='DonutForm-frostingThickness'
               onChange={(evt) => onChangeFrostingThickness(evt.target.value)}
               type='range'
               min='0'
@@ -75,8 +77,9 @@ class DonutForm extends Component {
         </div>
         <div className='DonutForm-group'>
           <div className='DonutForm-control'>
-            <label>Sprinkle Coverage:</label>
+            <label htmlFor='DonutForm-sprinkleCoverage'>Sprinkle Coverage:</label>
             <input
+              id='DonutForm-sprinkleCoverage'
               onChange={(evt) => onChangeSprinkleCoverage(evt.target.value)}
               type='range'
               min='0'
@@ -89,8 +92,9 @@ class DonutForm extends Component {
         </div>
         <div className='DonutForm-group'>
           <div className='DonutForm-control'>
-            <label>Inner Radius:</label>
+            <label htmlFor='DonutForm-innerRadius'>Inner Radius:</label>
             <input
+              id='DonutForm-innerRadius'
               onChange={(evt) => onChangeInnerRadius(evt.target.value)}
               type='range'
               min='0'
@@ -100,8 +104,9 @@ class DonutForm extends Component {
             />
           </div>
           <div className='DonutForm-control'>
-            <label>Outer Radius:</label>
+            <label htmlFor='DonutForm-outerRadius'>Outer Radius:</label>
             <input
+              id='DonutForm-outerRadius'
               onChange={(evt) => onChangeOuterRadius(evt.target.value)}
               type='range'
               min='0'
