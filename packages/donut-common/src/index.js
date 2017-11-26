@@ -4,8 +4,8 @@ var getRandomDonuts = require('./get-random-donuts.js')
 var messages = require('./messages.js')
 
 module.exports = {
-  getRandomDonuts,
-  keys,
-  messages,
-  rater
+  getRandomDonuts: getRandomDonuts,
+  keys: keys,
+  messages: messages,
+  rater: rater
 }
