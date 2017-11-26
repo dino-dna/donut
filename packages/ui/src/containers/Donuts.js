@@ -24,10 +24,7 @@ const Donuts = ({
   })
   const content = hasDonuts
     ? (
-      <div>
-        <h3>Your donuts, your highness…</h3>
-        <DonutList donuts={donuts} />
-      </div>
+      <DonutList donuts={donuts} />
     )
     : (
       <div>
