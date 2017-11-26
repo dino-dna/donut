@@ -12,3 +12,4 @@ build
 yarn.lock
 coverage
 .nyc_output
+package-lock.json

@@ -15,6 +15,7 @@ const port = process.env.PORT || 3001
 const io = socketIo(server, {
   serveClient: false
 })
+io.set('origins', '*:*') // #security.lol
 let submitMode = false
 
 const donutsRunner = debounce(

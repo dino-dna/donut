@@ -1,0 +1,19 @@
+# https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
+FROM node
+
+# https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md#handling-kernel-signals
+# https://github.com/krallin/tini#using-tini
+ENV TINI_VERSION v0.16.1
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+ENTRYPOINT ["/tini", "--"]
+
+RUN mkdir /donut
+ENV NODE_ENV=production
+ENV DEBUG=donut*
+# RUN npm install # mono-repo has no way to link private packages into build dist,
+# so we use the host system's node_modules & src
+COPY . /donut
+WORKDIR /donut/packages/donut-monster
+EXPOSE 3001
+CMD ["npm", "start"]

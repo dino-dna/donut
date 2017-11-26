@@ -1,6 +1,6 @@
 # donut :doughnut:
 
-donut is a utility to create totally rad doughnuts!
+donut is a utility to create totally rad ~doughnuts~ donuts!
 
 ## usage
 

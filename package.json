@@ -6,9 +6,12 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "clean": "lerna clean --yes",
+    "build:donut-monster": "docker build . -f Dockerfile.donut-monster -t cdaringe/donut-monster",
+    "build:donut-regression": "docker build . -f Dockerfile.donut-regression -t cdaringe/donut-regression",
     "lint": "standard",
     "postinstall": "lerna bootstrap",
     "precommit": "npm run lint && npm run test",
+    "publish:donut-monster": "docker push cdaringe/donut-monster",
     "test": "lerna run test"
   },
   "repository": {
@@ -25,7 +28,9 @@
     "cdaringe",
     "swashcap"
   ],
-  "devDependencies": {},
+  "devDependencies": {
+    "npm-run-all": "^4.1.2"
+  },
   "dependencies": {
     "husky": "^0.14.3",
     "lerna": "^2.5.1",

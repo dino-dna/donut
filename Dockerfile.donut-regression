@@ -1,6 +1,6 @@
-FROM python:3.6.2
+FROM python:3.6-slim
 RUN pip install -U numpy scipy scikit-learn
 RUN mkdir -p /app
-COPY src/DonutLearner.py /app/DonutLearner.py
+COPY packages/regression/src/DonutLearner.py /app/DonutLearner.py
 WORKDIR /app
 CMD ["python", "DonutLearner.py"]

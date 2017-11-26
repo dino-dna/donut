@@ -30,7 +30,7 @@ async function regression (donuts, image) {
   }
   const child = execa(
     'docker',
-    [ 'run', '-i', '--rm', image || 'donut-regression' ]
+    [ 'run', '-i', '--rm', image || 'cdaringe/donut-regression' ]
   )
   child.stdin.write(
     JSON.stringify({
