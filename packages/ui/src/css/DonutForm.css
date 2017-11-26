@@ -8,6 +8,7 @@
 .DonutForm-control label {
   display: block;
   padding-bottom: .25em;
+  user-select: none;
 }
 
 .DonutForm-group {
