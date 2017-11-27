@@ -30,3 +30,16 @@
   line-height: 1;
   padding: .1rem .3rem;
 }
+
+@media (min-width: 32em) {
+  .DonutPredictionViewer .Donut,
+  .DonutPredictionViewer h1 {
+    text-align: center;
+  }
+  .DonutPredictionViewer-panes {
+    display: flex;
+  }
+  .DonutPredictionViewer-pane {
+    width: 50%;
+  }
+}
