@@ -133,7 +133,7 @@ export default class Donut extends Component {
 
     const innerRadius = DONUT_INNER_RADIUS * 50
     // Subtract strokeWidth to avoid SVG viewbox cropping
-    const outerRadius = DONUT_OUTER_RADIUS * 50 - 2
+    const outerRadius = DONUT_OUTER_RADIUS * (50 - 2)
     const frostRadius = (outerRadius + innerRadius) / 2
     const frostStrokeWidth = (outerRadius - innerRadius) * DONUT_FROSTING_COVERAGE
     const frostingInnerRadius = frostRadius - frostStrokeWidth / 2

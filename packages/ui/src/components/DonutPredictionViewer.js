@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import round from 'lodash/round'
 
 import Donut from './Donut'
-import Rating from './Rating'
+import RatingWithScores from './RatingWithScores'
 import '../css/DonutPredictionViewer.css'
 
 const DonutPredictionViewer = ({ models }) => {
@@ -13,7 +12,7 @@ const DonutPredictionViewer = ({ models }) => {
     const {
       ridge_regression_with_sim_ann: {
         donut,
-        score
+        score: error
       }
     } = models
 
@@ -21,15 +20,7 @@ const DonutPredictionViewer = ({ models }) => {
       <div>
         <h1>Ridge regression</h1>
         <Donut {...donut} />
-        <Rating {...donut} />
-        <ul>
-          <li>Frosting coverage: <code>{round(donut.DONUT_FROSTING_COVERAGE, 4)}</code></li>
-          <li>Frosting thickness: <code>{round(donut.DONUT_FROSTING_THICKNESS, 4)}</code></li>
-          <li>Inner radius: <code>{round(donut.DONUT_INNER_RADIUS, 4)}</code></li>
-          <li>Outer radius: <code>{round(donut.DONUT_OUTER_RADIUS, 4)}</code></li>
-          <li>Sprinkle coverage: <code>{round(donut.DONUT_SPRINKLE_COVERAGE, 4)}</code></li>
-          <li>Score: <code>${score}</code></li>
-        </ul>
+        <RatingWithScores error={error} {...donut} />
       </div>
     )
   } else {

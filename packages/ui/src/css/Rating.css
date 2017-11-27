@@ -13,7 +13,8 @@
   margin: 0;
   width: 100%;
 }
-.Rating thead {
+.Rating thead,
+.Rating tfoot {
   font-weight: 700;
 }
 .Rating tr {
@@ -28,11 +29,23 @@
 }
 
 @media (min-width: 20em) {
-  .Rating th {
+  .Rating tbody th {
     width: 70%;
   }
-  .Rating td {
+  .Rating td,
+  .Rating th {
     padding-top: .5em;
     padding-bottom: .5em;
+  }
+}
+
+/** TODO: Move styles to separate file */
+.RatingWithScores tr > *:last-child {
+  text-align: center;
+}
+
+@media (min-width: 20em) {
+  .Rating.RatingWithScores tbody th {
+    width: auto;
   }
 }
