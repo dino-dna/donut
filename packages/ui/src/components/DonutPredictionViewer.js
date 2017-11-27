@@ -10,17 +10,22 @@ const DonutPredictionViewer = ({ models }) => {
 
   if (models) {
     const {
-      ridge_regression_with_sim_ann: {
-        donut,
-        score
-      }
+      knn,
+      ridge_regression_with_sim_ann: ridgeRegression
     } = models
 
     content = (
-      <div>
-        <h1>Ridge regression</h1>
-        <Donut {...donut} />
-        <RatingWithScores score={score} {...donut} />
+      <div className='DonutPredictionViewer-panes'>
+        <div className='DonutPredictionViewer-pane'>
+          <h1>Ridge regression</h1>
+          <Donut {...ridgeRegression.donut} />
+          <RatingWithScores score={ridgeRegression.score} {...ridgeRegression.donut} />
+        </div>
+        <div className='DonutPredictionViewer-pane'>
+          <h1>KNN</h1>
+          <Donut {...knn.donut} />
+          <RatingWithScores score={knn.score} {...knn.donut} />
+        </div>
       </div>
     )
   } else {
@@ -36,6 +41,16 @@ const DonutPredictionViewer = ({ models }) => {
 
 DonutPredictionViewer.propTypes = {
   models: PropTypes.shape({
+    knn: PropTypes.shape({
+      donut: PropTypes.shape({
+        DONUT_FROSTING_COVERAGE: PropTypes.number.isRequired,
+        DONUT_FROSTING_THICKNESS: PropTypes.number.isRequired,
+        DONUT_INNER_RADIUS: PropTypes.number.isRequired,
+        DONUT_OUTER_RADIUS: PropTypes.number.isRequired,
+        DONUT_SPRINKLE_COVERAGE: PropTypes.number.isRequired
+      }).isRequired,
+      score: PropTypes.number.isRequired
+    }).isRequired,
     ridge_regression_with_sim_ann: PropTypes.shape({
       donut: PropTypes.shape({
         DONUT_FROSTING_COVERAGE: PropTypes.number.isRequired,
