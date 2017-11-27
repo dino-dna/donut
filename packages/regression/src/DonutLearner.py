@@ -1,16 +1,32 @@
 import json
 import os
 import sys
+import numpy as np
 from scipy.optimize import differential_evolution
 from sklearn import linear_model
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
+from sklearn.neighbors import KNeighborsRegressor
 
 
 def log(msg):
-  sys.stderr.write(f'donut:py_regression: {msg}\n')
+  if os.getenv('DEBUG') is not None:
+    sys.stderr.write(f'donut:py_regression: {msg}\n')
 
 class DonutLearner:
+
+  @staticmethod
+  def knn(X, Y):
+    neigh = KNeighborsRegressor()
+    neigh.fit(X, Y)
+    def explore(x):
+      score = -1 * neigh.predict([x])
+      return score
+    minimized = differential_evolution(explore, ((0, 1), (0, 1), (0, 1), (0, 1), (0, 1)))
+    return {
+      'X_min': list(minimized.x),
+      'score': neigh.score(X, Y)
+    }
 
   @staticmethod
   def ridge_regression_with_sim_ann(X, Y):

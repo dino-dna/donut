@@ -6,13 +6,15 @@ const Docker = require('dockerode')
 const concat = require('concat-stream')
 const bluebird = require('bluebird')
 const docker = new Docker()
+const IMAGE = 'cdaringe/donut-regression:latest'
 
 /**
  * Runs a donut regression
  * @param {Donut[]} donuts
+ * @param {string[]} [learners=['knn', 'ridge_regression_with_sim_ann']]
  * @returns {Promise} resolves to regression coefficients
  */
-async function regression (donuts) {
+async function regression (donuts, learners, dockerOpts) {
   var Xm = {}
   for (var i in keys) {
     Xm[keys[i]] = []
@@ -33,7 +35,7 @@ async function regression (donuts) {
   const serializedInput = JSON.stringify({
     X: Xn,
     Y,
-    learners: ['ridge_regression_with_sim_ann']
+    learners: learners || ['knn', 'ridge_regression_with_sim_ann']
   })
   let res
 
@@ -42,9 +44,11 @@ async function regression (donuts) {
     res = `${stdoutString}`
   }
 
-  debug('building regression container')
-  docker.createContainer({
-    Image: 'cdaringe/donut-regression',
+  // debug(`pulling image ${IMAGE}`)
+  // await docker.pull(IMAGE)
+  debug(`building regression container: ${IMAGE}`)
+  const learnerOpts = Object.assign({
+    Image: IMAGE,
     CapDrop: ['ALL'],
     AttachStdin: true,
     Privileged: false,
@@ -54,7 +58,8 @@ async function regression (donuts) {
     Env: [
       `DEBUG=${process.env.DEBUG}`
     ]
-  }, function (err, container) {
+  }, dockerOpts || {})
+  docker.createContainer(learnerOpts, function (err, container) {
     if (err) throw err
     container.attach({ hijack: true, stream: true, stdin: true, stdout: true, stderr: true }, function (err, stream) {
       if (err) throw err

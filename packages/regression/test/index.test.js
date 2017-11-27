@@ -7,15 +7,33 @@ var isNumber = require('lodash/isNumber')
 var regression = require('../')
 var { rater, keys } = require('donut-common')
 
-ava('donut regression', async t => {
+ava.only('DEBUG', async t => {
   var donnies = require('./fixture/donuts.json')
   donnies = donnies.X.map((rawnut, i) => {
-    var nut = zipObject(values(keys), rawnut) // generateDonnies(300)
+    var nut = zipObject(values(keys), rawnut)
     nut.DONUT_RATING = donnies.Y[i]
     return nut
   })
-  var numDonuts = 5000
-  var { ridge_regression_with_sim_ann: { X_min, donut, score } } = await regression(donnies.slice(0, numDonuts))
+  var i = 0
+  process.env.DEBUG = false
+  while (i < 10) {
+    var numDonnies = 20 * (i + 1)
+    var { knn: { X_min, donut, score } } = await regression(donnies.slice(0, numDonnies), ['knn'], { Env: [] })
+    var rating = rater.getIndicator(donut)
+    console.log(`rating: ${rating}, model-score: ${score}, indicies: ${X_min.join(', ')}`)
+    ++i
+  }
+  t.pass('yahtzee')
+})
+
+ava('donut regression', async t => {
+  var donnies = require('./fixture/donuts.json')
+  donnies = donnies.X.map((rawnut, i) => {
+    var nut = zipObject(values(keys), rawnut)
+    nut.DONUT_RATING = donnies.Y[i]
+    return nut
+  })
+  var { knn: { X_min, donut, score } } = await regression(donnies)
   t.truthy(isNumber(score), 'reports numeric score')
   t.truthy(Array.isArray(X_min), 'provides a set of optimal inputs')
   t.truthy(donut, 'result has donut')

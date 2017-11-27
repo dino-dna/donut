@@ -5,6 +5,8 @@ var shuffle = require('lodash/shuffle')
 var { rater, keys } = require('donut-common')
 var debug = require('debug')('donut:regression:test')
 
+console.log(keys)
+
 function generateDonut () {
   const donut = keys.reduce((nut, key) => {
     const value = Math.random()
@@ -21,14 +23,14 @@ function generateDonnies (numDonnies) {
   while (percentGoodDonnies < 0.2) {
     donnies.shift()
     var newDonut = generateDonut()
-    while (rater.getIndicator(newDonut) < 0.8) {
+    while (rater.getIndicator(newDonut) < 0.9) {
       newDonut = generateDonut()
     }
     donnies.push(newDonut)
     var numScoring80Plus = donnies.reduce(
       (agg, donut) => {
         var score = rater.getIndicator(donut)
-        if (score >= 0.8) ++agg
+        if (score >= 0.9) ++agg
         return agg
       },
       0
@@ -44,7 +46,7 @@ module.exports = generateDonnies
 /**
  * run DEBUG=donut* node generate.js <num-donuts>
  * to build a json file w/ <num-donuts> random donuts in it.
- * at least 20% of donuts will have a rating of > 0.8.
+ * at least 20% of donuts will have a rating of > 0.9.
  */
 if (!module.parent) {
   var donnies = generateDonnies(parseInt(process.argv[2], 10) || 5000)

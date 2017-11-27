@@ -14,6 +14,8 @@ ENV DEBUG=donut*
 # RUN npm install # mono-repo has no way to link private packages into build dist,
 # so we use the host system's node_modules & src
 COPY . /donut
+WORKDIR /donut
+RUN npx lerna bootstrap
 WORKDIR /donut/packages/donut-monster
 EXPOSE 3001
 CMD ["npm", "start"]
