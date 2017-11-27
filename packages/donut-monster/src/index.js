@@ -25,6 +25,7 @@ const donutsRunner = async function () {
   }
 
   const donutsCount = donuts.size
+  if (donutsCount < 5) return
 
   debug('Running regression with %d donuts', donutsCount)
   isMakingRegression = true

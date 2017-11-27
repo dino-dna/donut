@@ -103,6 +103,15 @@ controls: true
 - we send back down our best guess to the UI
 
 ---
+
+# bloopers
+
+- open VLC, dawg.
+ - `open img/bloopers`
+- bulk select and open w/
+
+---
+
 ### plugs
 
 - **math**.
@@ -110,6 +119,13 @@ controls: true
   - it's like a real simple stupid revealjs
 - [scikit learn](http://scikit-learn.org/stable/index.html)
 - [docker](http://docker.com), obviously.  such great.
+
+---
+
+### anti-plugs, kinda
+
+- **dockerode**
+  - great, but tricky!
 
 ---
 ### questions?
