@@ -6,6 +6,8 @@ import {
   submitModeReceive
 } from '../state/ducks/submitMode'
 
+import { DISABLE_SPRAY, ENABLE_SPRAY, setSpray } from '../state/ducks/admin'
+
 import {
   UPLOAD_REQUEST,
   uploadSuccess
@@ -37,10 +39,14 @@ export default ({ dispatch, getState }) => next => action => {
     )
     socket.on('connect', () => dispatch(connected()))
     socket.on('disconnect', () => dispatch(disconnected()))
-    socket.on(messages.INIT_CLIENT, ({ submitMode }) => {
+    socket.on(messages.INIT_CLIENT, ({ isSpray, submitMode }) => {
+      dispatch(setSpray(isSpray))
       dispatch(submitModeReceive(submitMode))
     })
     socket.on('error', handleError)
+    socket.on(messages.DONUT_FIREHOSE_SPRAY, ({ isSpray }) => {
+      dispatch(setSpray(isSpray))
+    })
     socket.on(messages.SUBMIT_MODE, (newMode) => {
       dispatch(submitModeReceive(newMode))
     })
@@ -67,6 +73,10 @@ export default ({ dispatch, getState }) => next => action => {
       messages.UPLOAD_DONUTS,
       action.payload
     )
+  } else if (action.type === ENABLE_SPRAY) {
+    socket.emit(messages.DONUT_FIREHOSE_SPRAY_ON)
+  } else if (action.type === DISABLE_SPRAY) {
+    socket.emit(messages.DONUT_FIREHOSE_SPRAY_OFF)
   }
 
   return next(action)

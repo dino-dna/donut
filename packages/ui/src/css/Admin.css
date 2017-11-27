@@ -87,6 +87,7 @@
   font-size: 200%;
   font-weight: 700;
   height: 10em;
+  margin: 0 0 1rem;
   padding: 0;
   transition-duration: 80ms;
   transition-property: background, box-shadow, text-shadow, transform;
@@ -125,4 +126,19 @@
 }
 .Admin-button-off {
 
+}
+
+/** Spray button */
+.Admin-spray {
+  background: orangered;
+  border: none;
+  border-radius: .25rem;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: 700;
+  line-height: inherit;
+  padding: 1em;
 }

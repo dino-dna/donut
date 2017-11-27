@@ -1,6 +1,6 @@
 'use strict'
 
-const { messages, rater } = require('donut-common')
+const { getRandomDonuts, messages, rater } = require('donut-common')
 const regression = require('donut-regression')
 const http = require('http')
 const socketIo = require('socket.io')
@@ -16,6 +16,7 @@ const io = socketIo(server, {
   serveClient: false
 })
 io.set('origins', '*:*') // #security.lol
+let spray
 let submitMode = false
 
 const donutsRunner = debounce(
@@ -37,10 +38,26 @@ const donutsRunner = debounce(
   }
 )
 
+const addDonutsToStore = (newDonuts) => {
+  // TODO: validate, check for pre-existing donuts
+  const toEnter = newDonuts.map(donut => ([uuidv4(), donut]))
+
+  for (const [id, donut] of toEnter) {
+    donuts.set(id, donut)
+  }
+
+  io.emit(messages.DONUT_FIREHOSE, toEnter)
+
+  donutsRunner() // Re-compute regression on every addition
+
+  return toEnter
+}
+
 io.on('connection', (socket) => {
   debug('Client connected %s', socket.id)
 
   socket.emit(messages.INIT_CLIENT, {
+    isSpray: !!spray,
     submitMode
   })
   socket.on(messages.UPLOAD_DONUTS, (newDonuts) => {
@@ -50,15 +67,8 @@ io.on('connection', (socket) => {
     }
 
     // TODO: validate, check for pre-existing donuts
-    const toEnter = newDonuts.map(donut => ([uuidv4(), donut]))
+    const toEnter = addDonutsToStore(newDonuts)
 
-    for (const [id, donut] of toEnter) {
-      donuts.set(id, donut)
-    }
-
-    donutsRunner()
-
-    io.emit(messages.DONUT_FIREHOSE, toEnter)
     socket.emit(messages.UPLOAD_DONUTS, toEnter)
   })
   socket.on(messages.SUBMIT_MODE, (newMode) => {
@@ -69,6 +79,35 @@ io.on('connection', (socket) => {
   })
   socket.on('disconnect', (reason) => {
     debug('Client %s disconnected: %s', socket.id, reason)
+  })
+  socket.on(messages.DONUT_FIREHOSE_SPRAY_ON, () => {
+    if (submitMode) {
+      debug('Beginning firehose spray')
+      io.emit(messages.DONUT_FIREHOSE_SPRAY, { isSpray: true })
+      spray = setInterval(() => {
+        const donutCount = 10
+        let newDonuts = []
+
+        // Generate 20% good donuts
+        while (newDonuts.length < Math.floor(donutCount * 0.2)) {
+          const donut = getRandomDonuts(1)[0]
+          if (donut.DONUT_RATING > 0.9) {
+            newDonuts.push(donut)
+          }
+        }
+
+        // Backfill with 80% random donuts
+        newDonuts = newDonuts.concat(getRandomDonuts(Math.floor(donutCount * 0.8)))
+
+        addDonutsToStore(newDonuts)
+      }, 1000)
+    }
+  })
+  socket.on(messages.DONUT_FIREHOSE_SPRAY_OFF, () => {
+    debug('Stopping firehose spray')
+    io.emit(messages.DONUT_FIREHOSE_SPRAY, { isSpray: false })
+    clearInterval(spray)
+    spray = undefined
   })
 })
 if (!module.parent) {

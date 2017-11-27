@@ -13,5 +13,13 @@ module.exports = {
 
   // Client-emitted setting of 'submit mode'
   // Server-emitted value of 'submit mode' when changed
-  SUBMIT_MODE: 'SUBMIT_MODE'
+  SUBMIT_MODE: 'SUBMIT_MODE',
+
+  DONUT_FIREHOSE_SPRAY: 'DONUT_FIREHOSE_SPRAY',
+
+  // Start spraying random donuts
+  DONUT_FIREHOSE_SPRAY_ON: 'DONUT_FIREHOSE_SPRAY_ON',
+
+  // Stop the spray
+  DONUT_FIREHOSE_SPRAY_OFF: 'DONUT_FIREHOSE_SPRAY_OFF'
 }
