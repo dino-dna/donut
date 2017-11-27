@@ -11,6 +11,7 @@
     "lint": "standard",
     "postinstall": "lerna bootstrap",
     "precommit": "npm run lint && npm run test",
+    "present": "cleaver watch index.md",
     "publish:donut-monster": "docker push cdaringe/donut-monster",
     "test": "lerna run test"
   },
@@ -29,7 +30,8 @@
     "swashcap"
   ],
   "devDependencies": {
-    "npm-run-all": "^4.1.2"
+    "npm-run-all": "^4.1.2",
+    "cleaver": "^0.8.5"
   },
   "dependencies": {
     "husky": "^0.14.3",
