@@ -76,6 +76,11 @@ async function regression (donuts, learners, dockerOpts) {
         await container.wait()
         bluebird.delay(50)
         concatter.end()
+        try {
+          await container.remove()
+        } catch (err) {
+          // pass
+        }
       })
     })
   })

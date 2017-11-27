@@ -31,10 +31,13 @@ controls: true
 - 👋🏻 chris, genreal guy
 
 ---
-### what?
+## ready-check!
 
-- were here to show you... how to make a donut, _and_
-- share some tinkering with DonutLearning™
+- bloopers, queued
+- donut-monster, growling
+- hacks, hacking
+- stories, telling
+- jerks, crushed (i.e. little server worker buddies)
 
 ---
 ### why?
@@ -63,11 +66,18 @@ controls: true
 - built a distributed Machine Learning system
 
 ---
-### why donuts
+### what?
 
 - we wanted to show it off!
 - they researched "what factors contribute to Schizophrenia?"
 - we researched "what factors make donuts most delicious?"
+
+---
+
+### why donuts
+
+- were here to show you... how to make a donut, _and_
+- share some tinkering with DonutLearning™
 
 ---
 ### but we left
@@ -82,17 +92,20 @@ controls: true
 - <code>CODE!</code>
 
 ---
+### lets make donuts!
+
+<a id="open-donuts" href="https://donuts.cdaringe.com">donuts.cdaringe.com</a>
+- keep it open!
+
+---
+
 ### what makes a donut delicious?
 
 <img src="./img/regression-1.gif" class='reg-1' />
 
 ---
-### lets make donuts!
-
-<a id="open-donuts" href="https://donuts.cdaringe.com">donuts.cdaringe.com</a>
-
+### DonutLearn™ Time
 ---
-
 ### what's happening here?
 
 - you send us donuts
@@ -103,7 +116,6 @@ controls: true
 - we send back down our best guess to the UI
 
 ---
-
 # bloopers
 
 - open VLC, dawg.
@@ -119,6 +131,8 @@ controls: true
   - it's like a real simple stupid revealjs
 - [scikit learn](http://scikit-learn.org/stable/index.html)
 - [docker](http://docker.com), obviously.  such great.
+- [coinstac](https://github.com/MRN-Code/coinstac/)
+- `create-react-app`!
 
 ---
 
