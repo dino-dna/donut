@@ -8,10 +8,6 @@
 .Donuts h1 {
   margin: 0 0 1.5rem;
 }
-.Donuts h3 {
-  margin: 0 0 1rem;
-  text-align: left;
-}
 
 .Donuts-link {
   background: rgba(255, 255, 255, 0.1);
@@ -52,9 +48,8 @@
   height: 100%;
 }
 
-.Donuts.is-empty span[role=img] {
+.Donuts.is-empty a:first-of-type {
   display: block;
-  font-size: 600%;
   margin-bottom: 1rem;
 }
 

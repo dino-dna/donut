@@ -2,12 +2,33 @@ import React from 'react'
 import { number } from 'prop-types'
 
 const RatingIndicator = ({ rating }) => {
-  if (rating > 0.9) {
-    return <span aria-label='good' className='RatingIndicator' role='img'>😎</span>
-  } else if (rating > 0.8) {
-    return <span aria-label='okay' className='RatingIndicator' role='img'>😐</span>
+  let emoji
+  let label
+
+  if (rating > 6 / 7) {
+    emoji = '😎'
+    label = 'great'
+  } else if (rating > 5 / 7) {
+    emoji = '🙂'
+    label = 'good'
+  } else if (rating > 4 / 7) {
+    emoji = '😐'
+    label = 'still acceptable'
+  } else if (rating > 3 / 7) {
+    emoji = '😕'
+    label = 'so-so'
+  } else if (rating > 2 / 7) {
+    emoji = '😧'
+    label = 'bad'
+  } else if (rating > 1 / 7) {
+    emoji = '😱'
+    label = 'awful'
+  } else {
+    emoji = '😵'
+    label = 'the worst'
   }
-  return <span aria-label='bad' className='RatingIndicator' role='img'>😱</span>
+
+  return <span aria-label={label} className='RatingIndicator' role='img'>{emoji}</span>
 }
 
 RatingIndicator.propTypes = {

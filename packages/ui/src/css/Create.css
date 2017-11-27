@@ -1,5 +1,5 @@
 .Create {
-
+  padding-bottom: 3.5em;
 }
 @media (max-width: 31.999em) {
   .Create .Donut {
@@ -12,6 +12,7 @@
     display: flex;
     min-height: calc(100vh - 4.56em);
     flex-wrap: nowrap;
+    padding-bottom: 0;
   }
   .Create .Donut {
     height: calc(100vh - 4.56em);

@@ -24,20 +24,19 @@ const Donuts = ({
   })
   const content = hasDonuts
     ? (
-      <div>
-        <h3>Your donuts, your highness…</h3>
-        <DonutList donuts={donuts} />
-      </div>
+      <DonutList donuts={donuts} />
     )
     : (
       <div>
         <h1>We see that you’re very, very, hungry.</h1>
-        <span
-          aria-label='Donut'
-          role='img'
-        >
-          🍩
-        </span>
+        <a href='https://giphy.com/gifs/pixel-art-donut-bd4td7PlhYY9i'>
+          <img
+            alt='A dancing pixel art donut'
+            height='128'
+            src='https://media.giphy.com/media/bd4td7PlhYY9i/giphy.gif'
+            width='128'
+          />
+        </a>
         <Link
           className='Donuts-link'
           to='/create'

@@ -1,5 +1,5 @@
 import io from 'socket.io-client/dist/socket.io.slim.js'
-import { messages } from 'donut-common'
+import messages from 'donut-common/src/messages'
 import {
   SUBMIT_MODE_REQUEST,
   submitModeError,
