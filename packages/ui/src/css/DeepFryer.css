@@ -16,7 +16,7 @@
 
 /** Prediction */
 .DeepFryer .DonutPredictionViewer {
-  height: calc(100vh - 2.75rem);
+  min-height: calc(100vh - 2.75rem);
   width: 50%;
 }
 
