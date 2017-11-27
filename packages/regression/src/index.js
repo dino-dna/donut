@@ -55,6 +55,9 @@ async function regression (donuts, learners, dockerOpts) {
     Tty: false,
     OpenStdin: true,
     StdinOnce: true,
+    HostConfig: {
+      AutoRemove: true
+    },
     Env: [
       `DEBUG=${process.env.DEBUG}`
     ]
