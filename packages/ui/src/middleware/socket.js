@@ -64,10 +64,12 @@ export default ({ dispatch, getState }) => next => action => {
   }
 
   if (action.type === SUBMIT_MODE_REQUEST) {
-    socket.emit(
-      messages.SUBMIT_MODE,
-      action.payload
-    )
+    setTimeout(() => {
+      socket.emit(
+        messages.SUBMIT_MODE,
+        action.payload
+      )
+    }, 3000)
   } else if (action.type === UPLOAD_REQUEST) {
     socket.emit(
       messages.UPLOAD_DONUTS,
