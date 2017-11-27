@@ -12,7 +12,7 @@ const DonutPredictionViewer = ({ models }) => {
     const {
       ridge_regression_with_sim_ann: {
         donut,
-        score: error
+        score
       }
     } = models
 
@@ -20,7 +20,7 @@ const DonutPredictionViewer = ({ models }) => {
       <div>
         <h1>Ridge regression</h1>
         <Donut {...donut} />
-        <RatingWithScores error={error} {...donut} />
+        <RatingWithScores score={score} {...donut} />
       </div>
     )
   } else {
