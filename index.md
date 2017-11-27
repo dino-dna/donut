@@ -89,7 +89,7 @@ controls: true
 ---
 ### lets make donuts!
 
-<a id="open-donuts" href="https://donuts.cdaringe.com">donuts.cdaringe.com</a>
+<a id="open-donuts" href="https://dino-dna.github.io/donut/#/">dino-dna.github.io/donut/</a>
 
 ---
 
