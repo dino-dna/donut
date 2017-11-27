@@ -1,22 +1,9 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import Donut from './Donut'
+// import Donut from './Donut'
 
 const outerRadius = 40
 const innerRadius = 10
-
-{/* <circle
-cx={50}
-cy={50}
-fill='transparent'
-opacity={DONUT_FROSTING_THICKNESS}
-r={frostRadius}
-stroke='#f288a9'
-strokeWidth={frostStrokeWidth} /> */}
-
-{/* <g transform='translate(50, 50)'>
-{this.renderSprinkles(frostingInnerRadius, frostingOuterRadius)}
-</g> */}
 
 export default storiesOf('Donut', module)
 .add('basic', () => {

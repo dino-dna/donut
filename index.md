@@ -38,6 +38,7 @@ controls: true
 - hacks, hacking
 - stories, telling
 - jerks, crushed (i.e. little server worker buddies)
+- comp auds, silenced
 
 ---
 ### why?

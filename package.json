@@ -13,7 +13,8 @@
     "precommit": "npm run lint && npm run test",
     "present": "cleaver watch index.md",
     "publish:donut-monster": "docker push cdaringe/donut-monster",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "deploy": "echo 'dont judge me' && npm run build:donut-regression && npm run build:donut-monster && docker push cdaringe/donut-regression && docker push cdaringe/donut-monster"
   },
   "repository": {
     "type": "git",
