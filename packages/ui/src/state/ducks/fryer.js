@@ -1,5 +1,6 @@
 // TODO: Move state to somewhere more appropriate
 import mapValues from 'lodash/mapValues'
+import { getIndicator } from 'donut-common/src/rater'
 
 export const FRYER_CONNECTED = 'FRYER_CONNECTED'
 
@@ -84,7 +85,7 @@ export default function reducer (state = initialState, { payload, type }) {
           const oldModel = state.models && state.models[name]
 
           // Only use a model if it's better than its previous iteration
-          return !oldModel || model.score > oldModel.score
+          return !oldModel || (getIndicator(model.donut) > getIndicator(oldModel.donut))
             ? model
             : oldModel
         })
