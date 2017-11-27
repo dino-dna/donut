@@ -5,7 +5,6 @@ const regression = require('donut-regression')
 const http = require('http')
 const socketIo = require('socket.io')
 const uuidv4 = require('uuid/v4')
-const debounce = require('lodash/debounce')
 const debug = require('debug')('donut:monster')
 
 const donuts = new Map()
@@ -16,27 +15,33 @@ const io = socketIo(server, {
   serveClient: false
 })
 io.set('origins', '*:*') // #security.lol
+let isMakingRegression = false
 let spray
 let submitMode = false
 
-const donutsRunner = debounce(
-  async () => {
-    debug('Running regression with %d donuts', donuts.size)
-    const res = await regression(
-      Array.from(donuts.values()).map(nut => {
-        nut.DONUT_RATING = rater.getIndicator(nut)
-        return nut
-      })
-    )
-
-    debug('Regression results %o', res)
-    io.emit(messages.NEW_REGRESSION_RESULTS, res)
-  },
-  3000,
-  {
-    maxWait: 3000
+const donutsRunner = async function () {
+  if (isMakingRegression) {
+    return
   }
-)
+
+  const donutsCount = donuts.size
+
+  debug('Running regression with %d donuts', donutsCount)
+  isMakingRegression = true
+
+  const res = await regression(
+    Array.from(donuts.values()).map(nut => {
+      nut.DONUT_RATING = rater.getIndicator(nut)
+      return nut
+    })
+  )
+
+  debug('Regression results %o', res)
+  io.emit(messages.NEW_REGRESSION_RESULTS, res)
+  isMakingRegression = false
+
+  if (donuts.size > donutsCount) return donutsRunner()
+}
 
 const addDonutsToStore = (newDonuts) => {
   // TODO: validate, check for pre-existing donuts

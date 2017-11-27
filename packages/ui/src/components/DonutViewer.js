@@ -10,7 +10,8 @@ class DonutViewer extends Component {
   constructor (...args) {
     super(...args)
     this.state = {
-      donuts: []
+      donuts: [],
+      donutQueue: []
     }
   }
 
@@ -23,22 +24,47 @@ class DonutViewer extends Component {
   componentWillReceiveProps ({ donuts }) {
     const delay = 500
     const lifespan = 3000
+    const nextQueue = [
+      ...this.state.donutQueue,
+      ...donuts.map(([id, donut]) => ({
+        id,
+        donut,
+        isScheduled: false
+      }))
+    ].slice(0, 10)
+    let toSchedule = nextQueue.filter(({ isScheduled }) => !isScheduled)
 
-    donuts.forEach(([id, donut], index) => {
-      // Add donuts to state:
-      setTimeout(() => {
-        this.setState({
-          donuts: [...this.state.donuts, [id, donut, index]]
-        })
-      }, delay * index)
-
-      // Remove donut from state:
-      setTimeout(() => {
-        this.setState({
-          donuts: this.state.donuts.filter(([_id]) => _id !== id)
-        })
-      }, lifespan + delay * index)
+    this.setState({
+      donuts: this.state.donuts,
+      donutQueue: nextQueue.map(item => ({ ...item, isScheduled: true }))
     })
+
+    toSchedule
+      .forEach((obj, index) => {
+        // Add donuts to state:
+        setTimeout(() => {
+          console.log('before', this.state.donuts.length, this.state.donutQueue.length)
+          console.log('adding this ID', obj.id)
+          this.setState({
+            donuts: [...this.state.donuts, [obj.id, obj.donut, index]],
+            donutQueue: this.state.donutQueue.map(o1 => {
+              if (o1.id === obj.id) {
+                return Object.assign(o1, { isScheduled: true })
+              }
+              return o1
+            })
+          })
+        }, delay * index)
+
+        // Remove donut from state:
+        setTimeout(() => {
+          console.log('after', this.state.donuts.length, this.state.donutQueue.length)
+          this.setState({
+            donuts: this.state.donuts.filter(([_id]) => _id !== obj.id),
+            donutQueue: this.state.donutQueue.filter(({ id }) => id !== obj.id)
+          })
+        }, lifespan + delay * index)
+      })
   }
 
   render () {
