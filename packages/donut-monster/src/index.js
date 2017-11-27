@@ -71,7 +71,6 @@ io.on('connection', (socket) => {
     debug('Client %s disconnected: %s', socket.id, reason)
   })
 })
-
 if (!module.parent) {
   server.listen(port, () => {
     console.log(`donut-monster listening on ${server.address().port}`)

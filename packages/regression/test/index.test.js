@@ -22,5 +22,5 @@ ava('donut regression', async t => {
   t.truthy(donut.DONUT_FROSTING_COVERAGE)
   var perfectRating = rater.getIndicator(donut)
   t.truthy(perfectRating > 0.8)
-  console.log(`actual rating: ${perfectRating} // `)
+  console.log(`actual rating: ${perfectRating}`)
 })

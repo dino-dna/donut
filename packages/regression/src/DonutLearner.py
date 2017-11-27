@@ -1,5 +1,4 @@
 import json
-import numpy as np
 import os
 import sys
 from scipy.optimize import differential_evolution
@@ -30,7 +29,16 @@ class DonutLearner:
   @staticmethod
   def from_stdin():
     log('reading input')
-    request = json.load(sys.stdin)
+    data = ""
+    for line in sys.stdin:
+      data += line
+      try:
+        request = json.loads(data)
+        break
+      except:
+        pass
+
+    log('input read complete')
     response = {}
     for learner in request['learners']:
       X = request['X']
@@ -40,20 +48,9 @@ class DonutLearner:
     log('writing response')
     print(json.dumps(response)) # send to stdout for parsing
 
-if __name__ == "__main__":
-  if os.getenv('DEBUG'):
-    dir_name = os.path.dirname(os.path.realpath(__file__))
-    donuts = json.load(open(os.path.join(dir_name, '../test/fixture/donuts.json')))
 
-    X = np.array(donuts['X'])
-    Y = np.array(donuts['Y'])
-    for i in range(0, len(X), 1):
-      if i < 2: continue
-      res = DonutLearner.ridge_regression_with_sim_ann(X[0:i], Y[0:i])
-      r2 = res['score']
-      predicted_max_inputs = res['minimized'].x
-      predicted_rating = -1 * res['minimized'].fun[0]
-      print(f'donut count: {str(len(X[0:i]))} r2: {"%.2f" % r2} predicted_rating: {"%.2f" % predicted_rating} using inputs:', predicted_max_inputs)
-  else:
-    sys.stderr.write('Launching DonutLearner\n')
-    DonutLearner.from_stdin()
+if __name__ == "__main__":
+  log('Launching DonutLearner')
+  DonutLearner.from_stdin()
+  log('complete.')
+  exit(0)

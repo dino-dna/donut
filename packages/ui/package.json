@@ -8,7 +8,7 @@
     "@storybook/react": "^3.2.12",
     "gh-pages": "^1.0.0",
     "react-remarkable": "^1.1.1",
-    "react-scripts": "^1.0.14",
+    "react-scripts": "^1.0.17",
     "redux-logger": "^3.0.6",
     "storybook-host": "^4.1.4"
   },
@@ -39,5 +39,6 @@
   },
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/config/eslint.js"
-  }
+  },
+  "proxy": "https://donut.cdaringe.com:3001"
 }
