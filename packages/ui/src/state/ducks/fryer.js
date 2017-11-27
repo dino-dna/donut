@@ -1,4 +1,5 @@
 // TODO: Move state to somewhere more appropriate
+import mapValues from 'lodash/mapValues'
 
 export const FRYER_CONNECTED = 'FRYER_CONNECTED'
 
@@ -79,7 +80,14 @@ export default function reducer (state = initialState, { payload, type }) {
     case FRYER_SET_MODELS:
       return {
         ...state,
-        models: payload
+        models: mapValues(payload, (model, name) => {
+          const oldModel = state.models && state.models[name]
+
+          // Only use a model if it's better than its previous iteration
+          return !oldModel || model.score > oldModel.score
+            ? model
+            : oldModel
+        })
       }
     default:
       return state
