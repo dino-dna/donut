@@ -42,11 +42,11 @@ class Admin extends Component {
         </button>
 
         <button
-          className='Admin-spray'
+          className={`Admin-spray Admin-spray-${isSpray ? 'on' : 'off'}`}
           onClick={() => isSpray ? disableSpray() : enableSpray()}
           type='button'
         >
-          {isSpray ? 'Disable spray' : 'Enable spray'}
+          {isSpray ? 'Disable donut spray' : 'Enable disable spray'}
         </button>
       </div>
     )

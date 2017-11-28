@@ -4,6 +4,7 @@
  * Styles for the *super secret* admin page
  */
 .Admin {
+  align-items: center;
   display: flex;
   flex-direction: column;
   flex-grow: 2;
@@ -87,7 +88,7 @@
   font-size: 200%;
   font-weight: 700;
   height: 10em;
-  margin: 0 0 1rem;
+  margin: 0 0 2rem;
   padding: 0;
   transition-duration: 80ms;
   transition-property: background, box-shadow, text-shadow, transform;
@@ -130,15 +131,44 @@
 
 /** Spray button */
 .Admin-spray {
-  background: orangered;
-  border: none;
+  background: lightcyan;
+  border: .125rem solid transparent;
   border-radius: .25rem;
-  color: white;
+  color: black;
   cursor: pointer;
   display: inline-block;
   font-family: inherit;
-  font-size: 100%;
+  font-size: 125%;
   font-weight: 700;
   line-height: inherit;
-  padding: 1em;
+  padding: 1em 1.25em;
+}
+.Admin-spray:active,
+.Admin-spray:focus,
+.Admin-spray:hover {
+  border-color: lightcyan;
+}
+.Admin-spray:focus,
+.Admin-spray:hover {
+  animation: adminSprayHover 600ms linear infinite;
+}
+@keyframes adminSprayHover {
+  0% {
+    background: lightcyan;
+  }
+  16.7% {
+    background: thistle;
+  }
+  33.3% {
+    background: lightpink;
+  }
+  50% {
+    background: peachpuff;
+  }
+  66.7% {
+    background: yellow;
+  }
+  83.3% {
+    background: palegreen;
+  }
 }
