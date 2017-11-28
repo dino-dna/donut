@@ -7,7 +7,7 @@ var isNumber = require('lodash/isNumber')
 var regression = require('../')
 var { rater, keys } = require('donut-common')
 
-ava.only('DEBUG', async t => {
+ava.skip('DEBUG', async t => {
   var donnies = require('./fixture/donuts.json')
   donnies = donnies.X.map((rawnut, i) => {
     var nut = zipObject(values(keys), rawnut)
@@ -26,7 +26,7 @@ ava.only('DEBUG', async t => {
   t.pass('yahtzee')
 })
 
-ava('donut regression', async t => {
+ava.skip('donut regression', async t => {
   var donnies = require('./fixture/donuts.json')
   donnies = donnies.X.map((rawnut, i) => {
     var nut = zipObject(values(keys), rawnut)
