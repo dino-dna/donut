@@ -6,6 +6,8 @@ import { Link } from 'react-router'
 
 import DonutList from '../components/DonutList'
 import Upload from '../components/Upload'
+
+import { removeDonut } from '../state/ducks/donuts.js'
 import { uploadRequest } from '../state/ducks/upload.js'
 import '../css/Donuts.css'
 
@@ -15,6 +17,7 @@ const Donuts = ({
   hasUploaded,
   isLoading,
   isOn,
+  removeDonut,
   uploadDonuts
 }) => {
   const hasDonuts = !!(donuts && donuts.length)
@@ -24,7 +27,7 @@ const Donuts = ({
   })
   const content = hasDonuts
     ? (
-      <DonutList donuts={donuts} />
+      <DonutList donuts={donuts} removeDonut={removeDonut} />
     )
     : (
       <div>
@@ -71,6 +74,7 @@ Donuts.propTypes = {
   hasUploaded: PropTypes.bool.isRequired,
   isOn: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  removeDonut: PropTypes.func.isRequired,
   uploadDonuts: PropTypes.func.isRequired
 }
 
@@ -85,6 +89,7 @@ export default connect(
     donuts
   }),
   {
+    removeDonut,
     uploadDonuts: uploadRequest
   }
 )(Donuts)

@@ -6,7 +6,38 @@
 
 .DonutList li {
   padding: .5em;
+  position: relative;
 }
+.DonutList li > button {
+  background: #fff;
+  border: .125rem solid transparent;
+  border-radius: 100%;
+  color: #234069;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 150%;
+  font-weight: 400;
+  height: 1.5em;
+  line-height: 1.25;
+  padding: 0;
+  position: absolute;
+  right: .75rem;
+  top: .75rem;
+  vertical-align: middle;
+  width: 1.5em;
+}
+.DonutList li > button:active,
+.DonutList li > button:focus,
+.DonutList li > button:hover {
+  border-color: #234069;
+}
+.DonutList li > button:focus,
+.DonutList li > button:hover {
+  background: #234069;
+  color: #fff;
+}
+
+
 .DonutList .Donut {
   background: #fff;
   color: #234069;
@@ -22,6 +53,10 @@
   }
   .DonutList li {
     padding: 1em;
+  }
+  .DonutList li > button {
+    right: 1.25rem;
+    top: 1.25rem;
   }
   .DonutList li {
     width: 50%;
