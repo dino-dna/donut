@@ -1,0 +1,39 @@
+#slide-1 {
+  text-align: center;
+}
+#slide-1 h1 {
+  margin: 0;
+}
+
+.brain {
+  animation: spin infinite 20s linear;
+  position: absolute;
+  top: 5vh;
+  right: 5vw;
+  width: 100px;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.reg-1 {
+  height: 70vh;
+}
+#open-donuts {
+  font-size: 2em;
+}
+span {
+  display: none;
+}
+.slide-content > ul:last-child {
+  display: none;
+}
+
+.why p,
+.so-wat p,
+.launch p {
+  text-align: center;
+}
+.why li {
+  font-size: large;
+}
