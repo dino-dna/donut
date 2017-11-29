@@ -4,6 +4,7 @@
  * Styles for the *super secret* admin page
  */
 .Admin {
+  align-items: center;
   display: flex;
   flex-direction: column;
   flex-grow: 2;
@@ -130,15 +131,21 @@
 
 /** Spray button */
 .Admin-spray {
-  background: orangered;
+  background: white;
   border: none;
   border-radius: .25rem;
-  color: white;
+  color: black;
   cursor: pointer;
   display: inline-block;
   font-family: inherit;
-  font-size: 100%;
+  font-size: 125%;
   font-weight: 700;
   line-height: inherit;
   padding: 1em;
+}
+.Admin-spray:active,
+.Admin-spray:focus,
+.Admin-spray:hover {
+  background: black;
+  color: white;
 }
